@@ -15,7 +15,7 @@
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
@@ -119,9 +119,9 @@
         </div>
       </div>
 
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
       <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
-   <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
+      <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
       <input type="hidden" id="formMissingData" name="Form_Missing_Data__c" value="" />
       <input type="hidden" name="first_name" value="Remove Driver AutoOwners" />
       <input type="hidden" name="last_name" value="Test" />
@@ -132,6 +132,7 @@
       <input type="hidden" name="Debug_Notes__c" value="AutoOwners Test: 2025-06-27 07:21AM" />
       <input type="hidden" name="Carrier__c" value="Auto Owners" />
       <input type="hidden" name="delete_Action_Form__c" value="1" />
+      <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
 
       <div class="flex justify-end mt-6">
         <button type="button" id="reviewBtn" class="bg-blue-600 text-white font-semibold py-2 px-8 rounded-xl hover:bg-blue-700 transition">Review and Submit</button>
@@ -257,6 +258,36 @@ new Pikaday({
 
           document.getElementById("formDataJson").value = completedData.join("\n");
           document.getElementById("formMissingData").value = missing.join("\n");
+          // NEW: allFormData JSON logic (same exact pattern as Central form)
+function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')}`;
+}
+
+function getSelectedRadioValue(name) {
+  const selected = document.querySelector(`input[name="${name}"]:checked`);
+  return selected ? selected.value : "";
+}
+
+const allFormData = {
+  Email: document.getElementById("email")?.value || "",
+  Is_this_a_quote_or_a_change_request: getSelectedRadioValue("Is_this_a_quote_or_a_change_request__c"), 
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value || "",
+  Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value),
+  First_Name: document.getElementById("driverName")?.value || "",
+  Age: document.getElementById("driverAge")?.value || "",
+  Relationship_to_Insured: document.getElementById("00NU7000005zuVR")?.value || "",
+  reasonToDelete: document.getElementById("reasonToDelete")?.value || "",
+  Other_Reason: document.getElementById("otherReason")?.value || "",
+  Is_Driver_assigned_as_additional_named: document.getElementById("additionalNamed")?.value || "",
+  Reason_to_remove_as_additional_named: document.getElementById("removeReason")?.value || "",
+  // Hidden fields (IMPORTANT)
+  Carrier: "Auto Owners",
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || ""
+};
+          document.getElementById("allFormData").value = JSON.stringify(allFormData);
+
 
           const dialog = document.getElementById("dialog");
           const title = document.getElementById("dialogTitle");
