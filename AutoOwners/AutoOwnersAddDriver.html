@@ -23,7 +23,7 @@
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
@@ -628,7 +628,7 @@
       </div>
 
       <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
  <!-- <input type="hidden" name="recordType" id="recordType" value="012U7000003Ie5JIAS" />-->
       <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
       <input type="hidden" name="first_name" value="Add Driver Test AutoOwners New" />
@@ -642,6 +642,7 @@
       <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
       <input type="hidden" id="missingFormData" name="Form_Missing_Data__c" value="" />
                      <input type="hidden" name="Carrier__c" value ="Auto Owners">
+                     <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
                   <!--   <input type="hidden" name="debug" value=1>                              
 <input type="hidden" name="debugEmail" value="annie.rawal@caeliusconsulting.com">-->
 
@@ -1024,6 +1025,57 @@ if (!vinFieldContainer.classList.contains("hidden")) {
 
          // Store missing fields in hidden field
          missingFormDataInput.value = missing.join("\n");
+         // Helper functions
+function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')}`;
+}
+
+function getSelectedRadioValue(name) {
+  const selected = document.querySelector(`input[name="${name}"]:checked`);
+  return selected ? selected.value : "";
+}
+
+// Build All Form Data JSON
+// Build All Form Data JSON
+const allFormData = {
+  Email: document.getElementById("email")?.value || "",
+  Is_this_a_quote_or_a_change_request: getSelectedRadioValue("Is_this_a_quote_or_a_change_request__c"),
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value || "",
+  Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value),
+
+  First_Name: document.getElementById("driverFirstName")?.value || "",
+  Middle_Name: document.getElementById("driverMiddleName")?.value || "",
+  Last_Name: document.getElementById("driverLastName")?.value || "",
+  Date_of_Birth: formatDateToISO(document.getElementById("driverDOB")?.value),
+  Gender: document.getElementById("driverGender")?.value || "",
+  Marital_Status: document.getElementById("driverMaritalStatus")?.value || "",
+  Relationship_To_Insured_AutoOwners: document.getElementById("driverRelationship")?.value || "",
+  Driver_Status_AutoOwners: document.getElementById("driverStatus")?.value || "",
+
+  Business_Industry: document.getElementById("businessIndustry")?.value || "",
+  Occupation: document.getElementById("occupation")?.value || "",
+  City_of_Employer_School: document.getElementById("cityOfEmployment")?.value || "",
+
+  License_State_AutoOwners: document.getElementById("licenseState")?.value || "",
+  Drivers_license_number: document.getElementById("licenseNumber")?.value || "",
+
+  Good_Student_Driver_AutoOwners: document.getElementById("goodStudentDriver")?.value || "",
+  Teen_Driver_Monitoring_Discount: document.getElementById("teenDriverMonitoring")?.value || "",
+  Motorcycle_Safety_Foundation_Discount: document.getElementById("motorcycleSafety")?.value || "",
+
+  More_Vehicles_Than_Drivers: document.getElementById("moreVehiclesThanDrivers")?.value || "",
+Age: (vehicleAgeContainer.classList.contains('hidden') || !vehicleAgeInput.value.trim())
+    ? "0"
+    : vehicleAgeInput.value.trim(),
+  VIN_number: document.getElementById("extraVehicleVIN")?.value || "",
+
+  Carrier: "Auto Owners",
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || "Add Driver"
+};
+
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
 
          if (missing.length) {
            dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
