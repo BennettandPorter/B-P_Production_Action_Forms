@@ -7,25 +7,37 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
     <style>
       .star { color: #ef4444; margin-left: 2px; }
-      .modal-bg { background: rgba(0,0,0,0.4);}
+      .modal-bg { background: rgba(0,0,0,0.4); }
       .hidden { display: none; }
+      .all-form-data {
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.4;
+      }
     </style>
   </head>
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-4xl space-y-8"
       autocomplete="off"
       novalidate
     >
+      <textarea
+        id="00NU7000008TS4L"
+        name="All_Form_Data__c"
+        rows="50"
+        type="text"
+        wrap="soft"
+        class="hidden all-form-data"
+      ></textarea>
 
       <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
         Add Vehicle Auto Owners Form
       </h2>
 
-      <!-- Policy Changes Section -->
       <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Policy Changes Section">
         <h3 class="text-xl font-semibold mb-4 text-gray-700">Policy Changes</h3>
 
@@ -67,13 +79,7 @@
           <label for="00NU7000005zuX3" class="block text-sm font-medium text-gray-700">
             Policy Number<span class="star">*</span>
           </label>
-          <input
-            type="text"
-            id="00NU7000005zuX3"
-            name="Policy_Number__c"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-            autocomplete="off"
-          />
+          <input type="text" id="00NU7000005zuX3" name="Policy_Number__c" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" autocomplete="off" />
         </div>
 
         <div class="mb-4">
@@ -83,7 +89,7 @@
           <input
             type="text"
             id="00NU7000005zuLl"
-            name="Date__c"
+            name="Effective_Date__c"
             placeholder="MM/DD/YYYY"
             maxlength="10"
             class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -92,7 +98,6 @@
         </div>
       </section>
 
-      <!-- Vehicle Section -->
       <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Vehicle Section">
         <h3 class="text-xl font-semibold mb-4 text-gray-700">Vehicle Section</h3>
 
@@ -100,26 +105,14 @@
           <label for="00NU7000006Knh3" class="block text-sm font-medium text-gray-700">
             VIN Number of New Vehicle<span class="star">*</span>
           </label>
-          <input
-            id="00NU7000006Knh3"
-            maxlength="255"
-            name="VIN_number_2__c"
-            size="20"
-            type="text"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-          />
+          <input id="00NU7000006Knh3" maxlength="255" name="VIN_number_2__c" size="20" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
         </div>
 
         <div class="mb-4">
           <label for="00NU7000007qMA6" class="block text-sm font-medium text-gray-700">
             Anti-Theft<span class="star">*</span>
           </label>
-          <select
-            id="00NU7000007qMA6"
-            name="Anti_Theft__c"
-            title="Anti-Theft"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-          >
+          <select id="00NU7000007qMA6" name="Anti_Theft__c" title="Anti-Theft" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
             <option value="">--None--</option>
             <option value="Category 1">Category 1</option>
             <option value="Category 2">Category 2</option>
@@ -127,7 +120,6 @@
         </div>
       </section>
 
-      <!-- Coverage Section -->
       <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Coverage Section">
         <h3 class="text-xl font-semibold mb-4 text-gray-700">Coverage's Section</h3>
 
@@ -193,19 +185,11 @@
           </div>
         </div>
 
-        <!-- Custom Limit Value: conditional -->
         <div class="mt-4 hidden" id="customLimitWrapper">
           <label for="00NU7000007qNKf" class="block text-sm font-medium text-gray-700">
             Custom Limit Value<span class="star">*</span>
           </label>
-          <input
-            id="00NU7000007qNKf"
-            maxlength="50"
-            name="Custom_Limit_Value__c"
-            size="20"
-            type="text"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-          />
+          <input id="00NU7000007qNKf" maxlength="50" name="Custom_Limit_Value__c" size="20" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
         </div>
 
         <div class="grid md:grid-cols-2 gap-4 mt-4">
@@ -259,7 +243,7 @@
             <label for="00NU7000007qNyz" class="block text-sm font-medium text-gray-700">
               Limited Transport/Network Comp Driver<span class="star">*</span>
             </label>
-            <select id="00NU7000007qNyz" name="Limited_Transportation_Network_Company__c" title="Limited Transport/Network Comp Driver" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
+            <select id="00NU7000007qNyz" name="Limited_Transport_Network_Comp_Driver__c" title="Limited Transport/Network Comp Driver" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
@@ -277,117 +261,58 @@
         </div>
       </section>
 
-      <!-- DYNAMIC Lien / Lease Section - HIDDEN BY DEFAULT -->
       <section id="lienLeaseSection" class="bg-gray-50 border rounded-xl p-6 shadow-inner hidden" aria-label="Lien / Lease Section">
         <h3 class="text-xl font-semibold mb-4 text-gray-700">Lien / Lease</h3>
 
         <div class="mb-4">
-  <label for="00NU7000007qO73" class="block text-sm font-medium text-gray-700">
-    Lien/Lease Type<span class="star">*</span>
-  </label>
-  <select
-    id="00NU7000007qO73"
-    name="Lien_Lease_Type__c"
-    title="Lien/Lease Type"
-    class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-  >
-    <option value="">--None--</option>
-    <option value="Lessor">Lessor</option>
-    <option value="Lienholder">Lienholder</option>
-    <!-- "No" option hidden from UI -->
-    <option value="No" style="display: none;">No</option>
-  </select>
-</div>
+          <label for="00NU7000007qO73" class="block text-sm font-medium text-gray-700">
+            Lien/Lease Type<span class="star">*</span>
+          </label>
+          <select id="00NU7000007qO73" name="Lien_Lease_Type__c" title="Lien/Lease Type" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
+            <option value="">--None--</option>
+            <option value="Lessor">Lessor</option>
+            <option value="Lienholder">Lienholder</option>
+            <option value="No" style="display: none;">No</option>
+          </select>
+        </div>
 
-        <!-- Lienholder (UI: Lien/Lease Name:) -->
         <div class="mb-4">
           <label for="00NU7000007QpKb" class="block text-sm font-medium text-gray-700">
             Lien/Lease Name:<span class="star">*</span>
           </label>
-          <input
-            id="00NU7000007QpKb"
-            maxlength="100"
-            name="Lienholder__c"
-            size="20"
-            type="text"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-          />
+          <input id="00NU7000007QpKb" maxlength="100" name="Lienholder__c" size="20" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
         </div>
 
-        <!-- Lien/Lease Name Line 2 (labeled) -->
         <div class="mb-2">
           <label for="00NU7000007qU9F" class="block text-sm font-medium text-gray-700">
             Lien/Lease Name Line 2<span class="star">*</span>
           </label>
-          <input
-            id="00NU7000007qU9F"
-            maxlength="50"
-            name="Lien_Lease_Name_Line_2__c"
-            size="20"
-            type="text"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-          />
+          <input id="00NU7000007qU9F" maxlength="50" name="Lien_Lease_Name_Line_2__c" size="20" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
         </div>
 
-        <!-- Extra Lien/Lease Name line (blank, no label) -->
         <div class="mb-4">
-          <input
-            id="00NU7000007rAur"
-            maxlength="50"
-            name="Lien_Lease_Name_Line_2_1__c"
-            size="20"
-            type="text"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-            placeholder=""
-          />
+          <input id="00NU7000007rAur" maxlength="50" name="Lien_Lease_Name_Line_2_1__c" size="20" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
         </div>
 
-        <!-- Address 1 (labeled) -->
         <div class="mb-2">
           <label for="00NU7000007QpPR" class="block text-sm font-medium text-gray-700">
             Address<span class="star">*</span>
           </label>
-          <input
-            id="00NU7000007QpPR"
-            maxlength="100"
-            name="Lienholder_Address_1__c"
-            size="20"
-            type="text"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-          />
+          <input id="00NU7000007QpPR" maxlength="100" name="Lienholder_Address_1__c" size="20" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
         </div>
 
-        <!-- Address 2 (blank field, no visible label) -->
         <div class="mb-4">
-          <input
-            id="00NU7000007QpUH"
-            maxlength="100"
-            name="Lienholder_Address_2__c"
-            size="20"
-            type="text"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-            placeholder=""
-          />
+          <input id="00NU7000007QpUH" maxlength="100" name="Lienholder_Address_2__c" size="20" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
         </div>
 
-        <!-- Row 1: City + State -->
         <div class="grid md:grid-cols-2 gap-4">
-          <!-- City -->
           <div class="flex flex-col">
             <label for="00NU7000007QpcL" class="text-sm font-medium text-gray-700">
               City<span class="star">*</span>
             </label>
-            <input
-              id="00NU7000007QpcL"
-              maxlength="50"
-              name="Lienholder_City__c"
-              size="20"
-              type="text"
-              class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-            />
+            <input id="00NU7000007QpcL" maxlength="50" name="Lienholder_City__c" size="20" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
           </div>
 
-          <!-- State -->
           <div class="flex flex-col">
             <label for="00NU7000007lLwD" class="text-sm font-medium text-gray-700">
               State<span class="star">*</span>
@@ -449,41 +374,19 @@
           </div>
         </div>
 
-        <!-- Row 2: Zip (full width, big boxes with dash between) -->
         <div class="mt-4 flex flex-col">
           <label for="00NU7000007qTgD" class="text-sm font-medium text-gray-700">
             Zip<span class="star">*</span>
           </label>
 
           <div class="mt-1 flex items-center gap-3">
-            <!-- First Zip (big) -->
-            <input
-              id="00NU7000007qTgD"
-              maxlength="5"
-              name="Zip_Auto_Owners_1__c"
-              size="20"
-              type="text"
-              class="flex-1 p-2 border border-gray-300 rounded-lg shadow-sm"
-            />
-
-            <!-- Dash (bigger) -->
+            <input id="00NU7000007qTgD" maxlength="5" name="Zip_Auto_Owners_1__c" size="20" type="text" class="flex-1 p-2 border border-gray-300 rounded-lg shadow-sm" />
             <span class="text-gray-700 font-bold text-xl px-1">-</span>
-
-            <!-- Second Zip (big) -->
-            <input
-              id="00NU7000007qTpt"
-              maxlength="30"
-              name="Zip_Auto_Owners_2__c"
-              size="20"
-              type="text"
-              class="flex-1 p-2 border border-gray-300 rounded-lg shadow-sm"
-              placeholder=""
-            />
+            <input id="00NU7000007qTpt" maxlength="30" name="Zip_Auto_Owners_2__c" size="20" type="text" class="flex-1 p-2 border border-gray-300 rounded-lg shadow-sm" />
           </div>
         </div>
       </section>
 
-      <!-- Driver Assignment Section -->
       <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Driver Assignment Section">
         <h3 class="text-xl font-semibold mb-4 text-gray-700">Driver Assignment</h3>
 
@@ -491,7 +394,7 @@
           <label for="00NU7000006N0iD" class="block text-sm font-medium text-gray-700">
             Vehicle Use<span class="star">*</span>
           </label>
-          <select id="00NU7000006N0iD" name="Vehicle_Use__c" title="Vehicle Use" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
+          <select id="00NU7000006N0iD" name="Vehicle_Use12__c" title="Vehicle Use" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
             <option value=""></option>
             <option value="Pleasure (includes commute 0-3 mi)">Pleasure (includes commute 0-3 mi)</option>
             <option value="Commute to Work/School (4-14 mi)">Commute to Work/School (4-14 mi)</option>
@@ -506,33 +409,18 @@
           <label for="00NU7000006AY3N" class="block text-sm font-medium text-gray-700">
             Miles to Work/School<span class="star">*</span>
           </label>
-          <input
-            id="00NU7000006AY3N"
-            maxlength="18"
-            name="Miles_one_way_to_work_or_school__c"
-            size="20"
-            type="text"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-          />
+          <input id="00NU7000006AY3N" maxlength="18" name="Miles_one_way_to_work_or_school__c" size="20" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
         </div>
 
         <div class="mb-0">
           <label for="00NU7000007qVID" class="block text-sm font-medium text-gray-700">
             Principal Driver Name<span class="star">*</span>
           </label>
-          <input
-            id="00NU7000007qVID"
-            maxlength="50"
-            name="Principal_Driver_Name__c"
-            size="20"
-            type="text"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-          />
+          <input id="00NU7000007qVID" maxlength="50" name="Principal_Driver_Name__c" size="20" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
         </div>
       </section>
 
-      <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
       <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
       <input type="hidden" name="first_name" value="Auto Owners" />
       <input type="hidden" name="last_name" value="Add Vehicle" />
@@ -544,41 +432,23 @@
       <input type="hidden" name="company" value="Auto Owners" />
       <input type="hidden" name="Form_Captured_Data__c" />
       <input type="hidden" name="Form_Missing_Data__c" />
-      
 
       <div class="flex justify-end mt-6">
-        <button
-          type="button"
-          id="reviewBtn"
-          class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition"
-        >
+        <button type="button" id="reviewBtn" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition">
           Review and Submit
         </button>
       </div>
     </form>
 
-    <!-- Confirmation Dialog -->
-    <div
-      id="dialog"
-      class="hidden fixed inset-0 flex items-center justify-center modal-bg z-50"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="dialogTitle"
-    >
+    <div id="dialog" class="hidden fixed inset-0 flex items-center justify-center modal-bg z-50" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
       <div class="bg-white rounded-lg p-6 max-w-md w-full shadow-lg text-gray-800">
         <h3 id="dialogTitle" class="text-lg font-semibold mb-4"></h3>
         <ul id="missingFieldsList" class="mb-4 text-red-600 text-sm"></ul>
         <div class="flex justify-end space-x-3" id="dialogButtons">
-          <button
-            id="proceedBtn"
-            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 font-medium"
-          >
+          <button id="proceedBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 font-medium">
             Proceed to End Request
           </button>
-          <button
-            id="editBtn"
-            class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 font-medium"
-          >
+          <button id="editBtn" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 font-medium">
             Edit
           </button>
         </div>
@@ -588,7 +458,6 @@
 <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Pikaday date picker
   if (window.Pikaday) {
     new Pikaday({
       field: document.getElementById("00NU7000005zuLl"),
@@ -606,31 +475,39 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Map radio buttons to hidden select for requestType
+  const form = document.getElementById("mainForm");
+  const reviewBtn = document.getElementById("reviewBtn");
+  const dialog = document.getElementById("dialog");
+  const dialogTitle = document.getElementById("dialogTitle");
+  const missingFieldsList = document.getElementById("missingFieldsList");
+  const proceedBtn = document.getElementById("proceedBtn");
+  const editBtn = document.getElementById("editBtn");
+  const allFormDataTextarea = document.getElementById("00NU7000008TS4L");
+
   const radios = document.querySelectorAll('input[name="requestTypeRadios"]');
   const hiddenSelect = document.getElementById("00NU7000006IOzh");
+
+  const compDeductible = document.getElementById("00NU7000006NdwT");
+  const collisionDeductible = document.getElementById("00NU7000006Ne7l");
+  const loanLeaseGapSelect = document.getElementById("00NU7000007qNkT");
+  const lienLeaseSection = document.getElementById("lienLeaseSection");
+
+  const customizationsSelect = document.getElementById("00NU7000007qNFp");
+  const customLimitWrapper = document.getElementById("customLimitWrapper");
+  const customLimitInput = document.getElementById("00NU7000007qNKf");
+
+  const lienLeaseTypeSelect = document.getElementById("00NU7000007qO73");
 
   function syncRequestType() {
     const checkedRadio = document.querySelector('input[name="requestTypeRadios"]:checked');
     hiddenSelect.value = checkedRadio ? checkedRadio.value : "";
   }
 
-  radios.forEach((radio) => {
-    radio.addEventListener("change", syncRequestType);
-  });
-
-  if (hiddenSelect.value !== "") {
-    const matchedRadio = document.querySelector(
-      `input[name="requestTypeRadios"][value="${hiddenSelect.value}"]`
-    );
-    if (matchedRadio) matchedRadio.checked = true;
+  function syncLienLeaseType() {
+    if (lienLeaseTypeSelect && lienLeaseTypeSelect.value === "") {
+      lienLeaseTypeSelect.value = "No";
+    }
   }
-  syncRequestType();
-
-  // Custom Limit dynamic show/hide
-  const customizationsSelect = document.getElementById("00NU7000007qNFp");
-  const customLimitWrapper = document.getElementById("customLimitWrapper");
-  const customLimitInput = document.getElementById("00NU7000007qNKf");
 
   function updateCustomLimitVisibility() {
     if (customizationsSelect.value === "Custom Limit") {
@@ -641,28 +518,31 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  customizationsSelect.addEventListener("change", updateCustomLimitVisibility);
-  updateCustomLimitVisibility();
+  function clearLienLeaseFields() {
+    const lienLeaseFields = [
+      "00NU7000007qO73",
+      "00NU7000007QpKb",
+      "00NU7000007qU9F",
+      "00NU7000007rAur",
+      "00NU7000007QpPR",
+      "00NU7000007QpUH",
+      "00NU7000007QpcL",
+      "00NU7000007lLwD",
+      "00NU7000007qTgD",
+      "00NU7000007qTpt"
+    ];
 
-  // **CRITICAL: Lien/Lease Type - sends "No" when untouched or --None-- selected**
-  const lienLeaseTypeSelect = document.getElementById("00NU7000007qO73");
+    lienLeaseFields.forEach((id) => {
+      const field = document.getElementById(id);
+      if (field) field.value = "";
+    });
 
-  function syncLienLeaseType() {
-    if (lienLeaseTypeSelect.value === "") {
-      lienLeaseTypeSelect.value = "No";
-    }
+    syncLienLeaseType();
   }
 
-  lienLeaseTypeSelect.addEventListener("change", syncLienLeaseType);
-  syncLienLeaseType();
-
-  // Lien/Lease Section dynamic show/hide
-  const loanLeaseGapSelect = document.getElementById("00NU7000007qNkT");
-  const lienLeaseSection = document.getElementById("lienLeaseSection");
-
   function updateLienLeaseVisibility() {
-    const showLienLease = loanLeaseGapSelect.value === "Loan Gap" || loanLeaseGapSelect.value === "Lease Gap";
-    
+    const showLienLease = ["No Coverage", "Loan Gap", "Lease Gap"].includes(loanLeaseGapSelect.value);
+
     if (showLienLease) {
       lienLeaseSection.classList.remove("hidden");
     } else {
@@ -671,46 +551,67 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function clearLienLeaseFields() {
-    const lienLeaseFields = [
-      "00NU7000007qO73", "00NU7000007QpKb", "00NU7000007qU9F", "00NU7000007rAur",
-      "00NU7000007QpPR", "00NU7000007QpUH", "00NU7000007QpcL", "00NU7000007lLwD",
-      "00NU7000007qTgD", "00NU7000007qTpt"
-    ];
-    lienLeaseFields.forEach(id => {
-      const field = document.getElementById(id);
-      if (field) field.value = "";
-    });
-    syncLienLeaseType();
+ function updateLoanLeaseGapState() {
+  const bothNoCoverage =
+    compDeductible.value === "No Coverage" &&
+    collisionDeductible.value === "No Coverage";
+
+  loanLeaseGapSelect.disabled = bothNoCoverage;
+
+  if (bothNoCoverage) {
+    loanLeaseGapSelect.value = "No Coverage";
+    lienLeaseSection.classList.add("hidden");
+    clearLienLeaseFields();
   }
 
-  loanLeaseGapSelect.addEventListener("change", updateLienLeaseVisibility);
   updateLienLeaseVisibility();
+}
 
-  // =========================
-  // FORM CAPTURE & VALIDATION
-  // =========================
-  const form = document.getElementById("mainForm");
-  const reviewBtn = document.getElementById("reviewBtn");
-  const dialog = document.getElementById("dialog");
-  const dialogTitle = document.getElementById("dialogTitle");
-  const missingFieldsList = document.getElementById("missingFieldsList");
-  const proceedBtn = document.getElementById("proceedBtn");
-  const editBtn = document.getElementById("editBtn");
+function updateLienLeaseVisibility() {
+  const bothNoCoverage =
+    compDeductible.value === "No Coverage" &&
+    collisionDeductible.value === "No Coverage";
 
-  // All form fields for capture (with proper labels)
+  if (bothNoCoverage) {
+    lienLeaseSection.classList.add("hidden");
+    clearLienLeaseFields();
+    return;
+  }
+
+  const showLienLease = ["No Coverage", "Loan Gap", "Lease Gap"].includes(loanLeaseGapSelect.value);
+
+  if (showLienLease) {
+    lienLeaseSection.classList.remove("hidden");
+  } else {
+    lienLeaseSection.classList.add("hidden");
+    clearLienLeaseFields();
+  }
+}
+
+ function updateCoverageDependentUI() {
+  updateLoanLeaseGapState();
+  updateLienLeaseVisibility();
+}
+
+  radios.forEach((radio) => radio.addEventListener("change", syncRequestType));
+  customizationsSelect.addEventListener("change", updateCustomLimitVisibility);
+  compDeductible.addEventListener("change", updateCoverageDependentUI);
+collisionDeductible.addEventListener("change", updateCoverageDependentUI);
+loanLeaseGapSelect.addEventListener("change", updateLienLeaseVisibility);
+  lienLeaseTypeSelect.addEventListener("change", syncLienLeaseType);
+
+  syncRequestType();
+  updateCustomLimitVisibility();
+  updateCoverageDependentUI();
+  syncLienLeaseType();
+
   const fieldData = [
-    // Policy Changes
-    { id: "email", label: "Email" },
+    { id: "email", label: "Email", type: "email" },
     { id: "00NU7000006IOzh", label: "Request Type" },
     { id: "00NU7000005zuX3", label: "Policy Number" },
-    { id: "00NU7000005zuLl", label: "Effective Date" },
-    
-    // Vehicle Section
+    { id: "00NU7000005zuLl", label: "Effective Date", type: "effectiveDate" },
     { id: "00NU7000006Knh3", label: "VIN Number of New Vehicle" },
     { id: "00NU7000007qMA6", label: "Anti-Theft" },
-    
-    // Coverage Section
     { id: "00NU7000006NdwT", label: "Comprehensive Deductible" },
     { id: "00NU7000006Ne7l", label: "Collision Deductible" },
     { id: "00NU7000007qN69", label: "Full Glass" },
@@ -722,8 +623,6 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "00NU7000007qNu9", label: "Original Titleholder of Vehicle" },
     { id: "00NU7000007qNyz", label: "Limited Transport/Network Comp Driver" },
     { id: "00NU7000007qO2D", label: "Original Equipment Manufacturer Parts" },
-    
-    // Lien/Lease Section
     { id: "00NU7000007qO73", label: "Lien/Lease Type" },
     { id: "00NU7000007QpKb", label: "Lien/Lease Name" },
     { id: "00NU7000007qU9F", label: "Lien/Lease Name Line 2" },
@@ -734,14 +633,11 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "00NU7000007lLwD", label: "License State AutoOwners" },
     { id: "00NU7000007qTgD", label: "Zip Auto Owners 1" },
     { id: "00NU7000007qTpt", label: "Zip Auto Owners 2" },
-    
-    // Driver Assignment
     { id: "00NU7000006N0iD", label: "Vehicle Use" },
     { id: "00NU7000006AY3N", label: "Miles to Work/School" },
     { id: "00NU7000007qVID", label: "Principal Driver Name" }
   ];
 
-  // ALWAYS REQUIRED FIELDS
   const requiredFields = [
     { id: "email", label: "Email", type: "email" },
     { radioGroupName: "requestTypeRadios", label: "Select the Request Type:" },
@@ -764,7 +660,6 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "00NU7000007qVID", label: "Principal Driver Name" }
   ];
 
-  // CONDITIONAL REQUIRED FIELDS
   const conditionalCustomLimitField = { id: "00NU7000007qNKf", label: "Custom Limit Value" };
   const conditionalLienLeaseFields = [
     { id: "00NU7000007QpKb", label: "Lien/Lease Name" },
@@ -775,39 +670,125 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "00NU7000007qTgD", label: "Zip Auto Owners 1" }
   ];
 
+  function formatEffectiveDate(value) {
+    const parts = value.split("/");
+    if (parts.length !== 3) return value;
+    const [m, d, y] = parts;
+    return `${y}-${m}-${d}`;
+  }
+
+  function captureAllFormDataAsJSON() {
+    const formData = {};
+    const excludeFields = [
+      "oid", "OrgId",
+      "retURL", "ReturnURL",
+      "first_name", "FirstName",
+      "last_name", "LastName",
+      "status", "Status",
+      "phone", "Phone",
+      "lead_source", "LeadSource",
+      "delete_Action_Form__c", "delete_Action_Form",
+      "company", "Company","requestTypeRadios"
+    ];
+
+    const formElements = form.querySelectorAll("input, textarea, select");
+
+    formElements.forEach((element) => {
+      if (
+        element.name &&
+        element.name !== "Form_Captured_Data__c" &&
+        element.name !== "Form_Missing_Data__c" &&
+        element.name !== "All_Form_Data__c"
+      ) {
+        let fieldName = element.name.replace(/__c$/, "");
+
+        const fieldMapping = {
+          email: "Email",
+          Policy_Number__c: "PolicyNumber",
+          Policy_Action__c: "PolicyAction",
+          Carrier__c: "Carrier",
+          Date__c: "Effective_Date"
+        };
+
+        fieldName = fieldMapping[fieldName] || fieldName;
+
+        if (!excludeFields.includes(fieldName) && !excludeFields.includes(element.name)) {
+          let value = element.value || "";
+          if (element.id === "00NU7000005zuLl" && value.trim()) {
+            value = formatEffectiveDate(value.trim());
+          }
+          formData[fieldName] = value;
+        }
+      }
+    });
+
+    return JSON.stringify(formData, null, 2);
+  }
+
+  function validateFields() {
+    const missing = [];
+    if (customizationsSelect.value !== "Custom Limit") {
+      customLimitInput.value = "";
+    }
+
+    requiredFields.forEach((field) => {
+      if (field.radioGroupName) {
+        const radios = document.querySelectorAll(`input[name="${field.radioGroupName}"]`);
+        const checked = [...radios].some((r) => r.checked);
+        if (!checked) missing.push(field.label);
+        return;
+      }
+
+      const el = document.getElementById(field.id);
+      if (!el) return;
+
+      if (field.type === "email") {
+        if (!el.value.trim() || !el.checkValidity()) missing.push(field.label);
+      } else if (field.type === "date") {
+        const val = el.value.trim();
+        const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/;
+        if (!val || !dateRegex.test(val)) missing.push(field.label);
+      } else {
+        if (!el.value.trim()) missing.push(field.label);
+      }
+    });
+
+    if (customizationsSelect.value === "Custom Limit" && !customLimitInput.value.trim()) {
+      missing.push(conditionalCustomLimitField.label);
+    }
+
+    const showLienLease =
+      ["No Coverage", "Loan Gap", "Lease Gap"].includes(loanLeaseGapSelect.value) &&
+      !lienLeaseSection.classList.contains("hidden");
+
+    if (showLienLease) {
+      conditionalLienLeaseFields.forEach((field) => {
+        const el = document.getElementById(field.id);
+        if (el && !el.value.trim()) missing.push(field.label);
+      });
+    }
+
+    return missing;
+  }
+
   function captureFormAudit() {
     const captured = [];
     const missing = [];
-
-
     const optionalFields = ["00NU7000007rAur", "00NU7000007QpUH", "00NU7000007qTpt"];
 
-    fieldData.forEach(field => {
-  const el = document.getElementById(field.id);
-  if (!el) return;
+    fieldData.forEach((field) => {
+      const el = document.getElementById(field.id);
+      if (!el) return;
+      if (optionalFields.includes(field.id) && !el.value.trim()) return;
+      if (lienLeaseSection.classList.contains("hidden") && lienLeaseSection.contains(el)) return;
+      if (customLimitWrapper.classList.contains("hidden") && customLimitWrapper.contains(el)) return;
 
-   if (optionalFields.includes(field.id) && !el.value.trim()) {
-      return;
-    }
-    
-  
-  // 🚫 Skip fields inside hidden Lien/Lease section
-  if (lienLeaseSection.classList.contains("hidden") &&
-      lienLeaseSection.contains(el)) {
-    return;
-  }
-
-   if (customLimitWrapper.classList.contains("hidden") &&
-        customLimitWrapper.contains(el)) {
-      return;
-    }
-  
-  if (el.value && el.value.trim()) {
-    captured.push(`${field.label} = ${el.value.trim()}`);
-  } else {
-    missing.push(field.label);
-  }
-});
+      if (el.value && el.value.trim()) {
+        captured.push(`${field.label} = ${el.value.trim()}`);
+      } else {
+        missing.push(field.label);
+      }
+    });
 
     let capturedField = document.getElementById("Form_Captured_Data__c");
     let missingField = document.getElementById("Form_Missing_Data__c");
@@ -832,64 +813,10 @@ document.addEventListener("DOMContentLoaded", function () {
     missingField.value = missing.join("\n");
   }
 
-  function validateFields() {
-    const missing = [];
-
-  if (customizationsSelect.value !== "Custom Limit") {
-    customLimitInput.value = "";
-  }
-    // Validate always required fields
-    requiredFields.forEach((field) => {
-      if (field.radioGroupName) {
-        const radios = document.querySelectorAll(`input[name="${field.radioGroupName}"]`);
-        if (!radios.length) return;
-        const checked = [...radios].some((r) => r.checked);
-        if (!checked) missing.push(field.label);
-        return;
-      }
-
-      const el = document.getElementById(field.id);
-      if (!el) return;
-
-      if (field.type === "email") {
-        if (!el.value.trim() || !el.checkValidity()) missing.push(field.label);
-      } else if (field.type === "date") {
-        const val = el.value.trim();
-        const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/;
-        if (!val || !dateRegex.test(val)) missing.push(field.label);
-      } else {
-        if (!el.value.trim()) missing.push(field.label);
-      }
-    });
-
-    // CONDITIONAL: Custom Limit Value (only required when Custom Limit selected)
-    if (customizationsSelect.value === "Custom Limit") {
-      if (!customLimitInput.value.trim()) {
-        missing.push(conditionalCustomLimitField.label);
-      }
-    }
-
-    // CONDITIONAL: Lien/Lease fields (only required when Loan Gap or Lease Gap selected)
-  const showLienLease =
-  (loanLeaseGapSelect.value === "Loan Gap" ||
-   loanLeaseGapSelect.value === "Lease Gap") &&
-  !lienLeaseSection.classList.contains("hidden");
-
-if (showLienLease) {
-  conditionalLienLeaseFields.forEach((field) => {
-    const el = document.getElementById(field.id);
-    if (el && !el.value.trim()) {
-      missing.push(field.label);
-    }
-  });
-}
-
-    return missing;
-  }
-
-  // Event handlers
   reviewBtn.addEventListener("click", () => {
     const missing = validateFields();
+    allFormDataTextarea.value = captureAllFormDataAsJSON();
+
     if (missing.length) {
       dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
       missingFieldsList.innerHTML = missing.map((f) => `<li>${f}</li>`).join("");
@@ -900,9 +827,7 @@ if (showLienLease) {
     dialog.classList.remove("hidden");
   });
 
-  editBtn.addEventListener("click", () => {
-    dialog.classList.add("hidden");
-  });
+  editBtn.addEventListener("click", () => dialog.classList.add("hidden"));
 
   proceedBtn.addEventListener("click", () => {
     syncLienLeaseType();
@@ -912,9 +837,7 @@ if (showLienLease) {
   });
 
   window.addEventListener("click", (e) => {
-    if (e.target === dialog) {
-      dialog.classList.add("hidden");
-    }
+    if (e.target === dialog) dialog.classList.add("hidden");
   });
 
   window.addEventListener("keydown", (e) => {
@@ -924,5 +847,5 @@ if (showLienLease) {
   });
 });
 </script>
-</body>
+  </body>
 </html>
