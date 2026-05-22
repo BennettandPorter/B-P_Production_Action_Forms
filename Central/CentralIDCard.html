@@ -4,32 +4,32 @@
     <meta charset="UTF-8" />
     <title>Central Insurance Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
     <style>
-      .hidden {
-        display: none;
-      }
-      .star {
-        color: #ef4444;
-        margin-left: 2px;
-      }
-      .modal-bg {
-        background: rgba(0, 0, 0, 0.4);
-      }
+      .hidden { display: none; }
+      .star { color: #ef4444; margin-left: 2px; }
+      .modal-bg { background: rgba(0, 0, 0, 0.4); }
+      .all-form-data { font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
     </style>
   </head>
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
       novalidate
     >
+      <textarea
+        id="00NU7000008TS4L"
+        name="All_Form_Data__c"
+        rows="50"
+        type="text"
+        wrap="soft"
+        class="hidden all-form-data"
+      ></textarea>
+
       <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
         ID Card Central Insurance Form
       </h2>
@@ -37,7 +37,6 @@
       <div class="bg-gray-50 border rounded-xl p-6 shadow-inner">
         <h3 class="text-xl font-semibold mb-4 text-gray-700">Policy Changes</h3>
 
-        <!-- Email -->
         <div class="mb-3">
           <label for="email" class="block text-sm font-medium text-gray-700">
             Email<span class="star">*</span>
@@ -51,7 +50,6 @@
           />
         </div>
 
-        <!-- Policy Action -->
         <input
           type="hidden"
           id="00NU7000005zuNN"
@@ -59,7 +57,6 @@
           value="ID Card"
         />
 
-        <!-- Policy Number -->
         <div class="mb-3">
           <label
             for="00NU7000005zuX3"
@@ -76,7 +73,6 @@
           />
         </div>
 
-        <!-- Effective Date -->
         <div class="mb-3">
           <label
             for="00NU7000005zuLl"
@@ -96,18 +92,9 @@
         </div>
       </div>
 
-      <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
-      <input
-        type="hidden"
-        name="retURL"
-        value="https://bennettandporter.com/"
-      />
-      <input
-        type="hidden"
-        name="first_name"
-        value="ID Card"
-      />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
+      <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
+      <input type="hidden" name="first_name" value="ID Card" />
       <input type="hidden" name="last_name" value="Central" />
       <input type="hidden" name="status" value="New" />
       <input type="hidden" name="phone" value="21736836129" />
@@ -115,11 +102,9 @@
       <input type="hidden" name="delete_Action_Form__c" value="1" />
       <input type="hidden" id="00NU7000007OdKL" name="Carrier__c" value="Central Insurance" />
       <input type="hidden" name="company" value="Central ID Card" />
-    <input type="hidden" name="Form_Captured_Data__c" />
-    <input type="hidden" name="Form_Missing_Data__c" />
+      <input type="hidden" name="Form_Captured_Data__c" />
+      <input type="hidden" name="Form_Missing_Data__c" />
 
-
-      <!-- Review and Submit Button -->
       <div class="flex justify-end mt-6">
         <button
           type="button"
@@ -131,7 +116,6 @@
       </div>
     </form>
 
-    <!-- Confirmation Dialog -->
     <div
       id="dialog"
       class="hidden fixed inset-0 flex items-center justify-center modal-bg z-50"
@@ -139,9 +123,7 @@
       aria-modal="true"
       aria-labelledby="dialogTitle"
     >
-      <div
-        class="bg-white rounded-lg p-6 max-w-md w-full shadow-lg text-gray-800"
-      >
+      <div class="bg-white rounded-lg p-6 max-w-md w-full shadow-lg text-gray-800">
         <h3 id="dialogTitle" class="text-lg font-semibold mb-4"></h3>
         <ul id="missingFieldsList" class="mb-4 text-red-600 text-sm"></ul>
         <div class="flex justify-end space-x-3" id="dialogButtons">
@@ -161,133 +143,156 @@
       </div>
     </div>
 
-    <!-- JS -->
-<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        new Pikaday({
+          field: document.getElementById("00NU7000005zuLl"),
+          format: "MM/DD/YYYY",
+          toString(date) {
+            const day = String(date.getDate()).padStart(2, "0");
+            const month = String(date.getMonth() + 1).padStart(2, "0");
+            const year = date.getFullYear();
+            return `${month}/${day}/${year}`;
+          },
+          parse(dateString) {
+            const [month, day, year] = dateString.split("/");
+            return new Date(year, month - 1, day);
+          },
+        });
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("mainForm");
+        const reviewBtn = document.getElementById("reviewBtn");
+        const dialog = document.getElementById("dialog");
+        const dialogTitle = document.getElementById("dialogTitle");
+        const missingFieldsList = document.getElementById("missingFieldsList");
+        const proceedBtn = document.getElementById("proceedBtn");
+        const editBtn = document.getElementById("editBtn");
+        const allFormDataTextarea = document.getElementById("00NU7000008TS4L");
 
-  // ================= DATE PICKER =================
-  new Pikaday({
-    field: document.getElementById("00NU7000005zuLl"),
-    format: "MM/DD/YYYY",
-    toString(date) {
-      const day = String(date.getDate()).padStart(2, "0");
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const year = date.getFullYear();
-      return `${month}/${day}/${year}`;
-    },
-    parse(dateString) {
-      const [month, day, year] = dateString.split("/");
-      return new Date(year, month - 1, day);
-    },
-  });
+        const fieldData = [
+          { id: "email", label: "Email", type: "email" },
+          { id: "00NU7000005zuX3", label: "Policy Number" },
+          { id: "00NU7000005zuLl", label: "Effective Date (MM/DD/YYYY)", type: "date" }
+        ];
 
-  const form = document.getElementById("mainForm");
-  const reviewBtn = document.getElementById("reviewBtn");
-  const dialog = document.getElementById("dialog");
-  const dialogTitle = document.getElementById("dialogTitle");
-  const missingFieldsList = document.getElementById("missingFieldsList");
-  const proceedBtn = document.getElementById("proceedBtn");
-  const editBtn = document.getElementById("editBtn");
+        function formatToISO(dateString) {
+          const match = dateString.trim().match(/^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/);
+          if (!match) return "";
+          const [, mm, dd, yyyy] = match;
+          return `${yyyy}-${mm}-${dd}`;
+        }
 
-  // ================= ADD HIDDEN FIELDS =================
+        function validateFields() {
+          const missing = [];
+          fieldData.forEach((field) => {
+            const el = document.getElementById(field.id);
+            if (!el) return;
+            if (field.type === "email") {
+              if (!el.value.trim() || !el.checkValidity()) missing.push(field.label);
+            } else if (field.type === "date") {
+              const val = el.value.trim();
+              const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/;
+              if (!val || !dateRegex.test(val)) missing.push(field.label);
+            } else if (!el.value.trim()) {
+              missing.push(field.label);
+            }
+          });
+          return missing;
+        }
 
-  const capturedInput = document.createElement("input");
-  capturedInput.type = "hidden";
-  capturedInput.name = "Form_Captured_Data__c";
-  form.appendChild(capturedInput);
+        function captureAllFormDataAsJSON() {
+          const formData = {};
+          const excludeFields = [
+            "oid", "OrgId", "retURL", "ReturnURL", "first_name", "FirstName",
+            "last_name", "LastName", "status", "Status", "phone", "Phone",
+            "lead_source", "LeadSource", "delete_Action_Form__c", "delete_Action_Form",
+            "company", "Company"
+          ];
+          const fieldMapping = {
+            email: "Email",
+            Policy_Number__c: "Policy_Number",
+            Policy_Action__c: "Policy_Action",
+            Carrier__c: "Carrier",
+            Date__c: "Effective_Date"
+          };
+          const formElements = form.querySelectorAll("input, textarea, select");
+          formElements.forEach((element) => {
+            if (!element.name || element.name === "Form_Captured_Data__c" || element.name === "Form_Missing_Data__c" || element.name === "All_Form_Data__c") return;
+            const mappedName = fieldMapping[element.name] || element.name.replace(/__c$/, "");
+            if (excludeFields.includes(mappedName) || excludeFields.includes(element.name)) return;
+            if (mappedName === "Effective_Date") formData[mappedName] = formatToISO(element.value || "");
+            else formData[mappedName] = element.value || "";
+          });
+          return JSON.stringify(formData, null, 2);
+        }
 
-  const missingInput = document.createElement("input");
-  missingInput.type = "hidden";
-  missingInput.name = "Form_Missing_Data__c";
-  form.appendChild(missingInput);
+        function captureFormAudit() {
+          const captured = [];
+          const missing = [];
 
-  // ================= VALIDATION DATA =================
+          fieldData.forEach(field => {
+            const el = document.getElementById(field.id);
+            if (el && el.value.trim()) captured.push(`${field.label} = ${el.value.trim()}`);
+            else missing.push(field.label);
+          });
 
-  const fieldData = [
-    { id: "email", label: "Email", type: "email" },
-    { id: "00NU7000005zuX3", label: "Policy Number" },
-    { id: "00NU7000005zuLl", label: "Effective Date (MM/DD/YYYY)", type: "date" }
-  ];
+          let capturedField = document.getElementById("Form_Captured_Data__c");
+          let missingField = document.getElementById("Form_Missing_Data__c");
 
-  function validateFields() {
-    const missing = [];
+          if (!capturedField) {
+            capturedField = document.createElement("input");
+            capturedField.type = "hidden";
+            capturedField.name = "Form_Captured_Data__c";
+            capturedField.id = "Form_Captured_Data__c";
+            form.appendChild(capturedField);
+          }
 
-    fieldData.forEach((field) => {
-      const input = document.getElementById(field.id);
+          if (!missingField) {
+            missingField = document.createElement("input");
+            missingField.type = "hidden";
+            missingField.name = "Form_Missing_Data__c";
+            missingField.id = "Form_Missing_Data__c";
+            form.appendChild(missingField);
+          }
 
-      if (field.type === "email") {
-        if (!input.value.trim() || !input.checkValidity()) missing.push(field.label);
-      } 
-      else if (field.type === "date") {
-        const val = input.value.trim();
-        const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/;
-        if (!val || !dateRegex.test(val)) missing.push(field.label);
-      } 
-      else {
-        if (!input.value.trim()) missing.push(field.label);
-      }
-    });
+          capturedField.value = captured.join("\n");
+          missingField.value = missing.join("\n");
+        }
 
-    return missing;
-  }
+        reviewBtn.addEventListener("click", () => {
+          const missing = validateFields();
+          captureFormAudit();
+          allFormDataTextarea.value = captureAllFormDataAsJSON();
 
-  // ================= REVIEW CLICK =================
+          if (missing.length) {
+            dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
+            missingFieldsList.innerHTML = missing.map(f => `<li>${f}</li>`).join("");
+          } else {
+            dialogTitle.textContent = "All mandatory fields are completed. Ready to submit your request?";
+            missingFieldsList.innerHTML = "";
+          }
 
-  reviewBtn.addEventListener("click", () => {
-    const missing = validateFields();
-    const filled = [];
-    const missingOnly = [];
+          dialog.classList.remove("hidden");
+        });
 
-    fieldData.forEach(field => {
-      const input = document.getElementById(field.id);
-      const value = input.value.trim();
+        editBtn.addEventListener("click", () => dialog.classList.add("hidden"));
 
-      if (value) {
-        filled.push(`${field.label} = ${value}`);
-      } else {
-        missingOnly.push(field.label);
-      }
-    });
+        proceedBtn.addEventListener("click", () => {
+          captureFormAudit();
+          allFormDataTextarea.value = captureAllFormDataAsJSON();
+          dialog.classList.add("hidden");
+          form.submit();
+        });
 
-    capturedInput.value = filled.join("\n");
-    missingInput.value = missingOnly.join("\n");
+        window.addEventListener("click", e => {
+          if (e.target === dialog) dialog.classList.add("hidden");
+        });
 
-    if (missing.length) {
-      dialogTitle.textContent =
-        "Below Mandatory Fields are missing and the Team will contact you shortly.";
-      missingFieldsList.innerHTML = missing.map(f => `<li>${f}</li>`).join("");
-    } else {
-      dialogTitle.textContent =
-        "All mandatory fields are completed. Ready to submit your request?";
-      missingFieldsList.innerHTML = "";
-    }
-
-    dialog.classList.remove("hidden");
-  });
-
-  // ================= DIALOG CONTROLS =================
-
-  editBtn.addEventListener("click", () => dialog.classList.add("hidden"));
-
-  proceedBtn.addEventListener("click", () => {
-    dialog.classList.add("hidden");
-    form.submit();
-  });
-
-  window.addEventListener("click", (e) => {
-    if (e.target === dialog) dialog.classList.add("hidden");
-  });
-
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !dialog.classList.contains("hidden")) {
-      dialog.classList.add("hidden");
-    }
-  });
-
-});
-</script>
+        window.addEventListener("keydown", e => {
+          if (e.key === "Escape" && !dialog.classList.contains("hidden")) dialog.classList.add("hidden");
+        });
+      });
+    </script>
   </body>
-
 </html>
