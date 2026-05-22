@@ -23,7 +23,7 @@
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
@@ -160,7 +160,7 @@
       </div>
 
       <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
      <!-- <input type="hidden" name="recordType" id="recordType" value="012U7000003Hjv3IAC" />-->
       <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
       <input type="hidden" name="first_name" value="Remove Driver Test Demo Progressive New" />
@@ -173,7 +173,7 @@
       <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
       <input type="hidden" id="formMissingData" name="Form_Missing_Data__c" value="" />
       <input type="hidden" name="delete_Action_Form__c" value="1" />
-
+<input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
                     <input type="hidden" name="Carrier__c" value ="Progressive">
 
 
@@ -314,7 +314,11 @@
       return new Date(year, month - 1, day);
     },
   });
-
+function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month}-${day}`;
+}
   reviewBtn.addEventListener("click", () => {
     const missing = validateFields();
 
@@ -345,6 +349,25 @@
     if (formMissingDataInput) {
       formMissingDataInput.value = missing.join('\n');
     }
+
+    // Build and store all form data JSON
+const selectedRequestType =
+  document.querySelector('input[name="Is_this_a_quote_or_a_change_request__c"]:checked')?.value || "";
+
+const allFormData = {
+  Email: document.getElementById("email")?.value || "",
+  Is_this_a_quote_or_a_change_request: selectedRequestType,
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value || "",
+Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value || ""),
+  First_Name: document.getElementById("driverName")?.value || "",
+  Relationship_To_Insured: document.getElementById("00NU7000005zuVR")?.value || "",
+
+  // Hidden fields
+  Carrier: document.querySelector('input[name="Carrier__c"]')?.value || "Progressive",
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || "Remove Driver"
+};
+
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
 
     // Show/hide quotePolicyError if Request Type is empty
     const quotePolicyError = document.getElementById("quotePolicyError");
