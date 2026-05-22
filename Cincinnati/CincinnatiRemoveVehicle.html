@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cincinnati Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
+    <style>
+      .star { color: #ef4444; margin-left: 2px; }
+      .modal-bg { background: rgba(0,0,0,0.4);}
+      .hidden { display: none; }
+      .all-form-data {
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
+    <form
+      id="mainForm"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU7000006EuID"
+      method="POST"
+      class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8"
+      autocomplete="off"
+      novalidate
+    >
+      
+      <!-- All Form Data - HIDDEN JSON CAPTURE -->
+      <textarea 
+        id="00NU7000008TS4L" 
+        name="00NU7000008TS4L" 
+        rows="50" 
+        type="text" 
+        wrap="soft"
+        class="hidden all-form-data"
+      ></textarea>
+
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+        Remove Vehicle Cincinnati Form
+      </h2>
+
+      <!-- Policy Changes Section -->
+      <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Policy Changes Section">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700">Policy Changes</h3>
+
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            Email<span class="star">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            autocomplete="off"
+            required
+          />
+        </div>
+      
+
+        <fieldset class="mb-4">
+          <legend class="block text-sm font-medium text-gray-700 mb-1">
+            Select the Request Type:<span class="star">*</span>
+          </legend>
+          <div class="flex space-x-6">
+            <label class="inline-flex items-center">
+              <input type="radio" name="requestTypeRadios" value="Y" class="mr-2" required />Quote
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" name="requestTypeRadios" value="N" class="mr-2" required />Endorsement
+            </label>
+          </div>
+          <!-- Hidden select field mapped to radio buttons -->
+          <select id="00NU7000006IOzh" name="Is_this_a_quote_or_a_change_request__c" class="hidden" required>
+            <option value=""></option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+          </select>
+        </fieldset>
+
+        <div class="mb-4">
+          <label for="00NU7000005zuX3" class="block text-sm font-medium text-gray-700">
+            Policy Number<span class="star">*</span>
+          </label>
+          <input
+            type="text"
+            id="00NU7000005zuX3"
+            name="Policy_Number__c"
+            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="00NU7000005zuLl" class="block text-sm font-medium text-gray-700">
+            Effective Date (MM/DD/YYYY)<span class="star">*</span>
+          </label>
+          <input
+            type="text"
+            id="00NU7000005zuLl"
+            name="Date__c"
+            placeholder="MM/DD/YYYY"
+            maxlength="10"
+            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 date-input"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <!-- Old Vehicle VIN Number -->
+        <div class="mb-4">
+          <label for="00NU700000616Sv" class="block text-sm font-medium text-gray-700">
+            Please enter VIN of the vehicle being removed<span class="star">*</span>
+          </label>
+          <input
+            id="00NU700000616Sv"
+            name="VIN_number__c"
+            maxlength="255"
+            size="20"
+            type="text"
+            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
+            autocomplete="off"
+            required
+          />
+        </div>
+      </section>
+      
+      <!-- Hidden Salesforce fields -->
+      <input type="hidden" name="oid" value="00DU7000006EuID" />
+      <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
+      <input type="hidden" name="first_name" value="Cincinnati" />
+      <input type="hidden" name="last_name" value="Remove Vehicle" />
+      <input type="hidden" name="status" value="New" />
+      <input type="hidden" name="phone" value="28138916529" />
+      <input type="hidden" name="lead_source" value="Web Form" />
+      <input type="hidden" name="delete_Action_Form__c" value="1" />
+      <input type="hidden" id="00NU7000007OdKL" name="Carrier__c" value="Cincinnati" />
+      <input type="hidden" name="00NU7000005zuNN" id="Policy_Action__c" value="Remove Vehicle" />
+      <input type="hidden" name="Form_Captured_Data__c" />
+      <input type="hidden" name="Form_Missing_Data__c" />
+      <input type="hidden" name="company" value="Cincinnati" />
+
+      <div class="flex justify-end mt-6">
+        <button
+          type="button"
+          id="reviewBtn"
+          class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition"
+        >
+          Review and Submit
+        </button>
+      </div>
+    </form>
+
+    <!-- Confirmation Dialog -->
+    <div
+      id="dialog"
+      class="hidden fixed inset-0 flex items-center justify-center modal-bg z-50"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="dialogTitle"
+    >
+      <div class="bg-white rounded-lg p-6 max-w-md w-full shadow-lg text-gray-800">
+        <h3 id="dialogTitle" class="text-lg font-semibold mb-4"></h3>
+        <ul id="missingFieldsList" class="mb-4 text-red-600 text-sm"></ul>
+        <div class="flex justify-end space-x-3" id="dialogButtons">
+          <button
+            id="proceedBtn"
+            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 font-medium"
+          >
+            Proceed to End Request
+          </button>
+          <button
+            id="editBtn"
+            class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 font-medium"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  let picker = null;
+
+  /* ===================== FIXED DATE PICKER ===================== */
+  const dateInput = document.getElementById("00NU7000005zuLl");
+  
+  if (window.Pikaday && dateInput) {
+    picker = new Pikaday({
+      field: dateInput,
+      format: "MM/DD/YYYY",
+      toString(date) {
+        const d = String(date.getDate()).padStart(2, "0");
+        const m = String(date.getMonth() + 1).padStart(2, "0");
+        const y = date.getFullYear();
+        return `${m}/${d}/${y}`;
+      },
+      parse(dateString) {
+        if (!dateString) return null;
+        const [m, d, y] = dateString.split("/");
+        return new Date(y, m - 1, d);
+      },
+      onSelect: function() {
+        // ✅ FORCE UPDATE input value on selection
+        dateInput.value = this.toString();
+      },
+      onClose: function() {
+        // ✅ FORCE UPDATE input value on close
+        if (this.getDate()) {
+          dateInput.value = this.toString();
+        }
+      }
+    });
+  }
+
+  /* ===================== RADIO → HIDDEN FIELD ===================== */
+  const radios = document.querySelectorAll('input[name="requestTypeRadios"]');
+  const hiddenSelect = document.getElementById("00NU7000006IOzh");
+
+  function syncRequestType() {
+    const checkedRadio = document.querySelector('input[name="requestTypeRadios"]:checked');
+    hiddenSelect.value = checkedRadio ? checkedRadio.value : "";
+  }
+
+  radios.forEach(radio => radio.addEventListener("change", syncRequestType));
+  syncRequestType();
+
+  /* ===================== FORM ELEMENTS ===================== */
+  const reviewBtn = document.getElementById("reviewBtn");
+  const dialog = document.getElementById("dialog");
+  const dialogTitle = document.getElementById("dialogTitle");
+  const missingFieldsList = document.getElementById("missingFieldsList");
+  const proceedBtn = document.getElementById("proceedBtn");
+  const editBtn = document.getElementById("editBtn");
+  const form = document.getElementById("mainForm");
+  const allFormDataTextarea = document.getElementById("00NU7000008TS4L");
+  
+  const requiredFields = [
+    { id: "email", label: "Email", type: "email" },
+    { radioGroupName: "requestTypeRadios", label: "Select the Request Type:" },
+    { id: "00NU7000005zuX3", label: "Policy Number" },
+    { id: "00NU7000005zuLl", label: "Effective Date (MM/DD/YYYY)", type: "date" },
+    { id: "00NU700000616Sv", label: "Please enter VIN of the vehicle being removed" }
+  ];
+
+  // ================= DATE FORMAT FOR JSON =================
+  function formatDateForJSON(dateString) {
+    if (!dateString) return '';
+    const [m, d, y] = dateString.split('/');
+    return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+  }
+
+  // ================= CAPTURE ALL FORM DATA AS JSON =================
+  function captureAllFormDataAsJSON() {
+    const formData = {};
+    const formElements = form.querySelectorAll('input, textarea, select');
+    
+    formElements.forEach(element => {
+      if (
+        !element.name ||
+        element.name === 'Form_Captured_Data__c' ||
+        element.name === 'Form_Missing_Data__c' ||
+        element.name === '00NU7000008TS4L' ||
+        element.name === 'requestTypeRadios'
+      ) {
+        return;
+      }
+
+      let fieldName = element.name.replace(/__c$/, '');
+      const skipFields = ['company', 'delete_Action_Form', 'lead_source', 'phone', 'status', 'last_name', 'first_name', 'retURL', 'oid'];
+      
+      if (skipFields.includes(fieldName)) return;
+
+      const fieldMapping = {
+        '00NU7000005zuNN': 'Policy_Action',
+        'Policy_Number': 'Policy_Number',
+        'Carrier': 'Carrier',
+        'Is_this_a_quote_or_a_change_request': 'Is_this_a_quote_or_a_change_request',
+        'Date': 'Effective_Date',
+        'VIN_number': 'VIN_number',
+        'email': 'Email'
+      };
+
+      fieldName = fieldMapping[fieldName] || fieldName;
+
+      if (fieldName === 'Effective_Date' && element.value) {
+        formData[fieldName] = formatDateForJSON(element.value);
+      } else {
+        formData[fieldName] = element.value || '';
+      }
+    });
+
+    return JSON.stringify(formData, null, 2);
+  }
+
+  /* ===================== VALIDATION ===================== */
+  function validateFields() {
+    const missing = [];
+
+    requiredFields.forEach(field => {
+      if (field.radioGroupName) {
+        const radios = document.querySelectorAll(`input[name="${field.radioGroupName}"]`);
+        const checked = [...radios].some(r => r.checked);
+        if (!checked) missing.push(field.label);
+        return;
+      }
+
+      const el = document.getElementById(field.id);
+      if (!el) return;
+
+      if (field.type === "email") {
+        if (!el.value.trim() || !el.checkValidity()) missing.push(field.label);
+      }
+      else if (field.type === "date") {
+        const val = el.value.trim();
+        const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d{2}$/;
+        if (!val || !dateRegex.test(val)) missing.push(field.label);
+      }
+      else {
+        if (!el.value.trim()) missing.push(field.label);
+      }
+    });
+
+    return missing;
+  }
+
+  /* ===================== FORM CAPTURE ===================== */
+  function captureFormData() {
+    // ✅ FORCE DATE PICKER TO UPDATE BEFORE CAPTURE
+    if (picker && picker.getDate()) {
+      dateInput.value = picker.toString();
+    }
+
+    const missing = [];
+    const filled = [];
+
+    requiredFields.forEach(field => {
+      if (field.radioGroupName) {
+        const radios = document.querySelectorAll(`input[name="${field.radioGroupName}"]`);
+        const checked = [...radios].find(r => r.checked);
+        if (checked) filled.push(`${field.label}: ${checked.value}`);
+        else missing.push(field.label);
+        return;
+      }
+
+      const el = document.getElementById(field.id);
+      if (!el || !el.value.trim()) {
+        missing.push(field.label);
+      } else {
+        filled.push(`${field.label}: ${el.value.trim()}`);
+      }
+    });
+
+    let missingField = document.getElementById("Form_Missing_Data__c");
+    let capturedField = document.getElementById("Form_Captured_Data__c");
+
+    if (!missingField) {
+      missingField = document.createElement("input");
+      missingField.type = "hidden";
+      missingField.id = "Form_Missing_Data__c";
+      missingField.name = "Form_Missing_Data__c";
+      form.appendChild(missingField);
+    }
+
+    if (!capturedField) {
+      capturedField = document.createElement("input");
+      capturedField.type = "hidden";
+      capturedField.id = "Form_Captured_Data__c";
+      capturedField.name = "Form_Captured_Data__c";
+      form.appendChild(capturedField);
+    }
+
+    missingField.value = missing.join("\n");
+    capturedField.value = filled.join("\n");
+  }
+
+  /* ===================== UI FLOW ===================== */
+  reviewBtn.addEventListener("click", () => {
+    const missing = validateFields();
+    allFormDataTextarea.value = captureAllFormDataAsJSON();
+    
+    if (missing.length) {
+      dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
+      missingFieldsList.innerHTML = missing.map(f => `<li>${f}</li>`).join("");
+    } else {
+      dialogTitle.textContent = "All mandatory fields are completed. Ready to submit your request?";
+      missingFieldsList.innerHTML = "";
+    }
+
+    dialog.classList.remove("hidden");
+  });
+
+  editBtn.addEventListener("click", () => dialog.classList.add("hidden"));
+
+  proceedBtn.addEventListener("click", () => {
+    captureFormData();
+    dialog.classList.add("hidden");
+    // ✅ FINAL FORCE UPDATE FOR DATE PICKER
+    if (picker && picker.getDate()) {
+      dateInput.value = picker.toString();
+    }
+    form.submit();
+  });
+
+  // Close dialog on outside click or Escape
+  window.addEventListener("click", e => {
+    if (e.target === dialog) dialog.classList.add("hidden");
+  });
+
+  window.addEventListener("keydown", e => {
+    if (e.key === "Escape" && !dialog.classList.contains("hidden")) {
+      dialog.classList.add("hidden");
+    }
+  });
+});
+</script>
+</body>
+</html>

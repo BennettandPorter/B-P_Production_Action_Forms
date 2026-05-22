@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cincinnati Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
+    <style>
+      .star { color: #ef4444; margin-left: 2px; }
+      .modal-bg { background: rgba(0,0,0,0.4); }
+      .hidden { display: none; }
+      .all-form-data {
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+      .disabled-field {
+        background-color: #f3f4f6;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
+    <form
+      id="mainForm"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU7000006EuID"
+      method="POST"
+      class="bg-white p-8 rounded-2xl shadow-md w-full max-w-3xl space-y-8"
+      autocomplete="off"
+      novalidate
+    >
+      <textarea
+        id="00NU7000008TS4L"
+        name="All_Form_Data__c"
+        rows="50"
+        type="text"
+        wrap="soft"
+        class="hidden all-form-data"
+      ></textarea>
+
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+        EOI Cincinnati Form
+      </h2>
+
+      <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Policy Changes Section">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700">Policy Changes</h3>
+
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            Email<span class="star">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <fieldset class="mb-4">
+          <legend class="block text-sm font-medium text-gray-700 mb-1">
+            Select the Request Type:<span class="star">*</span>
+          </legend>
+          <div class="flex space-x-6">
+            <label class="inline-flex items-center">
+              <input type="radio" name="requestTypeRadios" value="Quote" class="mr-2" required />Quote
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" name="requestTypeRadios" value="Endorsement" class="mr-2" required />Endorsement
+            </label>
+          </div>
+          <select id="00NU7000006IOzh" name="Is_this_a_quote_or_a_change_request__c" class="hidden" required>
+            <option value=""></option>
+            <option value="Quote">Quote</option>
+            <option value="Endorsement">Endorsement</option>
+          </select>
+        </fieldset>
+
+        <div class="mb-4">
+          <label for="00NU7000005zuX3" class="block text-sm font-medium text-gray-700">
+            Policy Number<span class="star">*</span>
+          </label>
+          <input type="text" id="00NU7000005zuX3" name="Policy_Number__c" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" autocomplete="off" required />
+        </div>
+
+        <div class="mb-4">
+          <label for="00NU7000005zuLl" class="block text-sm font-medium text-gray-700">
+            Effective Date (MM/DD/YYYY)<span class="star">*</span>
+          </label>
+          <input
+            type="text"
+            id="00NU7000005zuLl"
+            name="Date__c"
+            placeholder="MM/DD/YYYY"
+            maxlength="10"
+            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 date-input"
+            autocomplete="off"
+            required
+          />
+        </div>
+      </section>
+
+      <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Remove Mortgage Details Section">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700">Remove Mortgage Details</h3>
+
+        <div class="mb-4">
+          <label for="mortgageeDeleteCount" class="block text-sm font-medium text-gray-700">
+            Please select the number of mortgagee you want to delete:<span class="star">*</span>
+          </label>
+          <select id="mortgageeDeleteCount" name="mortgageeDeleteCount" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" required>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </div>
+
+        <div id="mortgageDeleteFields" class="space-y-4 hidden">
+          <div id="mortgageDeleteField1" class="hidden">
+            <label for="00NU700000748W2" class="block text-sm font-medium text-gray-700">
+              Please enter the Loan Number of the Mortgagee to delete<span class="star">*</span>
+            </label>
+            <input id="00NU700000748W2" maxlength="30" name="Loan_Number_To_Delete1__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" autocomplete="off" />
+          </div>
+
+          <div id="mortgageDeleteField2" class="hidden">
+            <label for="00NU70000074B2U" class="block text-sm font-medium text-gray-700">
+              Please enter the Loan Number of the Mortgagee to delete<span class="star">*</span>
+            </label>
+            <input id="00NU70000074B2U" maxlength="30" name="Loan_Number_To_Delete2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" autocomplete="off" />
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Add Mortgage Details Section">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700">Add Mortgage Details</h3>
+
+        <div class="mb-4">
+          <label for="addMortgageCount" class="block text-sm font-medium text-gray-700">
+            Please select the number of Mortgagee Details you want to Add:<span class="star">*</span>
+          </label>
+          <select id="addMortgageCount" name="addMortgageCount" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" required>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+
+        <div id="addMortgageFields" class="space-y-6 hidden">
+          <div id="addMortgageField1" class="hidden bg-white border rounded-xl p-4">
+            <h4 class="text-lg font-semibold mb-4 text-gray-700">Add Mortgage 1</h4>
+
+            <div class="mb-4">
+              <label class="inline-flex items-center text-sm font-medium text-gray-700">
+                <input type="checkbox" id="escrow1Checkbox" class="mr-2" />
+                Is this an Escrow Account?
+              </label>
+              <input type="hidden" id="00NU70000085iwf" name="Is_this_an_escrow_account_1__c" />
+            </div>
+            
+            <div class="mb-4">
+  <label for="mortgageType1" class="block text-sm font-medium text-gray-700">Type</label>
+  <select id="mortgageType1" name="mortgageType1" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
+    <option value="">Select Type</option>
+    <option value="First Mortgagee">First Mortgagee</option>
+    <option value="Second Mortgagee">Second Mortgagee</option>
+    <option value="Third Mortgagee">Third Mortgagee</option>
+  </select>
+</div>
+
+            <div class="mb-4">
+              <label for="00NU70000074ACr" class="block text-sm font-medium text-gray-700">Loan Number<span class="star">*</span></label>
+              <input id="00NU70000074ACr" maxlength="255" name="loanNumber_1__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
+            </div>
+
+            <div class="mb-4">
+              <label class="inline-flex items-center text-sm font-medium text-gray-700">
+                <input type="checkbox" id="atima1Checkbox" class="mr-2" />
+                ATIMA
+              </label>
+              <input type="hidden" id="00NU7000008w6re" name="ATIMA__c" />
+            </div>
+
+            <div class="mb-4">
+              <label class="inline-flex items-center text-sm font-medium text-gray-700">
+                <input type="checkbox" id="isaoa1Checkbox" class="mr-2" />
+                ISAOA
+              </label>
+              <input type="hidden" id="00NU7000008w8ob" name="ISAOA__c" />
+            </div>
+
+            <div class="mb-4">
+              <label for="00NU70000074A4n" class="block text-sm font-medium text-gray-700">Name 1<span class="star">*</span></label>
+              <input id="00NU70000074A4n" maxlength="30" name="name_1__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
+            </div>
+
+            <div class="mb-4">
+              <label for="00NU700000749FD" class="block text-sm font-medium text-gray-700">Name 2</label>
+              <input id="00NU700000749FD" maxlength="30" name="name1_1_1__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
+            </div>
+
+            <div class="mb-4">
+              <label for="00NU7000008wIBF" class="block text-sm font-medium text-gray-700">FEIN</label>
+              <input id="00NU7000008wIBF" maxlength="255" name="FEIN__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700">
+                Is your mailing address a PO BOX address?<span class="star">*</span>
+              </label>
+              <div class="flex space-x-6 mt-2">
+                <label class="inline-flex items-center">
+                  <input type="radio" name="mailingAddress1" value="Y" class="mr-2" />
+                  Yes
+                </label>
+                <label class="inline-flex items-center">
+                  <input type="radio" name="mailingAddress1" value="N" class="mr-2" />
+                  No
+                </label>
+              </div>
+              <input type="hidden" id="00NU7000007xdVx" name="Do_you_want_to_change_mailing_address__c" />
+            </div>
+
+            <div class="mb-4">
+              <label for="00NU7000008o0JZ" class="block text-sm font-medium text-gray-700">Street Number<span class="star">*</span></label>
+              <input id="00NU7000008o0JZ" maxlength="255" name="Street_Number__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
+            </div>
+
+            <div class="mb-4">
+              <label for="00NU7000008o0OP" class="block text-sm font-medium text-gray-700">Street Name<span class="star">*</span></label>
+              <input id="00NU7000008o0OP" maxlength="255" name="Street_Name__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
+            </div>
+
+            <div class="mb-4">
+              <label for="00NU7000008oBZx" class="block text-sm font-medium text-gray-700">Apartment/Suite</label>
+              <input id="00NU7000008oBZx" maxlength="255" name="Apartment_Suite__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
+            </div>
+
+            <div class="mb-4">
+              <label for="00NU700000746Z4" class="block text-sm font-medium text-gray-700">PO Box Address<span class="star">*</span></label>
+              <input id="00NU700000746Z4" maxlength="30" name="address_1__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
+            </div>
+
+            <div class="mb-4">
+              <label for="00NU70000074AG5" class="block text-sm font-medium text-gray-700">City<span class="star">*</span></label>
+              <input id="00NU70000074AG5" maxlength="30" name="city_1__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
+            </div>
+
+            <div class="mb-4">
+              <label for="00NU70000074AKv" class="block text-sm font-medium text-gray-700">State<span class="star">*</span></label>
+              <select id="00NU70000074AKv" name="state_1__c" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
+                <option value="">--None--</option>
+                <option value="AK">AK</option>
+<option value="AL">AL</option>
+<option value="AR">AR</option>
+<option value="AZ">AZ</option>
+<option value="CA">CA</option>
+<option value="CO">CO</option>
+<option value="CT">CT</option>
+<option value="DC">DC</option>
+<option value="DE">DE</option>
+<option value="FL">FL</option>
+<option value="GA">GA</option>
+<option value="HI">HI</option>
+<option value="IA">IA</option>
+<option value="ID">ID</option>
+<option value="IL">IL</option>
+<option value="IN">IN</option>
+<option value="KS">KS</option>
+<option value="KY">KY</option>
+<option value="LA">LA</option>
+<option value="MA">MA</option>
+<option value="MD">MD</option>
+<option value="ME">ME</option>
+<option value="MI">MI</option>
+<option value="MN">MN</option>
+<option value="MO">MO</option>
+<option value="MS">MS</option>
+<option value="MT">MT</option>
+<option value="NC">NC</option>
+<option value="ND">ND</option>
+<option value="NE">NE</option>
+<option value="NH">NH</option>
+<option value="NJ">NJ</option>
+<option value="NM">NM</option>
+<option value="NV">NV</option>
+<option value="NY">NY</option>
+<option value="OH">OH</option>
+<option value="OK">OK</option>
+<option value="OR">OR</option>
+<option value="PA">PA</option>
+<option value="RI">RI</option>
+<option value="SC">SC</option>
+<option value="SD">SD</option>
+<option value="TN">TN</option>
+<option value="TX">TX</option>
+<option value="UT">UT</option>
+<option value="VA">VA</option>
+<option value="VT">VT</option>
+<option value="WA">WA</option>
+<option value="WI">WI</option>
+<option value="WV">WV</option>
+<option value="WY">WY</option>
+<option value="CW">CW</option>
+<option value="PR">PR</option>
+<option value="AS">AS</option>
+<option value="FM">FM</option>
+<option value="GU">GU</option>
+<option value="MH">MH</option>
+<option value="MP">MP</option>
+<option value="PW">PW</option>
+<option value="VI">VI</option>
+<option value="AE">AE</option>
+<option value="AP">AP</option>
+<option value="AA">AA</option>
+<option value="Non-US">Non-US</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label for="00NU7000007qTgD" class="block text-sm font-medium text-gray-700">Zip Code<span class="star">*</span></label>
+              <input id="00NU7000007qTgD" maxlength="30" name="Zip_Auto_Owners_1__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
+            </div>
+          </div>
+
+          <div id="addMortgageField2" class="hidden bg-white border rounded-xl p-4">
+            <h4 class="text-lg font-semibold mb-4 text-gray-700">Add Mortgage 2</h4>
+            <div class="mb-4">
+              <label class="inline-flex items-center text-sm font-medium text-gray-700">
+                <input type="checkbox" id="escrow2Checkbox" class="mr-2" />
+                Is this an Escrow Account?
+              </label>
+              <input type="hidden" id="00NU70000085iv3" name="Is_this_an_escrow_account_2__c" />
+            </div>
+            
+            <div class="mb-4">
+  <label for="mortgageType1" class="block text-sm font-medium text-gray-700">Type</label>
+  <select id="mortgageType1" name="mortgageType1" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
+    <option value="">Select Type</option>
+    <option value="First Mortgagee">First Mortgagee</option>
+    <option value="Second Mortgagee">Second Mortgagee</option>
+    <option value="Third Mortgagee">Third Mortgagee</option>
+  </select>
+</div>
+            <div class="mb-4"><label for="loanNumber_2__c" class="block text-sm font-medium text-gray-700">Loan Number<span class="star">*</span></label><input id="00NU70000074AXp" maxlength="255" name="loanNumber_2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4">
+              <label class="inline-flex items-center text-sm font-medium text-gray-700"><input type="checkbox" id="atima2Checkbox" class="mr-2" />ATIMA</label>
+              <input type="hidden" id="00NU7000008w7pJ" name="ATIMA_2__c" />
+            </div>
+            <div class="mb-4">
+              <label class="inline-flex items-center text-sm font-medium text-gray-700"><input type="checkbox" id="isaoa2Checkbox" class="mr-2" />ISAOA</label>
+              <input type="hidden" id="00NU7000008w8qD" name="ISAOA_2__c" />
+            </div>
+            <div class="mb-4"><label for="00NU70000074APl" class="block text-sm font-medium text-gray-700">Name 1<span class="star">*</span></label><input id="00NU70000074APl" maxlength="30" name="name_2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU70000074AUb" class="block text-sm font-medium text-gray-700">Name 2</label><input id="00NU70000074AUb" maxlength="30" name="name2_2_2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU7000008wICr" class="block text-sm font-medium text-gray-700">FEIN</label><input id="00NU7000008wICr" maxlength="255" name="FEIN_2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700">
+                Is your mailing address a PO BOX address?<span class="star">*</span>
+              </label>
+              <div class="flex space-x-6 mt-2">
+                <label class="inline-flex items-center"><input type="radio" name="mailingAddress2" value="Y" class="mr-2" />Yes</label>
+                <label class="inline-flex items-center"><input type="radio" name="mailingAddress2" value="N" class="mr-2" />No</label>
+              </div>
+              <input type="hidden" id="00NU7000008w6bV" name="Do_you_want_to_change_mailing_address_2__c" />
+            </div>
+            <div class="mb-4"><label for="00NU7000008w6GX" class="block text-sm font-medium text-gray-700">Street Number<span class="star">*</span></label><input id="00NU7000008w6GX" maxlength="255" name="Street_Number_2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU7000008w6TR" class="block text-sm font-medium text-gray-700">Street Name<span class="star">*</span></label><input id="00NU7000008w6TR" maxlength="255" name="Street_Name_2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU7000008wIKv" class="block text-sm font-medium text-gray-700">Apartment/Suite</label><input id="00NU7000008wIKv" maxlength="255" name="Apartment_Suite_2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU700000749iM" class="block text-sm font-medium text-gray-700">PO Box Address<span class="star">*</span></label><input id="00NU700000749iM" maxlength="30" name="address_2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU70000074ApZ" class="block text-sm font-medium text-gray-700">City<span class="star">*</span></label><input id="00NU70000074ApZ" maxlength="30" name="city_2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU70000074ArB" class="block text-sm font-medium text-gray-700">State<span class="star">*</span></label><select id="00NU70000074ArB" name="state_2__c" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
+              <option value="">--None--</option>
+                <option value="AK">AK</option>
+<option value="AL">AL</option>
+<option value="AR">AR</option>
+<option value="AZ">AZ</option>
+<option value="CA">CA</option>
+<option value="CO">CO</option>
+<option value="CT">CT</option>
+<option value="DC">DC</option>
+<option value="DE">DE</option>
+<option value="FL">FL</option>
+<option value="GA">GA</option>
+<option value="HI">HI</option>
+<option value="IA">IA</option>
+<option value="ID">ID</option>
+<option value="IL">IL</option>
+<option value="IN">IN</option>
+<option value="KS">KS</option>
+<option value="KY">KY</option>
+<option value="LA">LA</option>
+<option value="MA">MA</option>
+<option value="MD">MD</option>
+<option value="ME">ME</option>
+<option value="MI">MI</option>
+<option value="MN">MN</option>
+<option value="MO">MO</option>
+<option value="MS">MS</option>
+<option value="MT">MT</option>
+<option value="NC">NC</option>
+<option value="ND">ND</option>
+<option value="NE">NE</option>
+<option value="NH">NH</option>
+<option value="NJ">NJ</option>
+<option value="NM">NM</option>
+<option value="NV">NV</option>
+<option value="NY">NY</option>
+<option value="OH">OH</option>
+<option value="OK">OK</option>
+<option value="OR">OR</option>
+<option value="PA">PA</option>
+<option value="RI">RI</option>
+<option value="SC">SC</option>
+<option value="SD">SD</option>
+<option value="TN">TN</option>
+<option value="TX">TX</option>
+<option value="UT">UT</option>
+<option value="VA">VA</option>
+<option value="VT">VT</option>
+<option value="WA">WA</option>
+<option value="WI">WI</option>
+<option value="WV">WV</option>
+<option value="WY">WY</option>
+<option value="CW">CW</option>
+<option value="PR">PR</option>
+<option value="AS">AS</option>
+<option value="FM">FM</option>
+<option value="GU">GU</option>
+<option value="MH">MH</option>
+<option value="MP">MP</option>
+<option value="PW">PW</option>
+<option value="VI">VI</option>
+<option value="AE">AE</option>
+<option value="AP">AP</option>
+<option value="AA">AA</option>
+<option value="Non-US">Non-US</option>
+              </select></div>
+            <div class="mb-4"><label for="00NU7000007qTpt" class="block text-sm font-medium text-gray-700">Zip Code<span class="star">*</span></label><input id="00NU7000007qTpt" maxlength="30" name="Zip_Auto_Owners_2__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+          </div>
+
+          <div id="addMortgageField3" class="hidden bg-white border rounded-xl p-4">
+            <h4 class="text-lg font-semibold mb-4 text-gray-700">Add Mortgage 3</h4>
+            <div class="mb-4">
+              <label class="inline-flex items-center text-sm font-medium text-gray-700">
+                <input type="checkbox" id="escrow3Checkbox" class="mr-2" />
+                Is this an Escrow Account?
+              </label>
+              <input type="hidden" id="00NU70000085itR" name="Is_this_an_escrow_account_3__c" />
+            </div>
+            
+            <div class="mb-4">
+  <label for="mortgageType1" class="block text-sm font-medium text-gray-700">Type</label>
+  <select id="mortgageType1" name="mortgageType1" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
+    <option value="">Select Type</option>
+    <option value="First Mortgagee">First Mortgagee</option>
+    <option value="Second Mortgagee">Second Mortgagee</option>
+    <option value="Third Mortgagee">Third Mortgagee</option>
+  </select>
+</div>
+            <div class="mb-4"><label for="00NU70000074B5h" class="block text-sm font-medium text-gray-700">Loan Number<span class="star">*</span></label><input id="00NU70000074B5h" maxlength="30" name="loanNumber_3__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label class="inline-flex items-center text-sm font-medium text-gray-700"><input type="checkbox" id="atima3Checkbox" class="mr-2" />ATIMA</label><input type="hidden" id="00NU7000008w82D" name="ATIMA_3__c" /></div>
+            <div class="mb-4"><label class="inline-flex items-center text-sm font-medium text-gray-700"><input type="checkbox" id="isaoa3Checkbox" class="mr-2" />ISAOA</label><input type="hidden" id="00NU7000008w8rp" name="ISAOA_3__c" /></div>
+            <div class="mb-4"><label for="00NU70000074Axd" class="block text-sm font-medium text-gray-700">Name 1<span class="star">*</span></label><input id="00NU70000074Axd" maxlength="30" name="name_3__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU70000074B45" class="block text-sm font-medium text-gray-700">Name 2</label><input id="00NU70000074B45" maxlength="30" name="name3_3_3__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU7000008wFIE" class="block text-sm font-medium text-gray-700">FEIN</label><input id="00NU7000008wFIE" maxlength="255" name="FEIN_3__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700">
+                Is your mailing address a PO BOX address?<span class="star">*</span>
+              </label>
+              <div class="flex space-x-6 mt-2">
+                <label class="inline-flex items-center"><input type="radio" name="mailingAddress3" value="Y" class="mr-2" />Yes</label>
+                <label class="inline-flex items-center"><input type="radio" name="mailingAddress3" value="N" class="mr-2" />No</label>
+              </div>
+              <input type="hidden" id="00NU7000008w6d7" name="Do_you_want_to_change_mailing_address_3__c" />
+            </div>
+            <div class="mb-4"><label for="00NU7000008w6I9" class="block text-sm font-medium text-gray-700">Street Number<span class="star">*</span></label><input id="00NU7000008w6I9" maxlength="255" name="Street_Number_3__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU7000008w6Wf" class="block text-sm font-medium text-gray-700">Street Name<span class="star">*</span></label><input id="00NU7000008w6Wf" maxlength="255" name="Street_Name_3__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU7000008wIMX" class="block text-sm font-medium text-gray-700">Apartment/Suite</label><input id="00NU7000008wIMX" maxlength="255" name="Apartment_Suite_3__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU70000074B7J" class="block text-sm font-medium text-gray-700">PO Box Address<span class="star">*</span></label><input id="00NU70000074B7J" maxlength="30" name="address_3__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU70000074B8v" class="block text-sm font-medium text-gray-700">City<span class="star">*</span></label><input id="00NU70000074B8v" maxlength="30" name="city_3__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+            <div class="mb-4"><label for="00NU70000074BC9" class="block text-sm font-medium text-gray-700">State<span class="star">*</span></label><select id="00NU70000074BC9" name="state_3__c" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
+             <option value="">--None--</option>
+                <option value="AK">AK</option>
+<option value="AL">AL</option>
+<option value="AR">AR</option>
+<option value="AZ">AZ</option>
+<option value="CA">CA</option>
+<option value="CO">CO</option>
+<option value="CT">CT</option>
+<option value="DC">DC</option>
+<option value="DE">DE</option>
+<option value="FL">FL</option>
+<option value="GA">GA</option>
+<option value="HI">HI</option>
+<option value="IA">IA</option>
+<option value="ID">ID</option>
+<option value="IL">IL</option>
+<option value="IN">IN</option>
+<option value="KS">KS</option>
+<option value="KY">KY</option>
+<option value="LA">LA</option>
+<option value="MA">MA</option>
+<option value="MD">MD</option>
+<option value="ME">ME</option>
+<option value="MI">MI</option>
+<option value="MN">MN</option>
+<option value="MO">MO</option>
+<option value="MS">MS</option>
+<option value="MT">MT</option>
+<option value="NC">NC</option>
+<option value="ND">ND</option>
+<option value="NE">NE</option>
+<option value="NH">NH</option>
+<option value="NJ">NJ</option>
+<option value="NM">NM</option>
+<option value="NV">NV</option>
+<option value="NY">NY</option>
+<option value="OH">OH</option>
+<option value="OK">OK</option>
+<option value="OR">OR</option>
+<option value="PA">PA</option>
+<option value="RI">RI</option>
+<option value="SC">SC</option>
+<option value="SD">SD</option>
+<option value="TN">TN</option>
+<option value="TX">TX</option>
+<option value="UT">UT</option>
+<option value="VA">VA</option>
+<option value="VT">VT</option>
+<option value="WA">WA</option>
+<option value="WI">WI</option>
+<option value="WV">WV</option>
+<option value="WY">WY</option>
+<option value="CW">CW</option>
+<option value="PR">PR</option>
+<option value="AS">AS</option>
+<option value="FM">FM</option>
+<option value="GU">GU</option>
+<option value="MH">MH</option>
+<option value="MP">MP</option>
+<option value="PW">PW</option>
+<option value="VI">VI</option>
+<option value="AE">AE</option>
+<option value="AP">AP</option>
+<option value="AA">AA</option>
+<option value="Non-US">Non-US</option>
+</select></div>             
+            <div class="mb-4"><label for="00NU70000085nmf" class="block text-sm font-medium text-gray-700">Zip Code<span class="star">*</span></label><input id="00NU70000085nmf" maxlength="30" name="Zip_Auto_Owners_3__c" type="text" class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" /></div>
+          </div>
+        </div>
+      </section>
+
+      <input type="hidden" name="oid" value="00DU7000006EuID" />
+      <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
+      <input type="hidden" name="first_name" value="Cincinnati" />
+      <input type="hidden" name="last_name" value="EOI" />
+      <input type="hidden" name="status" value="New" />
+      <input type="hidden" name="phone" value="28138916529" />
+      <input type="hidden" name="lead_source" value="Web Form" />
+      <input type="hidden" name="delete_Action_Form__c" value="1" />
+      <input type="hidden" id="00NU7000007OdKL" name="Carrier__c" value="Cincinnati" />
+      <input type="hidden" name="Policy_Action__c" id="00NU7000005zuNN" value="EOI" />
+      <input type="hidden" name="Form_Captured_Data__c" />
+      <input type="hidden" name="Form_Missing_Data__c" />
+      <input type="hidden" name="company" value="Cincinnati" />
+
+      <div class="flex justify-end mt-6">
+        <button type="button" id="reviewBtn" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition">
+          Review and Submit
+        </button>
+      </div>
+    </form>
+
+    <div id="dialog" class="hidden fixed inset-0 flex items-center justify-center modal-bg z-50" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+      <div class="bg-white rounded-lg p-6 max-w-md w-full shadow-lg text-gray-800">
+        <h3 id="dialogTitle" class="text-lg font-semibold mb-4"></h3>
+        <ul id="missingFieldsList" class="mb-4 text-red-600 text-sm"></ul>
+        <div class="flex justify-end space-x-3" id="dialogButtons">
+          <button id="proceedBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 font-medium">Proceed to End Request</button>
+          <button id="editBtn" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 font-medium">Edit</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+        let picker = null;
+        const dateInput = document.getElementById("00NU7000005zuLl");
+
+        if (window.Pikaday && dateInput) {
+          picker = new Pikaday({
+            field: dateInput,
+            format: "MM/DD/YYYY",
+            toString(date) {
+              const d = String(date.getDate()).padStart(2, "0");
+              const m = String(date.getMonth() + 1).padStart(2, "0");
+              const y = date.getFullYear();
+              return `${m}/${d}/${y}`;
+            },
+            parse(dateString) {
+              if (!dateString) return null;
+              const [m, d, y] = dateString.split("/");
+              return new Date(y, m - 1, d);
+            },
+            onSelect: function () {
+              dateInput.value = this.toString();
+            },
+            onClose: function () {
+              if (this.getDate()) dateInput.value = this.toString();
+            }
+          });
+        }
+
+        const radios = document.querySelectorAll('input[name="requestTypeRadios"]');
+        const hiddenSelect = document.getElementById("00NU7000006IOzh");
+
+        function syncRequestType() {
+          const checkedRadio = document.querySelector('input[name="requestTypeRadios"]:checked');
+          hiddenSelect.value = checkedRadio ? checkedRadio.value : "";
+        }
+        radios.forEach(radio => radio.addEventListener("change", syncRequestType));
+        syncRequestType();
+
+        const mortgageeDeleteCount = document.getElementById("mortgageeDeleteCount");
+        const mortgageDeleteFields = document.getElementById("mortgageDeleteFields");
+        const mortgageDeleteField1 = document.getElementById("mortgageDeleteField1");
+        const mortgageDeleteField2 = document.getElementById("mortgageDeleteField2");
+        const mortgageLoan1 = document.getElementById("00NU700000748W2");
+        const mortgageLoan2 = document.getElementById("00NU70000074B2U");
+
+        function toggleMortgageDeleteFields() {
+          const count = mortgageeDeleteCount.value;
+          mortgageDeleteFields.classList.toggle("hidden", count === "");
+          mortgageDeleteField1.classList.toggle("hidden", count === "0" || count === "");
+          mortgageDeleteField2.classList.toggle("hidden", count !== "2");
+          if (count === "0") {
+            mortgageLoan1.value = "";
+            mortgageLoan2.value = "";
+          } else if (count === "1") {
+            mortgageLoan2.value = "";
+          }
+        }
+        mortgageeDeleteCount.addEventListener("change", toggleMortgageDeleteFields);
+        toggleMortgageDeleteFields();
+
+        const addMortgageCount = document.getElementById("addMortgageCount");
+        const addMortgageFields = document.getElementById("addMortgageFields");
+        const addMortgageField1 = document.getElementById("addMortgageField1");
+        const addMortgageField2 = document.getElementById("addMortgageField2");
+        const addMortgageField3 = document.getElementById("addMortgageField3");
+
+        const blocks = [
+          {
+            idx: 1,
+            wrapper: addMortgageField1,
+            escrowCheckbox: document.getElementById("escrow1Checkbox"),
+            escrowHidden: document.getElementById("00NU70000085iwf"),
+            atimaCheckbox: document.getElementById("atima1Checkbox"),
+            atimaHidden: document.getElementById("00NU7000008w6re"),
+            isaoaCheckbox: document.getElementById("isaoa1Checkbox"),
+            isaoaHidden: document.getElementById("00NU7000008w8ob"),
+            mailingRadios: document.querySelectorAll('input[name="mailingAddress1"]'),
+            mailingHidden: document.getElementById("00NU7000007xdVx"),
+            streetNumber: document.getElementById("00NU7000008o0JZ"),
+            streetName: document.getElementById("00NU7000008o0OP"),
+            apt: document.getElementById("00NU7000008oBZx"),
+            poBox: document.getElementById("00NU700000746Z4"),
+            city: document.getElementById("00NU70000074AG5"),
+            state: document.getElementById("00NU70000074AKv"),
+            zip: document.getElementById("00NU7000007qTgD"),
+            requiredLabels: {
+              loan: "Loan Number",
+              name1: "Name 1",
+              mailing: "Is your mailing address a PO BOX address?",
+              streetNumber: "Street Number",
+              streetName: "Street Name",
+              poBox: "PO Box Address",
+              city: "City",
+              state: "State",
+              zip: "Zip Code"
+            }
+          },
+          {
+            idx: 2,
+            wrapper: addMortgageField2,
+            escrowCheckbox: document.getElementById("escrow2Checkbox"),
+            escrowHidden: document.getElementById("00NU70000085iv3"),
+            atimaCheckbox: document.getElementById("atima2Checkbox"),
+            atimaHidden: document.getElementById("00NU7000008w7pJ"),
+            isaoaCheckbox: document.getElementById("isaoa2Checkbox"),
+            isaoaHidden: document.getElementById("00NU7000008w8qD"),
+            mailingRadios: document.querySelectorAll('input[name="mailingAddress2"]'),
+            mailingHidden: document.getElementById("00NU7000008w6bV"),
+            streetNumber: document.getElementById("00NU7000008w6GX"),
+            streetName: document.getElementById("00NU7000008w6TR"),
+            apt: document.getElementById("00NU7000008wIKv"),
+            poBox: document.getElementById("00NU700000749iM"),
+            city: document.getElementById("00NU70000074ApZ"),
+            state: document.getElementById("00NU70000074ArB"),
+            zip: document.getElementById("00NU7000007qTpt")
+          },
+          {
+            idx: 3,
+            wrapper: addMortgageField3,
+            escrowCheckbox: document.getElementById("escrow3Checkbox"),
+            escrowHidden: document.getElementById("00NU70000085itR"),
+            atimaCheckbox: document.getElementById("atima3Checkbox"),
+            atimaHidden: document.getElementById("00NU7000008w82D"),
+            isaoaCheckbox: document.getElementById("isaoa3Checkbox"),
+            isaoaHidden: document.getElementById("00NU7000008w8rp"),
+            mailingRadios: document.querySelectorAll('input[name="mailingAddress3"]'),
+            mailingHidden: document.getElementById("00NU7000008w6d7"),
+            streetNumber: document.getElementById("00NU7000008w6I9"),
+            streetName: document.getElementById("00NU7000008w6Wf"),
+            apt: document.getElementById("00NU7000008wIMX"),
+            poBox: document.getElementById("00NU70000074B7J"),
+            city: document.getElementById("00NU70000074B8v"),
+            state: document.getElementById("00NU70000074BC9"),
+            zip: document.getElementById("00NU70000085nmf")
+          }
+        ];
+
+        function setDisabled(el, disabled) {
+          if (!el) return;
+          el.disabled = disabled;
+          el.classList.toggle("disabled-field", disabled);
+        }
+
+        function syncHiddenCheckbox(cb, hidden) {
+          if (hidden) hidden.value = cb && cb.checked ? "Y" : "N";
+        }
+
+        function syncMailing(block) {
+          const checked = [...block.mailingRadios].find(r => r.checked);
+          if (block.mailingHidden) block.mailingHidden.value = checked ? checked.value : "";
+        }
+
+        function clearIfDisabled(el, disabled) {
+          if (el && disabled) el.value = "";
+        }
+
+        function updateBlockState(block) {
+          const active = Number(addMortgageCount.value) >= block.idx;
+          block.wrapper.classList.toggle("hidden", !active);
+
+          if (!active) {
+            if (block.escrowCheckbox) block.escrowCheckbox.checked = false;
+            if (block.atimaCheckbox) block.atimaCheckbox.checked = false;
+            if (block.isaoaCheckbox) block.isaoaCheckbox.checked = false;
+            if (block.mailingRadios) block.mailingRadios.forEach(r => r.checked = false);
+            [
+              block.streetNumber, block.streetName, block.apt, block.poBox,
+              block.city, block.state, block.zip
+            ].forEach(el => { if (el) el.value = ""; });
+            syncHiddenCheckbox(block.escrowCheckbox, block.escrowHidden);
+            syncHiddenCheckbox(block.atimaCheckbox, block.atimaHidden);
+            syncHiddenCheckbox(block.isaoaCheckbox, block.isaoaHidden);
+            syncMailing(block);
+            return;
+          }
+
+          const mailingVal = [...block.mailingRadios].find(r => r.checked)?.value || "";
+          const isPO = mailingVal === "Y";
+          const isNo = mailingVal === "N";
+
+          syncHiddenCheckbox(block.escrowCheckbox, block.escrowHidden);
+          syncHiddenCheckbox(block.atimaCheckbox, block.atimaHidden);
+          syncHiddenCheckbox(block.isaoaCheckbox, block.isaoaHidden);
+          syncMailing(block);
+
+          setDisabled(block.streetNumber, isPO);
+          setDisabled(block.streetName, isPO);
+          setDisabled(block.poBox, isNo);
+          setDisabled(block.apt, isPO);
+          setDisabled(block.city, false);
+          setDisabled(block.state, false);
+          setDisabled(block.zip, false);
+
+          block.streetNumber.required = isNo;
+          block.streetName.required = isNo;
+          block.poBox.required = isPO;
+          block.city.required = true;
+          block.state.required = true;
+          block.zip.required = true;
+          block.apt.required = false;
+
+          clearIfDisabled(block.streetNumber, isPO);
+          clearIfDisabled(block.streetName, isPO);
+          clearIfDisabled(block.poBox, isNo);
+        }
+
+        function updateAllMortgageBlocks() {
+          const count = addMortgageCount.value;
+          addMortgageFields.classList.toggle("hidden", count === "");
+          blocks.forEach(updateBlockState);
+        }
+
+        addMortgageCount.addEventListener("change", updateAllMortgageBlocks);
+        blocks.forEach(block => {
+          if (block.escrowCheckbox) block.escrowCheckbox.addEventListener("change", () => syncHiddenCheckbox(block.escrowCheckbox, block.escrowHidden));
+          if (block.atimaCheckbox) block.atimaCheckbox.addEventListener("change", () => syncHiddenCheckbox(block.atimaCheckbox, block.atimaHidden));
+          if (block.isaoaCheckbox) block.isaoaCheckbox.addEventListener("change", () => syncHiddenCheckbox(block.isaoaCheckbox, block.isaoaHidden));
+          if (block.mailingRadios) block.mailingRadios.forEach(r => r.addEventListener("change", () => { syncMailing(block); updateBlockState(block); }));
+          [block.streetNumber, block.streetName, block.apt, block.poBox, block.city, block.state, block.zip].forEach(el => {
+            if (el) el.addEventListener("input", () => updateBlockState(block));
+            if (el && el.tagName === "SELECT") el.addEventListener("change", () => updateBlockState(block));
+          });
+        });
+        updateAllMortgageBlocks();
+
+        const reviewBtn = document.getElementById("reviewBtn");
+        const dialog = document.getElementById("dialog");
+        const dialogTitle = document.getElementById("dialogTitle");
+        const missingFieldsList = document.getElementById("missingFieldsList");
+        const proceedBtn = document.getElementById("proceedBtn");
+        const editBtn = document.getElementById("editBtn");
+        const form = document.getElementById("mainForm");
+        const allFormDataTextarea = document.getElementById("00NU7000008TS4L");
+
+        function formatDateForJSON(dateString) {
+          if (!dateString) return "";
+          const [m, d, y] = dateString.split("/");
+          return `${y}-${m.padStart(2, "0")}-${d.padStart(2, "0")}`;
+        }
+
+        function captureAllFormDataAsJSON() {
+          const formData = {};
+          const formElements = form.querySelectorAll("input, textarea, select");
+
+          formElements.forEach(element => {
+            if (
+              !element.name ||
+              element.name === "Form_Captured_Data__c" ||
+              element.name === "Form_Missing_Data__c" ||
+              element.name === "00NU7000008TS4L" ||
+              element.name === "requestTypeRadios"
+            ) return;
+
+            const skipFields = ["company", "delete_Action_Form", "lead_source", "phone", "status", "last_name", "first_name", "retURL", "oid"];
+            let fieldName = element.name.replace(/__c$/, "");
+            if (skipFields.includes(fieldName)) return;
+
+            const fieldMapping = {
+              "00NU7000005zuNN": "Policy_Action",
+              "Policy_Number": "Policy_Number",
+              "Carrier": "Carrier",
+              "Is_this_a_quote_or_a_change_request": "Is_this_a_quote_or_a_change_request",
+              "Date": "Effective_Date",
+              "email": "Email"
+            };
+
+            fieldName = fieldMapping[fieldName] || fieldName;
+
+            if (element.type === "checkbox") {
+              formData[fieldName] = element.checked ? "Y" : "N";
+            } else if (fieldName === "Effective_Date" && element.value) {
+              formData[fieldName] = formatDateForJSON(element.value);
+            } else {
+              formData[fieldName] = element.value || "";
+            }
+          });
+
+          return JSON.stringify(formData, null, 2);
+        }
+
+        function collectMissingFields() {
+          const missing = [];
+
+          const email = document.getElementById("email");
+          if (!email.value.trim() || !email.checkValidity()) missing.push("Email");
+
+          if (![...document.querySelectorAll('input[name="requestTypeRadios"]')].some(r => r.checked)) missing.push("Select the Request Type:");
+          if (!document.getElementById("00NU7000005zuX3").value.trim()) missing.push("Policy Number");
+          const d = document.getElementById("00NU7000005zuLl").value.trim();
+          if (!/^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d{2}$/.test(d)) missing.push("Effective Date (MM/DD/YYYY)");
+          if (!document.getElementById("mortgageeDeleteCount").value) missing.push("Please select the number of mortgagee you want to delete:");
+
+          const addCount = Number(document.getElementById("addMortgageCount").value || 0);
+          for (let i = 0; i < addCount; i++) {
+            const block = blocks[i];
+            const prefix = `Add Mortgage ${block.idx}`;
+            const mailingVal = [...block.mailingRadios].find(r => r.checked)?.value || "";
+            const isPO = mailingVal === "Y";
+            const isNo = mailingVal === "N";
+
+            if (!block.streetNumber.value.trim() && isNo) missing.push(`${prefix}: Street Number`);
+            if (!block.streetName.value.trim() && isNo) missing.push(`${prefix}: Street Name`);
+            if (!block.poBox.value.trim() && isPO) missing.push(`${prefix}: PO Box Address`);
+            if (!block.city.value.trim()) missing.push(`${prefix}: City`);
+            if (!block.state.value.trim()) missing.push(`${prefix}: State`);
+            if (!block.zip.value.trim()) missing.push(`${prefix}: Zip Code`);
+            if (!block.mailingHidden.value) missing.push(`${prefix}: Is your mailing address a PO BOX address?`);
+            if (!block.escrowHidden.value) missing.push(`${prefix}: Is this an Escrow Account?`);
+            if (!block.atimaHidden.value) missing.push(`${prefix}: ATIMA`);
+            if (!block.isaoaHidden.value) missing.push(`${prefix}: ISAOA`);
+            const loanIds = [null, "00NU70000074ACr", "00NU70000074AXp", "00NU70000074B5h"];
+            const nameIds = [null, "00NU70000074A4n", "00NU70000074APl", "00NU70000074Axd"];
+            if (!document.getElementById(loanIds[block.idx]).value.trim()) missing.push(`${prefix}: Loan Number`);
+            if (!document.getElementById(nameIds[block.idx]).value.trim()) missing.push(`${prefix}: Name 1`);
+          }
+
+          return missing;
+        }
+
+        function captureFormData() {
+          if (picker && picker.getDate()) dateInput.value = picker.toString();
+
+          const missing = [];
+          const filled = [];
+
+          const addCount = Number(addMortgageCount.value || 0);
+
+          const addIfFilled = (label, el) => {
+            if (!el || !el.value.trim()) missing.push(label);
+            else filled.push(`${label}: ${el.value.trim()}`);
+          };
+
+          addIfFilled("Email", document.getElementById("email"));
+          const req = document.querySelector('input[name="requestTypeRadios"]:checked');
+          if (req) filled.push(`Select the Request Type:: ${req.value}`); else missing.push("Select the Request Type:");
+          addIfFilled("Policy Number", document.getElementById("00NU7000005zuX3"));
+          addIfFilled("Effective Date (MM/DD/YYYY)", document.getElementById("00NU7000005zuLl"));
+          addIfFilled("Please select the number of mortgagee you want to delete:", document.getElementById("mortgageeDeleteCount"));
+          addIfFilled("Please select the number of Mortgagee Details you want to Add:", document.getElementById("addMortgageCount"));
+
+          for (let i = 0; i < addCount; i++) {
+            const block = blocks[i];
+            const prefix = `Add Mortgage ${block.idx}`;
+            const mailingVal = [...block.mailingRadios].find(r => r.checked)?.value || "";
+
+            if (block.escrowHidden) filled.push(`${prefix}: Is this an Escrow Account?: ${block.escrowHidden.value || ""}`);
+            if (block.atimaHidden) filled.push(`${prefix}: ATIMA: ${block.atimaHidden.value || ""}`);
+            if (block.isaoaHidden) filled.push(`${prefix}: ISAOA: ${block.isaoaHidden.value || ""}`);
+            if (block.mailingHidden) filled.push(`${prefix}: Is your mailing address a PO BOX address?: ${mailingVal}`);
+
+            if (mailingVal === "Y") {
+              addIfFilled(`${prefix}: PO Box Address`, block.poBox);
+              filled.push(`${prefix}: Street Number:`);
+              filled.push(`${prefix}: Street Name:`);
+            } else if (mailingVal === "N") {
+              addIfFilled(`${prefix}: Street Number`, block.streetNumber);
+              addIfFilled(`${prefix}: Street Name`, block.streetName);
+              filled.push(`${prefix}: PO Box Address:`);
+            }
+
+            if (block.apt && block.apt.value.trim()) filled.push(`${prefix}: Apartment/Suite: ${block.apt.value.trim()}`);
+            addIfFilled(`${prefix}: City`, block.city);
+            addIfFilled(`${prefix}: State`, block.state);
+            addIfFilled(`${prefix}: Zip Code`, block.zip);
+
+            const loanIds = [null, "00NU70000074ACr", "00NU70000074AXp", "00NU70000074B5h"];
+            const nameIds = [null, "00NU70000074A4n", "00NU70000074APl", "00NU70000074Axd"];
+            addIfFilled(`${prefix}: Loan Number`, document.getElementById(loanIds[block.idx]));
+            addIfFilled(`${prefix}: Name 1`, document.getElementById(nameIds[block.idx]));
+          }
+
+          let missingField = document.getElementById("Form_Missing_Data__c");
+          let capturedField = document.getElementById("Form_Captured_Data__c");
+
+          if (!missingField) {
+            missingField = document.createElement("input");
+            missingField.type = "hidden";
+            missingField.id = "Form_Missing_Data__c";
+            missingField.name = "Form_Missing_Data__c";
+            form.appendChild(missingField);
+          }
+
+          if (!capturedField) {
+            capturedField = document.createElement("input");
+            capturedField.type = "hidden";
+            capturedField.id = "Form_Captured_Data__c";
+            capturedField.name = "Form_Captured_Data__c";
+            form.appendChild(capturedField);
+          }
+
+          missingField.value = missing.join("\n");
+          capturedField.value = filled.join("\n");
+        }
+
+        reviewBtn.addEventListener("click", () => {
+          updateAllMortgageBlocks();
+          const missing = collectMissingFields();
+          allFormDataTextarea.value = captureAllFormDataAsJSON();
+
+          if (missing.length) {
+            dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
+            missingFieldsList.innerHTML = missing.map(f => `<li>${f}</li>`).join("");
+          } else {
+            dialogTitle.textContent = "All mandatory fields are completed. Ready to submit your request?";
+            missingFieldsList.innerHTML = "";
+          }
+
+          dialog.classList.remove("hidden");
+        });
+
+        editBtn.addEventListener("click", () => dialog.classList.add("hidden"));
+
+        proceedBtn.addEventListener("click", () => {
+          captureFormData();
+          dialog.classList.add("hidden");
+          if (picker && picker.getDate()) dateInput.value = picker.toString();
+          form.submit();
+        });
+
+        window.addEventListener("click", e => {
+          if (e.target === dialog) dialog.classList.add("hidden");
+        });
+
+        window.addEventListener("keydown", e => {
+          if (e.key === "Escape" && !dialog.classList.contains("hidden")) {
+            dialog.classList.add("hidden");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
