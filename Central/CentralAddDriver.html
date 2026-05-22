@@ -24,7 +24,7 @@
    <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">                          
       <form
          id="mainForm"
-         action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+         action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
          method="POST"
          class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
          autocomplete="off"
@@ -358,6 +358,9 @@
                name="Policy_Action__c"
                value="Add Driver"
                />
+
+              
+               <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
             <!-- Additional Remarks (conditionally shown) -->
            <!-- <div class="mb-3 hidden" id="additionalRemarksDiv">
                <label for="additionalRemarks" class="block text-sm font-medium text-gray-700">
@@ -470,7 +473,7 @@
             </div>
          </div>
          <!-- Hidden Salesforce fields -->
-         <input type=hidden name="oid" value="00D4x000006s8rs">
+         <input type=hidden name="oid" value="00DU700000AcTJN">
        <!--  <input
             type="hidden"
             name="recordType"
@@ -492,7 +495,6 @@
                <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
                <input type="hidden" id="formMissingData" name="Form_Missing_Data__c" value="" />
                                    <input type="hidden" name="Carrier__c" value ="Central Insurance">
-
 
 
          <input
@@ -592,6 +594,11 @@
       });
     }
   });
+  function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')}`;
+}
 
   // Fix duplicate option for 'Not Licensed' if any (optional cleanup)
   const licenseOptions = driverInformation.querySelectorAll("option");
@@ -792,6 +799,49 @@ if (formMissingHidden) {
       dialogTitle.textContent = "All mandatory fields are completed. Ready to submit your request?";
       missingFieldsList.innerHTML = "";
     }
+
+
+// Build All_Form_Data__c JSON (ONLY visible + enabled fields)
+const allFormData = {
+  Email: document.getElementById("email")?.value || "",
+  Is_this_a_quote_or_a_change_request:
+    getRequestType() === "Quote" ? "Y" : "N",
+
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value || "",
+
+  First_Name: document.getElementById("00NU7000005zuOz")?.value || "",
+  Last_Name: document.getElementById("00NU7000005zuQb")?.value || "",
+Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value || ""),
+Date_of_Birth: formatDateToISO(document.getElementById("00NU7000005zuSD")?.value || ""),
+Learners_Permit_Date: formatDateToISO(document.getElementById("00NU7000007Cw93")?.value || ""),
+  Gender: document.getElementById("00NU7000005zqRr")?.value || "",
+  Relationship_To_Insured_Central: document.getElementById("00NU7000007Cw0z")?.value || "",
+  Marital_Status_Central: document.getElementById("00NU7000007Cw4D")?.value || "",
+
+  Driver_Information: document.getElementById("00NU7000007CvbC")?.value || "",
+
+  License_State_Central: document.getElementById("00NU7000007CwFV")?.value || "",
+  Drivers_license_number: document.getElementById("00NU7000005zuK9")?.value || ""
+};
+
+// ✅ Include Co-Applicant ONLY if visible
+if (!document.getElementById("CoApplicantDetails").classList.contains("hidden")) {
+  allFormData.Co_Applicant_First_Name = document.getElementById("00NU7000007CwKL")?.value || "";
+  allFormData.Co_Applicant_Last_Name = document.getElementById("00NU7000007CwLx")?.value || "";
+  allFormData.Reason_for_adding_co_applicant = document.getElementById("00NU7000007CwNZ")?.value || "";
+  allFormData.Co_Applicant_Date_of_Birth = formatDateToISO(document.getElementById("00NU7000007CwPB")?.value);
+  allFormData.Co_Applicant_Occupation = document.getElementById("00NU7000007CwYr")?.value || "";
+  allFormData.Co_Applicant_Marital_Status = document.getElementById("00NU7000007CwXF")?.value || "";
+}
+
+// ✅ ALWAYS include hidden explicit fields
+allFormData.Carrier = "Central Insurance";
+allFormData.Policy_Action = document.getElementById("AddDriver")?.value || "";
+
+// ✅ Store pretty JSON
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
+ // remove spaces
+
 
     dialog.classList.remove("hidden");
     proceedBtn.classList.remove("hidden");
