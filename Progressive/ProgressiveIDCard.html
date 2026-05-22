@@ -20,8 +20,8 @@
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
-  method="POST"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
+      method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
       novalidate
@@ -74,7 +74,7 @@
       </div>
 
       <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
      <!-- <input
         type="hidden"
         name="recordType"
@@ -101,7 +101,8 @@
     <input type="hidden" name="debugEmail"  value="annie.rawal@caeliusconsulting.com">
           <input type="hidden" name="delete_Action_Form__c" value="1" />
                     <input type="hidden" name="Carrier__c" value ="Progressive">
-                    
+                    <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
+                   
 
 
       <input
@@ -227,6 +228,17 @@
 
     // Store missing fields, one per line
     missingFormDataInput.value = missing.join('\n');
+    // Build and store all form data JSON
+const allFormData = {
+  Email: document.getElementById("email")?.value || "",
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value || "",
+
+  // Hidden fields
+  Carrier: document.querySelector('input[name="Carrier__c"]')?.value || "Progressive",
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || "ID Card"
+};
+
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
 
     if (missing.length) {
       dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
