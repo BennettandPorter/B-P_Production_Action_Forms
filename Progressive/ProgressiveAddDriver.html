@@ -23,7 +23,7 @@
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
@@ -498,7 +498,7 @@
       </div>
 
       <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
      <!-- <input type="hidden" name="recordType" id="recordType" value="012U7000003Hjv3IAC" />-->
       <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
       <input type="hidden" name="first_name" value="Add Driver Test Progressive New" />
@@ -513,6 +513,7 @@
       <input type="hidden" id="missingFormData" name="Form_Missing_Data__c" value="" />
                           <input type="hidden" name="Carrier__c" value ="Progressive">
       <input type="hidden" id="comprehensiveClaimsmain" name="Comprehensive_Claims__c" value="No" />
+      <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
 
 
 
@@ -599,7 +600,11 @@ comprehensiveClaimsSelect?.addEventListener("change", checkClaimStatus);
       alert("License status must be Valid to proceed.");
     }
   });
-
+function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month}-${day}`;
+}
   // Override Review/Submit click logic for popup (add at TOP of event listener)
   reviewBtn.addEventListener("click", function (event) {
     if (licenseStatusField.value !== "Valid") {
@@ -954,6 +959,67 @@ let formDataJsonInput = document.getElementById("formDataJson");
 
     // Store missing fields in hidden field
     missingFormDataInput.value = missing.join("\n");
+    // Build and store all form data JSON
+// Build and store all form data JSON (Progressive Add Driver - CLEAN NAMES)
+const selectedRequestType = document.querySelector('input[name="Is_this_a_quote_or_a_change_request__c"]:checked')?.value || "";
+
+const allFormData = {
+  // Policy Changes Section
+  Email: document.getElementById("email")?.value || "",
+  Is_this_a_quote_or_a_change_request: selectedRequestType,
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value || "",
+  Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value || ""),
+  
+  // Add Driver Details Section
+  First_Name: document.getElementById("driverFirstName")?.value || "",
+  Middle_Name: document.getElementById("driverMiddleName")?.value || "",
+  Last_Name: document.getElementById("driverLastName")?.value || "",
+  Date_of_Birth: formatDateToISO(document.getElementById("driverDOB")?.value || ""),
+  Gender: document.getElementById("driverGender")?.value || "",
+  Marital_Status: document.getElementById("driverMaritalStatus")?.value || "",
+  Relationship_to_Insured: document.getElementById("driverRelationship")?.value || "",
+  
+  License_Type: document.getElementById("driverLicenseType")?.value || "",
+  License_Status: document.getElementById("driverLicenseStatus")?.value || "",
+  Driver_Status: document.getElementById("driverStatus")?.value || "",
+  Number_of_Years_Licensed: document.getElementById("yearsLicensed")?.value || "",
+  State_Licensed: document.getElementById("stateLicense")?.value || "",
+  Drivers_license_number: document.getElementById("licenseNumber")?.value || "",
+  
+  Comprehensive_Claims: document.getElementById("comprehensiveClaims")?.value || "",
+  SR_22_Filing: document.getElementById("driverSR22")?.value || "",
+  
+  // Conditional fields (only if visible)
+  SR_22_Filing_State: !document.getElementById("00NU7000005zuIX")?.classList.contains("hidden")
+    ? document.querySelector('select[name="SR_22_Filling_State__c"]')?.value || ""
+    : "",
+    
+  Distant_Student_Driver: !document.getElementById("distantStudentDriverField")?.classList.contains("hidden")
+    ? document.getElementById("distantStudentDriver")?.value || ""
+    : "",
+    
+  Good_Student_Driver: !document.getElementById("goodStudentDriverField")?.classList.contains("hidden")
+    ? document.getElementById("goodStudentDriver")?.value || ""
+    : "",
+    
+  Current_Employment_for_Driver: !document.getElementById("currentEmploymentField")?.classList.contains("hidden")
+    ? document.getElementById("currentEmployment")?.value || ""
+    : "",
+    
+  Current_occupation_for_driver: !document.getElementById("occupationField")?.classList.contains("hidden")
+    ? document.getElementById("driverOccupation")?.value || ""
+    : "",
+    
+  Level_of_education: !document.getElementById("educationLevelField")?.classList.contains("hidden")
+    ? document.getElementById("educationLevel")?.value || ""
+    : "",
+    
+  // Hidden fields (same pattern as AutoOwners)
+  Carrier: "Progressive",
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || "Add Driver"
+};
+
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
 
     if (missing.length) {
       dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
