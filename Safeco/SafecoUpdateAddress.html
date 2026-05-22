@@ -62,7 +62,7 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
   <form
-    action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+    action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00DU700000AcTJN"
     method="POST"
     class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-6"
     id="mainForm"
@@ -70,7 +70,7 @@
   >
     <h2 class="text-2xl font-bold text-center text-gray-800">Safeco Form</h2>
     <!-- Hidden Fields -->
-    <input type="hidden" name="oid" value="00D4x000006s8rs" />
+    <input type="hidden" name="oid" value="00DU700000AcTJN" />
    <!-- <input type="hidden" name="recordType" value="012U7000003Ie25IAC" />-->
     <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
     <input type="hidden" name="first_name" value="UpdateAddress" />
@@ -83,6 +83,7 @@
     <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
     <input type="hidden" id="formMissingData" name="Form_Missing_Data__c" value="" />
                             <input type="hidden" name="Carrier__c" value ="Safeco">
+                            <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
 
     <input
           type="hidden"
@@ -923,7 +924,11 @@ const form = document.getElementById("mainForm");
   reviewBtn.textContent = "Review and Submit";
   reviewBtn.className = "bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition w-full mt-4";
   form.appendChild(reviewBtn);
-
+function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
   reviewBtn.addEventListener("click", () => {
     const missing = validateFields();
 
@@ -944,6 +949,44 @@ const form = document.getElementById("mainForm");
 
     formDataJsonInput.value = completedData.join("\n");
     missingFormDataInput.value = missing.join("\n");
+    const allFormData = {
+  Email: document.getElementById("email")?.value?.trim() || "",
+  Is_this_a_quote_or_a_change_request:
+    document.querySelector('input[name="Is_this_a_quote_or_a_change_request__c"]:checked')?.value || "",
+
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || "",
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value?.trim() || "",
+Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value?.trim() || ""),
+
+  Address_Safeco: document.getElementById("00NU7000006YRFF")?.value?.trim() || "",
+  Address_Line_2: document.getElementById("00NU7000006YTXB")?.value?.trim() || "",
+  Interest_Zip_Code: document.getElementById("00NU7000006cbfp")?.value?.trim() || "",
+  City: document.getElementById("00NU7000005zvUj")?.value?.trim() || "",
+  State: document.getElementById("00NU7000005zvWL")?.value || "",
+
+  Primary_Phone: document.getElementById("00NU7000006qtBR")?.value?.trim() || "",
+  Email_UA: document.getElementById("00NU7000006qr9e")?.value?.trim() || "",
+
+  Address_Line_1_GL: document.getElementById("00NU7000006qtOL")?.value?.trim() || "",
+  Address_Line_2_GL: document.getElementById("00NU7000006qtTB")?.value?.trim() || "",
+  Zip_Code_1_GL: document.getElementById("00NU7000006qtZd")?.value?.trim() || "",
+  City_1_GL: document.getElementById("00NU7000006qtcr")?.value?.trim() || "",
+  State_1_Gl: document.getElementById("00NU7000006qteT")?.value || "",
+  same_Garaged: document.getElementById("garage1AssignHidden")?.value || "",
+  VIN_number: document.getElementById("00NU700000616Sv")?.value?.trim() || "",
+
+  Address_Line_1_2_Gl: document.getElementById("00NU7000006qtg5")?.value?.trim() || "",
+  Address_Line_2_2_GL: document.getElementById("00NU7000006qthh")?.value?.trim() || "",
+  Zip_Code_2_GL: document.getElementById("00NU7000006qtjJ")?.value?.trim() || "",
+  City_2_GL: document.getElementById("00NU7000006qsRW")?.value?.trim() || "",
+  State_2_GL: document.getElementById("00NU7000006quYv")?.value || "",
+  same_Garaged_2: document.getElementById("garage2AssignHidden")?.value || "",
+  VIN_number_2: document.getElementById("00NU7000006Knh3")?.value?.trim() || "",
+
+  Carrier: document.querySelector('input[name="Carrier__c"]')?.value || ""
+};
+
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
 
     if (missing.length) {
       dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
