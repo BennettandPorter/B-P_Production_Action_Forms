@@ -55,7 +55,7 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
   <form
-    action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+    action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00DU700000AcTJN"
     method="POST"
     class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-6"
     id="mainForm"
@@ -63,7 +63,7 @@
   >
     <h2 class="text-2xl font-bold text-center text-gray-800">Safeco Remove Driver Form</h2>
     <!-- Hidden Fields -->
-    <input type="hidden" name="oid" value="00D4x000006s8rs" />
+    <input type="hidden" name="oid" value="00DU700000AcTJN" />
   <!--  <input type="hidden" name="recordType" value="012U7000003Ie25IAC" />-->
     <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
     <input type="hidden" name="first_name" value="Removedriver" />
@@ -79,6 +79,7 @@
     <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
     <input type="hidden" id="formMissingData" name="Form_Missing_Data__c" value="" />
                             <input type="hidden" name="Carrier__c" value ="Safeco">
+                            <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
 
 
 
@@ -390,7 +391,11 @@
           document.getElementById("sfEndorsement").value = this.value === "Endorse" ? "true" : "false";
         });
       });
-
+function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month}-${day}`;
+}
       // Validation and modal on Review button click
       reviewBtn.addEventListener("click", function(e) {
        e.preventDefault();
@@ -417,7 +422,7 @@
         completedData.push({ field: label, value: val });
       }
     }
-
+ 
 
         // Validate fields with your specific rules:
         validate("email", "Email", {pattern: /^.+@.+\..+$/});
@@ -453,6 +458,29 @@
 const missingStr = missingData
   .map(d => d.field)
   .join("\n");
+
+  // NEW: Build and store allFormData JSON
+const allFormData = {
+  Email: document.getElementById("email")?.value?.trim() || "",
+  Is_this_a_quote_or_a_change_request: Array.from(
+    document.querySelectorAll('input[name="Is_this_a_quote_or_a_change_request__c"]')
+  ).find(i => i.checked)?.value || "",
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || "",
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value?.trim() || "",
+Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value?.trim() || ""),
+  Reaon_for_Deleting_Driver: document.getElementById("00NU7000006j9bZ")?.value || "",
+  First_Name: document.getElementById("00NU7000005zuOz")?.value?.trim() || "",
+  BirthYear: document.getElementById("00NU7000006lumT")?.value || "",
+  Relationship_to_Insured: document.getElementById("00NU7000005zuVR")?.value || "",
+  Marital_Status_RD: document.getElementById("00NU7000006kjDB")?.value || "",
+  Vehicle_Use12: document.getElementById("00NU7000006N0iD")?.value || "",
+  Mileage_One_Way: document.getElementById("00NU7000006kjI1")?.value?.trim() || "",
+  Annual_Miles: document.getElementById("00NU7000006N0zx")?.value?.trim() || "",
+  Ownership: document.getElementById("00NU7000006N0wj")?.value || "",
+  Carrier: document.querySelector('input[name="Carrier__c"]')?.value || ""
+};
+
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
 
 // Set hidden fields
 formDataJsonInput.value = capturedStr;
