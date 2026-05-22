@@ -55,7 +55,7 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
   <form
-    action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+    action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
     method="POST"
     class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-6"
     id="mainForm"
@@ -64,7 +64,7 @@
     <h2 class="text-2xl font-bold text-center text-gray-800">Safeco Add DriverForm</h2>
 
     <!-- Hidden Fields -->
-    <input type="hidden" name="oid" value="00D4x000006s8rs" />
+    <input type="hidden" name="oid" value="00DU700000AcTJN" />
   <!--  <input type="hidden" name="recordType" value="012U7000003Ie25IAC" /> -->
 
     <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
@@ -80,6 +80,7 @@
                                 <input type="hidden" name="Carrier__c" value ="Safeco">
                                 <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
 <input type="hidden" id="formMissingData" name="Form_Missing_Data__c" value="" />
+<input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
 
 
       <input
@@ -1046,6 +1047,11 @@ const dialogTitle = document.getElementById("dialogTitle");
 const missingFieldsList = document.getElementById("missingFieldsList");
 const proceedBtn = document.getElementById("proceedBtn");
 const editBtn = document.getElementById("editBtn");
+      function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
 
 reviewBtn?.addEventListener("click", function () {
     setDynamicRequiredFields();
@@ -1054,6 +1060,51 @@ reviewBtn?.addEventListener("click", function () {
 
   const capturedStr = completedData.join("\n");
   const missingStr = missingData.join("\n");
+  const allFormData = {
+  Email: document.getElementById("email")?.value?.trim() || "",
+  Is_this_a_quote_or_a_change_request:
+    document.querySelector('input[name="Is_this_a_quote_or_a_change_request__c"]:checked')?.value || "",
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value?.trim() || "",
+Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value?.trim() || ""),
+
+  First_Name: document.getElementById("00NU7000005zuOz")?.value?.trim() || "",
+  Middle_Name: document.getElementById("00NU7000006bcKb")?.value?.trim() || "",
+  Last_Name: document.getElementById("00NU7000005zuQb")?.value?.trim() || "",
+Date_of_Birth: formatDateToISO(document.getElementById("00NU7000005zuSD")?.value?.trim() || ""),
+  Gender: document.getElementById("00NU7000005zqRr")?.value || "",
+  Marital_Status: document.getElementById("00NU7000005zuTp")?.value || "",
+  Relationship_to_Insured: document.getElementById("00NU7000005zuVR")?.value || "",
+  Driver_Type: document.getElementById("00NU7000006VQAr")?.value || "",
+  State_Licensed: document.getElementById("00NU7000005zuIX")?.value || "",
+  Drivers_license_number: document.getElementById("00NU7000005zuK9")?.value?.trim() || "",
+  Age_When_First_Licensed: document.getElementById("00NU7000006XoH7")?.value?.trim() || "",
+
+  Has_license_suspended_revoked: document.getElementById("00NU7000006VQUD")?.value || "",
+  Has_driver_had_any_reportable_incidents: document.getElementById("00NU7000006VU1Z")?.value || "",
+  Good_Student_Discount: document.getElementById("00NU7000006XpI1")?.value || "",
+  Distant_Student_Discount: document.getElementById("00NU7000006XpLF")?.value || "",
+
+  SR_22_Filing: document.getElementById("00NU7000006VU3B")?.value || "",
+SR_22_Filing_End_Date : formatDateToISO(document.getElementById("00NU7000006VU4n")?.value?.trim() || ""),
+  SR_22_Filing_State : document.getElementById("00NU70000063b2n")?.value || "",
+  SR_22_Case_Number: document.getElementById("00NU7000006VUBF")?.value?.trim() || "",
+
+  Add_additional_Named_Insured_Driver: document.getElementById("00NU7000006VUJJ")?.value || "",
+  Select_Named_Insured_Driver: document.getElementById("00NU7000006VUKv")?.value || "",
+
+  Want_to_participate_for_RightTrack: document.getElementById("00NU7000006VUPl")?.value || "",
+  Request_Reason: document.getElementById("00NU7000006VUWD")?.value || "",
+  Driver_Email: document.getElementById("00NU7000006Xogv")?.value?.trim() || "",
+  Mobile_Phone_is_same_as_Primary_Phone: document.getElementById("00NU7000006VQPO")?.value || "",
+  Alternate_Phone: document.getElementById("00N4x00000QCvmg")?.value?.trim() || "",
+  Rightrack_Confirmation_for_phone_email: document.getElementById("00NU7000006XpRh")?.checked ? "1" : "",
+  Rightrack_Confirmation_explained: document.getElementById("00NU7000006XoKM")?.checked ? "1" : "",
+
+  Carrier: "Safeco",
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || ""
+};
+
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
 
   const capHidden = document.getElementById("formDataJson");
   const missHidden = document.getElementById("formMissingData");
