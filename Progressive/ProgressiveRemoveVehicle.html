@@ -7,24 +7,36 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
     <style>
       .star { color: #ef4444; margin-left: 2px; }
-      .modal-bg { background: rgba(0,0,0,0.4);}
+      .modal-bg { background: rgba(0,0,0,0.4); }
       .hidden { display: none; }
+      .all-form-data {
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.4;
+      }
     </style>
   </head>
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
-      class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8"
+      class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
       novalidate
     >
+      <textarea
+        id="00NU7000008TS4L"
+        name="All_Form_Data__c"
+        rows="50"
+        wrap="soft"
+        class="hidden all-form-data"
+      ></textarea>
+
       <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
         Remove Vehicle Progressive Form
       </h2>
 
-      <!-- Policy Changes Section -->
       <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Policy Changes Section">
         <h3 class="text-xl font-semibold mb-4 text-gray-700">Policy Changes</h3>
 
@@ -40,8 +52,7 @@
             autocomplete="off"
           />
         </div>
-      
-      <!-- Policy Action -->
+
         <input
           type="hidden"
           id="00NU7000005zuNN"
@@ -61,7 +72,6 @@
               <input type="radio" name="requestTypeRadios" value="N" class="mr-2" />Endorsement
             </label>
           </div>
-          <!-- Hidden select field mapped to radio buttons -->
           <select id="00NU7000006IOzh" name="Is_this_a_quote_or_a_change_request__c" class="hidden">
             <option value=""></option>
             <option value="Y">Y</option>
@@ -97,48 +107,33 @@
           />
         </div>
 
-         <div>
-    <label for="00NU700000616Sv" class="block text-sm font-medium text-gray-700">
-      Please Enter the VIN of Vehicle to Remove
-      <span class="star">*</span>
-    </label>
-    <input
-      id="00NU700000616Sv"
-      name="VIN_number__c"
-      maxlength="255"
-      size="20"
-      required
-      type="text"
-      class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-      autocomplete="off"
-    />
-  </div>
+        <div>
+          <label for="00NU700000616Sv" class="block text-sm font-medium text-gray-700">
+            Please Enter the VIN of Vehicle to Remove<span class="star">*</span>
+          </label>
+          <input
+            id="00NU700000616Sv"
+            name="VIN_number__c"
+            maxlength="255"
+            size="20"
+            required
+            type="text"
+            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
+            autocomplete="off"
+          />
+        </div>
       </section>
-      
-      <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
-      <input
-        type="hidden"
-        name="retURL"
-        value="https://bennettandporter.com/"
-      />
-      <input
-        type="hidden"
-        name="first_name"
-        value="Progressive Remove Vehicle"
-      />
+
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
+      <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
+      <input type="hidden" name="first_name" value="Remove Vehicle" />
       <input type="hidden" name="delete_Action_Form__c" value="1" />
-      <input type="hidden" name="last_name" value="Test" />
+      <input type="hidden" name="last_name" value="Progressive" />
       <input type="hidden" name="status" value="New" />
       <input type="hidden" name="phone" value="13466836129" />
       <input type="hidden" name="lead_source" value="Web Form" />
       <input type="hidden" id="00NU7000007OdKL" name="Carrier__c" value="Progressive" />
-      <input
-        type="hidden"
-        name="company"
-        value="Progressive Remove Vehicle"
-      />
-      <!-- FIELDS FOR DATA CAPTURE -->
+      <input type="hidden" name="company" value="Progressive Remove Vehicle" />
       <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
       <input type="hidden" id="missingFormData" name="Form_Missing_Data__c" value="" />
 
@@ -153,7 +148,6 @@
       </div>
     </form>
 
-    <!-- Confirmation Dialog -->
     <div
       id="dialog"
       class="hidden fixed inset-0 flex items-center justify-center modal-bg z-50"
@@ -191,8 +185,8 @@
         const missingFieldsList = document.getElementById("missingFieldsList");
         const proceedBtn = document.getElementById("proceedBtn");
         const editBtn = document.getElementById("editBtn");
+        const allFormDataTextarea = document.getElementById("00NU7000008TS4L");
 
-        // Pikaday date picker for Effective Date (UNCHANGED)
         if (window.Pikaday) {
           new Pikaday({
             field: document.getElementById("00NU7000005zuLl"),
@@ -210,7 +204,6 @@
           });
         }
 
-        // Map radio buttons to hidden select (UNCHANGED)
         const radios = document.querySelectorAll('input[name="requestTypeRadios"]');
         const hiddenSelect = document.getElementById("00NU7000006IOzh");
 
@@ -219,20 +212,9 @@
           hiddenSelect.value = checkedRadio ? checkedRadio.value : "";
         }
 
-        radios.forEach((radio) => {
-          radio.addEventListener("change", syncRequestType);
-        });
-
-        if (hiddenSelect.value !== "") {
-          const matchedRadio = document.querySelector(`input[name="requestTypeRadios"][value="${hiddenSelect.value}"]`);
-          if (matchedRadio) matchedRadio.checked = true;
-        } else {
-          hiddenSelect.value = "";
-        }
-
+        radios.forEach((radio) => radio.addEventListener("change", syncRequestType));
         syncRequestType();
 
-        // NEW: Define fields to validate and capture
         const fieldData = [
           { id: "email", label: "Email", type: "email" },
           { radioGroupName: "requestTypeRadios", label: "Select the Request Type:" },
@@ -241,19 +223,25 @@
           { id: "00NU700000616Sv", label: "Please Enter the VIN of Vehicle to Remove" }
         ];
 
-        let formDataJsonInput = document.getElementById("formDataJson");
-        let missingFormDataInput = document.getElementById("missingFormData");
+        function toISODate(value) {
+          if (!value) return "";
+          const parts = value.trim().split("/");
+          if (parts.length !== 3) return value;
+          const month = parts[0].padStart(2, "0");
+          const day = parts[1].padStart(2, "0");
+          const year = parts[2];
+          return `${year}-${month}-${day}`;
+        }
 
-        // NEW: Validate required fields (ENHANCED)
         function validateFields() {
           const missing = [];
           fieldData.forEach((field) => {
             if (field.radioGroupName) {
               const radios = document.querySelectorAll(`input[name="${field.radioGroupName}"]`);
-              const checked = [...radios].some((r) => r.checked);
-              if (!checked) missing.push(field.label);
+              if (![...radios].some((r) => r.checked)) missing.push(field.label);
               return;
             }
+
             const input = document.getElementById(field.id);
             if (!input) return;
 
@@ -268,51 +256,121 @@
               isValid = input.value.trim();
             }
 
-            if (!isValid) {
-              missing.push(field.label);
-            }
+            if (!isValid) missing.push(field.label);
           });
           return missing;
         }
 
-        // NEW: Prevent direct form submit
-        form.addEventListener("submit", function(e) {
-          e.preventDefault();
-          reviewBtn.click();
-        });
+       function captureAllFormDataAsJSON() {
+  const formData = {};
+  const excludeFields = [
+    "oid", "OrgId",
+    "retURL", "ReturnURL",
+    "first_name", "FirstName",
+    "last_name", "LastName",
+    "status", "Status",
+    "phone", "Phone",
+    "lead_source", "LeadSource",
+    "delete_Action_Form__c", "delete_Action_Form",
+    "company", "requestTypeRadios", "Company"
+  ];
 
-        // ENHANCED: Review button with data capture
-        reviewBtn.addEventListener("click", () => {
-          const missing = validateFields();
+  const formElements = form.querySelectorAll("input, textarea, select");
 
-          // NEW: Capture completed data
-          const completedData = [];
-          fieldData.forEach(field => {
+  function toISODate(value) {
+    if (!value) return "";
+    const parts = value.trim().split("/");
+    if (parts.length !== 3) return value;
+    const month = parts[0].padStart(2, "0");
+    const day = parts[1].padStart(2, "0");
+    const year = parts[2];
+    return `${year}-${month}-${day}`;
+  }
+
+  formElements.forEach((element) => {
+    if (
+      element.name &&
+      element.name !== "Form_Captured_Data__c" &&
+      element.name !== "Form_Missing_Data__c" &&
+      element.name !== "All_Form_Data__c"
+    ) {
+      let fieldName = element.name.replace(/__c$/, "");
+
+      const fieldMapping = {
+        email: "Email",
+        Policy_Number__c: "PolicyNumber",
+        Policy_Action__c: "PolicyAction",
+        Carrier__c: "Carrier",
+        Date__c: "Effective_Date"
+      };
+
+      fieldName = fieldMapping[fieldName] || fieldName;
+
+      if (!excludeFields.includes(fieldName) && !excludeFields.includes(element.name)) {
+        if (element.type === "radio") {
+          if (element.checked) {
+            formData[fieldName] = element.value || "";
+          }
+       } else if (element.name === "Date__c") {
+  const isoDate = toISODate(element.value.trim());
+  formData["Effective_Date"] = isoDate;
+} else {
+          formData[fieldName] = element.value || "";
+        }
+      }
+    }
+  });
+
+  return JSON.stringify(formData, null, 2);
+}
+
+        function captureFormAudit() {
+          const captured = [];
+          const missing = [];
+
+          fieldData.forEach((field) => {
             if (field.radioGroupName) {
               const radios = document.querySelectorAll(`input[name="${field.radioGroupName}"]`);
-              const checkedRadio = [...radios].find(r => r.checked);
-              if (checkedRadio) {
-                completedData.push(`${field.label} = ${checkedRadio.value}`);
-              }
-            } else {
-              const input = document.getElementById(field.id);
-              if (input) {
-                const value = input.value.trim();
-                if (value) {
-                  completedData.push(`${field.label} = ${value}`);
-                }
-              }
+              const checked = [...radios].find((r) => r.checked);
+              if (checked) captured.push(`${field.label} = ${checked.value}`);
+              else missing.push(field.label);
+              return;
             }
+
+            const el = document.getElementById(field.id);
+            if (el && el.value.trim()) captured.push(`${field.label} = ${el.value.trim()}`);
+            else missing.push(field.label);
           });
 
-          // NEW: Store data in hidden fields for Salesforce
-          formDataJsonInput.value = completedData.join('\n');
-          missingFormDataInput.value = missing.join('\n');
+          let capturedField = document.querySelector('input[name="Form_Captured_Data__c"]');
+          let missingField = document.querySelector('input[name="Form_Missing_Data__c"]');
 
-          // Show dialog
+          if (!capturedField) {
+            capturedField = document.createElement("input");
+            capturedField.type = "hidden";
+            capturedField.name = "Form_Captured_Data__c";
+            form.appendChild(capturedField);
+          }
+
+          if (!missingField) {
+            missingField = document.createElement("input");
+            missingField.type = "hidden";
+            missingField.name = "Form_Missing_Data__c";
+            form.appendChild(missingField);
+          }
+
+          capturedField.value = captured.join("\n");
+          missingField.value = missing.join("\n");
+        }
+
+        reviewBtn.addEventListener("click", () => {
+          const missing = validateFields();
+          syncRequestType();
+          allFormDataTextarea.value = captureAllFormDataAsJSON();
+
           if (missing.length) {
             dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
-            missingFieldsList.innerHTML = missing.map(f => `<li>${f}</li>`).join("");
+            missingFieldsList.innerHTML = missing.map((f) => `<li>${f}</li>`).join("");
           } else {
             dialogTitle.textContent = "All mandatory fields are completed. Ready to submit your request?";
             missingFieldsList.innerHTML = "";
@@ -321,20 +379,19 @@
           dialog.classList.remove("hidden");
         });
 
-        // Dialog handlers (UNCHANGED)
+        proceedBtn.addEventListener("click", () => {
+          dialog.classList.add("hidden");
+          captureFormAudit();
+          syncRequestType();
+          form.submit();
+        });
+
         editBtn.addEventListener("click", () => {
           dialog.classList.add("hidden");
         });
 
-        proceedBtn.addEventListener("click", () => {
-          dialog.classList.add("hidden");
-          form.submit();
-        });
-
         window.addEventListener("click", (e) => {
-          if (e.target === dialog) {
-            dialog.classList.add("hidden");
-          }
+          if (e.target === dialog) dialog.classList.add("hidden");
         });
 
         window.addEventListener("keydown", (e) => {
@@ -346,4 +403,3 @@
     </script>
   </body>
 </html>
-
