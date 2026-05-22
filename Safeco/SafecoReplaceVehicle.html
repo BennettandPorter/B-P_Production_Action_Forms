@@ -74,12 +74,20 @@
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
       novalidate
-    >
+    > 
+      <textarea
+      id="00NU7000008TS4L"
+      name="All_Form_Data__c"
+      rows="50"
+      wrap="soft"
+      class="hidden all-form-data"
+    ></textarea>
+    
       <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
         Replace Vehicle Safeco Form
       </h2>
@@ -299,7 +307,7 @@
           </label>
           <select
             id="00NU7000006N0iD"
-            name="Vehicle_Use__c"
+            name="Vehicle_Use12__c"
             class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
             required
           >
@@ -796,7 +804,7 @@
             class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
             required
           >
-            <option value="">--None--</option>
+             <option value="">--None--</option>
             <option value="Arizona">Arizona</option>
             <option value="Florida">Florida</option>
             <option value="Alabama">Alabama</option>
@@ -891,7 +899,7 @@
       </section>
 
       <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
       <input
         type="hidden"
         name="retURL"
@@ -904,11 +912,7 @@
       <input type="hidden" name="lead_source" value="Web Form" />
       <input type="hidden" name="delete_Action_Form__c" value="1" />
       <input type="hidden" id="00NU7000007OdKL" name="Carrier__c" value="Safeco" />
-      <input
-        type="hidden"
-        name="company"
-        value="Safeco Replace Vehicle"
-      />
+      <input type="hidden" name="company" value="Safeco" />
       <input type="hidden" id="Form_Captured_Data__c" name="Form_Captured_Data__c">
       <input type="hidden" id="Form_Missing_Data__c"  name="Form_Missing_Data__c">
 
@@ -998,6 +1002,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const capturedField = document.getElementById("Form_Captured_Data__c");
   const missingField = document.getElementById("Form_Missing_Data__c");
+  const allFormDataField = document.getElementById("00NU7000008TS4L");
 
   // Sections & Inputs
   const ownershipSelect = document.getElementById("00NU7000006N0wj");
@@ -1042,6 +1047,58 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "00NU7000006cbfp", label: "Interest Zip Code" },
   ];
 
+function captureAllFormDataAsJSON() {
+  const formData = {};
+  const excludeFields = [
+    "oid", "OrgId", "retURL", "ReturnURL",
+    "first_name", "FirstName", "last_name", "LastName",
+    "status", "Status", "phone", "Phone",
+    "lead_source", "LeadSource", "delete_Action_Form__c", "delete_Action_Form",
+    "company", "Company",
+    "Form_Captured_Data__c", "Form_Missing_Data__c","requestTypeRadio", "All_Form_Data__c"
+  ];
+
+  const formatISODate = (value) => {
+    if (!value || !/^\d{2}\/\d{2}\/\d{4}$/.test(value)) return value || "";
+    const [month, day, year] = value.split("/");
+    return `${year}-${month}-${day}`;
+  };
+
+  const formElements = form.querySelectorAll("input, textarea, select");
+
+  formElements.forEach((element) => {
+    if (!element.name || excludeFields.includes(element.name)) return;
+    
+    if (element.name === "email") {
+    formData["Email"] = element.value.trim();
+    return;
+}
+    
+    let fieldName = element.name.replace(/__c$/, "");
+
+    if (fieldName === "Date") {
+      fieldName = "Effective_Date";
+    }
+
+
+    if (element.type === "radio") {
+      if (element.checked) {
+        formData[fieldName] = element.value || "";
+      } else if (!(fieldName in formData)) {
+        formData[fieldName] = "";
+      }
+    } else if (element.type === "checkbox") {
+      formData[fieldName] = element.checked ? "true" : "false";
+    } else if (element.name === "Date__c") {
+      formData[fieldName] = formatISODate(element.value.trim());
+    } else {
+      formData[fieldName] = element.value || "";
+    }
+  });
+
+  return JSON.stringify(formData, null, 2);
+}
+
   // ===== Section Toggles =====
   function toggleAdditionalInterestSection() {
     if (ownershipSelect.value === "Owned" || ownershipSelect.value === "") {
@@ -1050,6 +1107,7 @@ document.addEventListener("DOMContentLoaded", function () {
       additionalInterestSection.classList.remove("hidden");
     }
   }
+
   function toggleMileageField() {
     if (commuteSelect.value === "Work/School 4 or more miles") {
       mileageOneWayWrapper.classList.remove("hidden");
@@ -1058,6 +1116,7 @@ document.addEventListener("DOMContentLoaded", function () {
       mileageOneWayInput.value = "";
     }
   }
+
   function updateYearsOwnedField() {
     let purchasedNewVal = null;
     for (const r of vehPurchasedRadios) {
@@ -1071,6 +1130,7 @@ document.addEventListener("DOMContentLoaded", function () {
       yearsOwnedInput.readOnly = false;
     }
   }
+
   ownershipSelect.addEventListener("change", toggleAdditionalInterestSection);
   commuteSelect.addEventListener("change", toggleMileageField);
   vehPurchasedRadios.forEach(r => r.addEventListener("change", updateYearsOwnedField));
@@ -1089,7 +1149,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ].forEach(el => el && el.classList.remove("error-highlight"));
   }
 
-  // ===== Standard required field validation (capture/missing only) =====
+  // ===== Standard required field validation =====
   function validateFields() {
     const missing = [];
     const captured = [];
@@ -1141,41 +1201,36 @@ document.addEventListener("DOMContentLoaded", function () {
       additionalInterestFields.forEach(checkField);
     }
 
-capturedField.value = captured.join("\n"); 
-missingField.value = missing.join("\n");  
+    capturedField.value = captured.join("\n");
+    missingField.value = missing.join("\n");
+    allFormDataField.value = captureAllFormDataAsJSON();
 
     return missing;
   }
 
-  // ===== ONLY EAP + Loss Payee rules affect disable state =====
+  // ===== Business rules =====
   function validateCustomCases() {
     clearHighlights();
     const errors = [];
 
-    // Loss Payee rule: at least ONE of Comp or Collision
     if (!additionalInterestSection.classList.contains("hidden") &&
         interestType.value === "Loss Payee") {
       const hasComp = !!comprehensiveDeductible.value;
       const hasColl = !!collisionDeductible.value;
       if (!hasComp && !hasColl) {
-        errors.push(
-          "Vehicle with Loss Payee Additional Interest must have Comprehensive Deductible or Collision Deductible Coverage or change the Interest Type."
-        );
+        errors.push("Vehicle with Loss Payee Additional Interest must have Comprehensive Deductible or Collision Deductible Coverage or change the Interest Type.");
         comprehensiveDeductible.classList.add("error-highlight");
         collisionDeductible.classList.add("error-highlight");
         interestType.classList.add("error-highlight");
       }
     }
 
-    // EAP rule: both Comp and Collision required, Loss of Use >= 35
     if (roadsideAssistance.value === "EAP") {
       const hasComp = !!comprehensiveDeductible.value;
       const hasColl = !!collisionDeductible.value;
       const lossVal = parseInt((lossOfUse.value || "0"), 10);
       if (!hasComp || !hasColl || lossVal < 35) {
-        errors.push(
-          "When Roadside Assistance is EAP, Comprehensive Deductible and Collision Deductible cannot be none, and Loss of Use must be 35/per day or above."
-        );
+        errors.push("When Roadside Assistance is EAP, Comprehensive Deductible and Collision Deductible cannot be none, and Loss of Use must be 35/per day or above.");
         roadsideAssistance.classList.add("error-highlight");
         if (!hasComp) comprehensiveDeductible.classList.add("error-highlight");
         if (!hasColl) collisionDeductible.classList.add("error-highlight");
@@ -1191,6 +1246,7 @@ missingField.value = missing.join("\n");
     dialog.classList.remove("hidden");
     document.body.classList.add("modal-open");
   }
+
   function closeDialog() {
     dialog.classList.add("hidden");
     document.body.classList.remove("modal-open");
@@ -1209,7 +1265,6 @@ missingField.value = missing.join("\n");
       dialogTitle.textContent = "All checks passed. Ready to submit your request.";
     }
 
-    // 1) Missing fields (normal style)
     if (missing.length) {
       missing.forEach(msg => {
         const li = document.createElement("li");
@@ -1218,7 +1273,6 @@ missingField.value = missing.join("\n");
       });
     }
 
-    // 2) Business rules section (highlighted)
     if (customErrors.length) {
       const headerLi = document.createElement("li");
       headerLi.textContent = "Business Rules Errors:";
@@ -1233,28 +1287,29 @@ missingField.value = missing.join("\n");
       });
     }
 
-    // Only EAP/Loss Payee errors can disable submit
-    if (customErrors.length > 0) {
-      proceedBtn.disabled = true;
-    } else {
-      proceedBtn.disabled = false;
-    }
-
+    proceedBtn.disabled = customErrors.length > 0;
     openDialog();
   });
 
   proceedBtn.addEventListener("click", () => {
     if (!proceedBtn.disabled) {
+      allFormDataField.value = captureAllFormDataAsJSON();
       form.submit();
     }
   });
 
-  editBtn.addEventListener("click", () => {
-    closeDialog();
+  editBtn.addEventListener("click", closeDialog);
+
+  window.addEventListener("click", function (e) {
+    if (e.target === dialog) closeDialog();
+  });
+
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !dialog.classList.contains("hidden")) {
+      closeDialog();
+    }
   });
 });
 </script>
-  </body>
-
+</body>
 </html>
-
