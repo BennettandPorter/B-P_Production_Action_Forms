@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Cincinnati Form</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link
+         rel="stylesheet"
+         href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css"
+         />
+      <style>
+         .hidden {
+         display: none;
+         }
+         .star {
+         color: #ef4444;
+         margin-left: 2px;
+         }
+         .modal-bg {
+         background: rgba(0, 0, 0, 0.4);
+         }
+      </style>
+   </head>
+   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">                   
+      <form
+         id="mainForm"
+         action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
+         method="POST"
+         class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
+         autocomplete="off"
+         >
+         <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
+         Add Driver Cincinnati Form
+         </h2>
+         <div class="bg-gray-50 border rounded-xl p-6 shadow-inner">
+            <h3 class="text-xl font-semibold mb-4 text-gray-700">Policy Changes</h3>
+            <!-- Email -->
+            <div class="mb-3">
+               <label for="email" class="block text-sm font-medium text-gray-700">
+               Email<span class="star">*</span>
+               </label>
+               <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  autocomplete="off"
+                  />
+            </div>
+            <div>
+               <label class="block text-sm font-medium text-gray-700 mb-2">Select the Request Type:<span class="star">*</span></label>
+               <!-- Radios: Keep for UI, but add hidden input for Salesforce as checkbox -->
+               <div class="flex space-x-4 mb-2">
+                  <label class="inline-flex items-center ">
+                  <input type="radio" id="00NU7000006IOzh" name="Is_this_a_quote_or_a_change_request__c" value="Quote"  class="mr-2" />Quote
+                  </label>
+                  <label class="inline-flex items-center">
+                  <input type="radio" id="00NU7000006IOzh" name="Is_this_a_quote_or_a_change_request__c" value="Endorsement" class="mr-2" />Endorsement
+                  </label>
+               </div>
+               <!-- Hidden Salesforce fields for checkbox mapping -->
+               <input type="hidden" name="Is_this_a_quote_or_a_change_request__c" id="sfQuote" value="false" />
+               <input type="hidden" name="Is_this_a_quote_or_a_change_request__c" id="sfEndorsement" value="false" />
+               <div id="quotePolicyError" class="error-message hidden ">Please select an option</div>
+            </div>
+            <!-- Policy Number -->
+            <div class="mb-3">
+               <label
+                  for="00NU7000005zuX3"
+                  class="block text-sm font-medium text-gray-700"
+                  >
+                  Policy Number<span class="star">*</span>
+               </label>
+               <input
+                  type="text"
+                  id="00NU7000005zuX3"
+                  name="Policy_Number__c"
+                  class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
+                  autocomplete="off"
+                  />
+            </div>
+            <!-- Effective Date -->
+            <div class="mb-3">
+               <label
+                  for="00NU7000005zuLl"
+                  class="block text-sm font-medium text-gray-700"
+                  >
+                  Effective Date<span class="star">*</span>
+               </label>
+               <input
+                  type="text"
+                  id="00NU7000005zuLl"
+                  name="Date__c"
+                  placeholder="MM/DD/YYYY"
+                  maxlength="10"
+                  class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  autocomplete="off"
+                  />
+            </div>
+         </div>
+         <div class="bg-gray-50 border rounded-xl p-6 shadow-inner">
+            <h3 class="text-xl font-semibold mb-4 text-gray-700">Driver Details</h3>
+            
+            <!-- Row 1: First Name, Middle Name, Last Name -->
+            <div class="grid grid-cols-3 gap-4 mb-4">
+               <div>
+                  <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">
+                  First Name<span class="star">*</span>
+                  </label>
+                  <input
+                     type="text"
+                     id="firstName"
+                     name="First_Name__c"
+                     class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                     autocomplete="off"
+                     />
+               </div>
+               <div>
+                  <label for="middleName" class="block text-sm font-medium text-gray-700 mb-1">
+                  Middle Name
+                  </label>
+                  <input
+                     type="text"
+                     id="middleName"
+                     name="Middle_Name__c"
+                     class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                     autocomplete="off"
+                     />
+               </div>
+               <div>
+                  <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">
+                  Last Name<span class="star">*</span>
+                  </label>
+                  <input
+                     type="text"
+                     id="lastName"
+                     name="Last_Name__c"
+                     class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                     autocomplete="off"
+                     />
+               </div>
+            </div>
+
+            <!-- Row 2: Gender, Marital Status -->
+            <div class="grid grid-cols-2 gap-4 mb-4">
+               <div>
+                  <label for="gender" class="block text-sm font-medium text-gray-700 mb-1">
+                  Gender<span class="star">*</span>
+                  </label>
+                  <select
+                     id="gender"
+                     name="Gender_Cincinnati__c"
+                     class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                     autocomplete="off"
+                     >
+                     <option value="">--Select--</option>
+                     <option value="Male">Male</option>
+                     <option value="Female">Female</option>
+                     <option value="Non-binary/Non-disclosed">Non-binary/Non-disclosed</option>
+                  </select>
+               </div>
+               <div>
+                  <label for="maritalStatus" class="block text-sm font-medium text-gray-700 mb-1">
+                  Marital Status<span class="star">*</span>
+                  </label>
+                  <select
+                     id="maritalStatus"
+                     name="Marital_Status_Central__c"
+                     class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                     autocomplete="off"
+                     >
+                     <option value="">--Select--</option>
+                     <option value="Divorced">Divorced</option>
+                     <option value="Married">Married</option>
+                     <option value="Single">Single</option>
+                     <option value="Widowed">Widowed</option>
+                  </select>
+               </div>
+            </div>
+
+            <!-- Row 3: Date of Birth, DL Number -->
+            <div class="grid grid-cols-2 gap-4 mb-4">
+               <div>
+                  <label for="dateOfBirth" class="block text-sm font-medium text-gray-700 mb-1">
+                  Date of Birth<span class="star">*</span>
+                  </label>
+                  <input
+                     type="text"
+                     id="dateOfBirth"
+                     name="Date_of_Birth__c"
+                     placeholder="MM/DD/YYYY"
+                     maxlength="10"
+                     class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                     autocomplete="off"
+                     />
+               </div>
+               <div>
+                  <label for="dlNumber" class="block text-sm font-medium text-gray-700 mb-1">
+                  DL Number<span class="star">*</span>
+                  </label>
+                  <input
+                     type="text"
+                     id="dlNumber"
+                     name="Drivers_license_number__c"
+                     class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                     autocomplete="off"
+                     />
+               </div>
+            </div>
+
+            <!-- HIDDEN Age field - maps to Salesforce -->
+            <input
+               type="hidden"
+               id="age"
+               name="Age__c"
+               value=""
+               />
+
+            <!-- Row 4: DL Country, DL State -->
+            <div class="grid grid-cols-2 gap-4 mb-4">
+               <div>
+                  <label for="dlCountry" class="block text-sm font-medium text-gray-700 mb-1">
+                  DL Country<span class="star">*</span>
+                  </label>
+                  <select
+                     id="dlCountry"
+                     name="DL_Country__c"
+                     class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                     autocomplete="off"
+                     >
+                     <option value="Afghanistan">Afghanistan</option>
+    <option value="Albania">Albania</option>
+    <option value="Algeria">Algeria</option>
+    <option value="Andorra">Andorra</option>
+    <option value="Angola">Angola</option>
+    <option value="Anguilla">Anguilla</option>
+    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+    <option value="Argentina">Argentina</option>
+    <option value="Armenia">Armenia</option>
+    <option value="Aruba">Aruba</option>
+    <option value="Australia">Australia</option>
+    <option value="Austria">Austria</option>
+    <option value="Azerbaijan">Azerbaijan</option>
+    <option value="Bahamas">Bahamas</option>
+    <option value="Bahrain">Bahrain</option>
+    <option value="Bangladesh">Bangladesh</option>
+    <option value="Barbados">Barbados</option>
+    <option value="Belarus">Belarus</option>
+    <option value="Belgium">Belgium</option>
+    <option value="Belize">Belize</option>
+    <option value="Benin">Benin</option>
+    <option value="Bermuda">Bermuda</option>
+    <option value="Bhutan">Bhutan</option>
+    <option value="Bolivia">Bolivia</option>
+    <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+    <option value="Botswana">Botswana</option>
+    <option value="Brazil">Brazil</option>
+    <option value="British Virgin Islands">British Virgin Islands</option>
+    <option value="Brunei">Brunei</option>
+    <option value="Bulgaria">Bulgaria</option>
+    <option value="Burkina Faso">Burkina Faso</option>
+    <option value="Burundi">Burundi</option>
+    <option value="Cambodia">Cambodia</option>
+    <option value="Cameroon">Cameroon</option>
+    <option value="Canada">Canada</option>
+    <option value="Cape Verde">Cape Verde</option>
+    <option value="Cayman Islands">Cayman Islands</option>
+    <option value="Central African Republic">Central African Republic</option>
+    <option value="Chad">Chad</option>
+    <option value="Chile">Chile</option>
+    <option value="China">China</option>
+    <option value="Colombia">Colombia</option>
+    <option value="Comoros">Comoros</option>
+    <option value="Congo">Congo</option>
+    <option value="Cook Islands">Cook Islands</option>
+    <option value="Costa Rica">Costa Rica</option>
+    <option value="Cote d'Ivoire">Cote d'Ivoire</option>
+    <option value="Croatia">Croatia</option>
+    <option value="Cuba">Cuba</option>
+    <option value="Cyprus">Cyprus</option>
+    <option value="Czech Republic">Czech Republic</option>
+    <option value="Democratic People's Republic of Korea">Democratic People's Republic of Korea</option>
+    <option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
+    <option value="Denmark">Denmark</option>
+    <option value="Djibouti">Djibouti</option>
+    <option value="Dominica">Dominica</option>
+    <option value="Dominican Republic">Dominican Republic</option>
+    <option value="East Timor">East Timor</option>
+    <option value="Ecuador">Ecuador</option>
+    <option value="Egypt">Egypt</option>
+    <option value="El Salvador">El Salvador</option>
+    <option value="Equatorial Guinea">Equatorial Guinea</option>
+    <option value="Eritrea">Eritrea</option>
+    <option value="Estonia">Estonia</option>
+    <option value="Ethiopia">Ethiopia</option>
+    <option value="Falkland Islands">Falkland Islands</option>
+    <option value="Fiji">Fiji</option>
+    <option value="Finland">Finland</option>
+    <option value="France">France</option>
+    <option value="French Guiana">French Guiana</option>
+    <option value="French Polynesia">French Polynesia</option>
+    <option value="Gabon">Gabon</option>
+    <option value="Gambia">Gambia</option>
+    <option value="Georgia">Georgia</option>
+    <option value="Germany">Germany</option>
+    <option value="Ghana">Ghana</option>
+    <option value="Gibraltar">Gibraltar</option>
+    <option value="Greece">Greece</option>
+    <option value="Greenland">Greenland</option>
+    <option value="Grenada">Grenada</option>
+    <option value="Guadeloupe">Guadeloupe</option>
+    <option value="Guatemala">Guatemala</option>
+    <option value="Guinea">Guinea</option>
+    <option value="Guinea-Bissau">Guinea-Bissau</option>
+    <option value="Guyana">Guyana</option>
+    <option value="Haiti">Haiti</option>
+    <option value="Honduras">Honduras</option>
+    <option value="Hong Kong">Hong Kong</option>
+    <option value="Hungary">Hungary</option>
+    <option value="Iceland">Iceland</option>
+    <option value="India">India</option>
+    <option value="Indonesia">Indonesia</option>
+    <option value="Iran">Iran</option>
+    <option value="Iraq">Iraq</option>
+    <option value="Ireland">Ireland</option>
+    <option value="Israel">Israel</option>
+    <option value="Italy">Italy</option>
+    <option value="Jamaica">Jamaica</option>
+    <option value="Japan">Japan</option>
+    <option value="Jordan">Jordan</option>
+    <option value="Kazakhstan">Kazakhstan</option>
+    <option value="Kenya">Kenya</option>
+    <option value="Kiribati">Kiribati</option>
+    <option value="Kuwait">Kuwait</option>
+    <option value="Kyrgyzstan">Kyrgyzstan</option>
+    <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+    <option value="Latvia">Latvia</option>
+    <option value="Lebanon">Lebanon</option>
+    <option value="Lesotho">Lesotho</option>
+    <option value="Liberia">Liberia</option>
+    <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+    <option value="Liechtenstein">Liechtenstein</option>
+    <option value="Lithuania">Lithuania</option>
+    <option value="Luxembourg">Luxembourg</option>
+    <option value="Macau">Macau</option>
+    <option value="Macedonia">Macedonia</option>
+    <option value="Madagascar">Madagascar</option>
+    <option value="Malawi">Malawi</option>
+    <option value="Malaysia">Malaysia</option>
+    <option value="Maldives">Maldives</option>
+    <option value="Mali">Mali</option>
+    <option value="Malta">Malta</option>
+    <option value="Marshall Islands">Marshall Islands</option>
+    <option value="Martinique">Martinique</option>
+    <option value="Mauritania">Mauritania</option>
+    <option value="Mauritius">Mauritius</option>
+    <option value="Mexico">Mexico</option>
+    <option value="Micronesia">Micronesia</option>
+    <option value="Moldova">Moldova</option>
+    <option value="Monaco">Monaco</option>
+    <option value="Mongolia">Mongolia</option>
+    <option value="Montserrat">Montserrat</option>
+    <option value="Morocco">Morocco</option>
+    <option value="Mozambique">Mozambique</option>
+    <option value="Myanmar">Myanmar</option>
+    <option value="Namibia">Namibia</option>
+    <option value="Nauru">Nauru</option>
+    <option value="Nepal">Nepal</option>
+    <option value="Netherlands">Netherlands</option>
+    <option value="Netherlands Antilles">Netherlands Antilles</option>
+    <option value="New Caledonia">New Caledonia</option>
+    <option value="New Zealand">New Zealand</option>
+    <option value="Nicaragua">Nicaragua</option>
+    <option value="Niger">Niger</option>
+    <option value="Nigeria">Nigeria</option>
+    <option value="Norway">Norway</option>
+    <option value="Oman">Oman</option>
+    <option value="Pakistan">Pakistan</option>
+    <option value="Palau">Palau</option>
+    <option value="Panama">Panama</option>
+    <option value="Papua New Guinea">Papua New Guinea</option>
+    <option value="Paraguay">Paraguay</option>
+    <option value="Peru">Peru</option>
+    <option value="Philippines">Philippines</option>
+    <option value="Poland">Poland</option>
+    <option value="Portugal">Portugal</option>
+    <option value="Qatar">Qatar</option>
+    <option value="Republic of Korea">Republic of Korea</option>
+    <option value="Romania">Romania</option>
+    <option value="Russia">Russia</option>
+    <option value="Rwanda">Rwanda</option>
+    <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+    <option value="Saint Lucia">Saint Lucia</option>
+    <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+    <option value="Samoa">Samoa</option>
+    <option value="San Marino">San Marino</option>
+    <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+    <option value="Saudi Arabia">Saudi Arabia</option>
+    <option value="Senegal">Senegal</option>
+    <option value="Serbia and Montenegro">Serbia and Montenegro</option>
+    <option value="Seychelles">Seychelles</option>
+    <option value="Sierra Leone">Sierra Leone</option>
+    <option value="Singapore">Singapore</option>
+    <option value="Slovakia">Slovakia</option>
+    <option value="Slovenia">Slovenia</option>
+    <option value="Solomon Islands">Solomon Islands</option>
+    <option value="Somalia">Somalia</option>
+    <option value="South Africa">South Africa</option>
+    <option value="Spain">Spain</option>
+    <option value="Sri Lanka">Sri Lanka</option>
+    <option value="Sudan">Sudan</option>
+    <option value="Suriname">Suriname</option>
+    <option value="Swaziland">Swaziland</option>
+    <option value="Sweden">Sweden</option>
+    <option value="Switzerland">Switzerland</option>
+    <option value="Syria">Syria</option>
+    <option value="Taiwan">Taiwan</option>
+    <option value="Tajikistan">Tajikistan</option>
+    <option value="Tanzania">Tanzania</option>
+    <option value="Thailand">Thailand</option>
+    <option value="Togo">Togo</option>
+    <option value="Tonga">Tonga</option>
+    <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+    <option value="Tunisia">Tunisia</option>
+    <option value="Turkey">Turkey</option>
+    <option value="Turkmenistan">Turkmenistan</option>
+    <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+    <option value="Tuvalu">Tuvalu</option>
+    <option value="Uganda">Uganda</option>
+    <option value="Ukraine">Ukraine</option>
+    <option value="United Arab Emirates">United Arab Emirates</option>
+    <option value="United Kingdom">United Kingdom</option>
+    <option value="United States of America" selected>United States of America</option>
+    <option value="Uruguay">Uruguay</option>
+    <option value="Uzbekistan">Uzbekistan</option>
+    <option value="Vanuatu">Vanuatu</option>
+    <option value="Venezuela">Venezuela</option>
+    <option value="Vietnam">Vietnam</option>
+    <option value="Yemen">Yemen</option>
+    <option value="Zambia">Zambia</option>
+    <option value="Zimbabwe">Zimbabwe</option>
+                  </select>
+               </div>
+               <div>
+                  <label for="dlState" class="block text-sm font-medium text-gray-700 mb-1">
+                  DL State<span class="star">*</span>
+                  </label>
+                  <select
+                     id="dlState"
+                     name="License_State_Cincinnati__c"
+                     class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                     autocomplete="off"
+                     >
+                    <option value="">--Select--</option>
+                  <option value="AK">AK</option>
+                  <option value="AL">AL</option>
+                  <option value="AR">AR</option>
+                  <option value="AZ">AZ</option>
+                  <option value="CA">CA</option>
+                  <option value="CO">CO</option>
+                  <option value="CT">CT</option>
+                  <option value="DC">DC</option>
+                  <option value="DE">DE</option>
+                  <option value="FL">FL</option>
+                  <option value="GA">GA</option>
+                  <option value="HI">HI</option>
+                  <option value="IA">IA</option>
+                  <option value="ID">ID</option>
+                  <option value="IL">IL</option>
+                  <option value="IN">IN</option>
+                  <option value="KS">KS</option>
+                  <option value="KY">KY</option>
+                  <option value="LA">LA</option>
+                  <option value="MA">MA</option>
+                  <option value="MD">MD</option>
+                  <option value="ME">ME</option>
+                  <option value="MI">MI</option>
+                  <option value="MN">MN</option>
+                  <option value="MO">MO</option>
+                  <option value="MS">MS</option>
+                  <option value="MT">MT</option>
+                  <option value="NC">NC</option>
+                  <option value="ND">ND</option>
+                  <option value="NE">NE</option>
+                  <option value="NH">NH</option>
+                  <option value="NJ">NJ</option>
+                  <option value="NM">NM</option>
+                  <option value="NV">NV</option>
+                  <option value="NY">NY</option>
+                  <option value="OH">OH</option>
+                  <option value="OK">OK</option>
+                  <option value="OR">OR</option>
+                  <option value="PA">PA</option>
+                  <option value="RI">RI</option>
+                  <option value="SC">SC</option>
+                  <option value="SD">SD</option>
+                  <option value="TN">TN</option>
+                  <option value="TX">TX</option>
+                  <option value="UT">UT</option>
+                  <option value="VA">VA</option>
+                  <option value="VT">VT</option>
+                  <option value="WA">WA</option>
+                  <option value="WI">WI</option>
+                  <option value="WV">WV</option>
+                  <option value="WY">WY</option>
+                  </select>
+               </div>
+            </div>
+
+            <!-- Row 5: Date Licensed -->
+            <div class="mb-4">
+               <label for="dateLicensed" class="block text-sm font-medium text-gray-700 mb-1">
+               Date Licensed<span class="star">*</span>
+               </label>
+               <input
+                  type="text"
+                  id="dateLicensed"
+                  name="Date_Licensed__c"
+                  placeholder="MM/DD/YYYY"
+                  maxlength="10"
+                  class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  autocomplete="off"
+                  />
+            </div>
+
+            <!-- Row 6: Relationship to Policyholder -->
+            <div class="mb-3">
+               <label for="relationshipToPolicyholder" class="block text-sm font-medium text-gray-700">
+               Relationship to Policyholder<span class="star">*</span>
+               </label>
+               <select
+                  id="relationshipToPolicyholder"
+                  name="Relationship_to_Policyholder__c"
+                  class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  autocomplete="off"
+                  >
+                  <option value="">--Select--</option>
+                  <option value="Brother/Sister of Policyholder">Brother/Sister of Policyholder</option>
+                  <option value="Child of Policyholder">Child of Policyholder</option>
+                  <option value="Employee of Policyholder">Employee of Policyholder</option>
+                  <option value="Parent/Guardian of Policyholder">Parent/Guardian of Policyholder</option>
+                  <option value="Policyholder #2">Policyholder #2</option>
+                  <option value="No Vehicle Operator Involved">No Vehicle Operator Involved</option>
+                  <option value="Other Relation to Policyholder">Other Relation to Policyholder</option>
+                  <option value="Policyholder">Policyholder</option>
+                  <option value="Spouse of Policyholder">Spouse of Policyholder</option>
+                  <option value="Relationship Not Known">Relationship Not Known</option>
+                  <option value="Not Related to Policyholder">Not Related to Policyholder</option>
+               </select>
+            </div>
+         </div>
+         
+         <!-- Policy Action -->
+         <input
+            type="hidden"
+            id="AddDriver"
+            name="Policy_Action__c"
+            value="Add Driver"
+            />
+         <!-- Hidden Salesforce fields -->
+         <input type=hidden name="oid" value="00DU700000AcTJN">
+         <input
+            type="hidden"
+            name="first_name"
+            value="Cincinnati Add Driver"
+            />
+         <input type="hidden" name="last_name" value=" Demo 4" />
+         <input type="hidden" name="status" value="New" />
+         <input type="hidden" name="phone" value="2843683729" />
+         <input type="hidden" name="lead_source" value="Web Form" />
+         <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
+         <input type="hidden" name="delete_Action_Form__c" value="1" />
+         <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
+         <input type="hidden" id="formMissingData" name="Form_Missing_Data__c" value="" />
+         <input type="hidden" name="Carrier__c" value ="Cincinnati">
+         <input
+            type="hidden"
+            name="company"
+            value="Caelius Test Cincinnati Add Driver Form"
+            />
+         <input
+            type="hidden"
+            name="Debug_Notes__c"
+            value="Cincinnati Test: 2025-06-27 07:21AM"
+            />
+            <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
+         <!-- Review and Submit Button -->
+         <button
+            type="button"
+            id="reviewBtn"
+            class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition w-full"
+            >
+            Review and Submit
+         </button>
+      </form>
+      <!-- Confirmation Dialog -->
+      <div
+         id="dialog"
+         class="hidden fixed inset-0 flex items-center justify-center modal-bg z-50"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="dialogTitle"
+         >
+         <div
+            class="bg-white rounded-lg p-6 max-w-md w-full shadow-lg text-gray-800"
+            >
+            <h3 id="dialogTitle" class="text-lg font-semibold mb-4"></h3>
+            <ul id="missingFieldsList" class="mb-4 text-red-600 text-sm"></ul>
+            <div class="flex justify-end space-x-3" id="dialogButtons">
+               <button
+                  id="proceedBtn"
+                  class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 font-medium"
+                  >
+                  Proceed to End Request
+               </button>
+               <button
+                  id="editBtn"
+                  class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 font-medium"
+                  >
+                  Edit
+               </button>
+            </div>
+         </div>
+      </div>
+      <!-- JS -->
+      <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("mainForm");
+      const dialog = document.getElementById("dialog");
+      const dialogTitle = document.getElementById("dialogTitle");
+      const missingFieldsList = document.getElementById("missingFieldsList");
+      const proceedBtn = document.getElementById("proceedBtn");
+      const editBtn = document.getElementById("editBtn");
+      const formDataJsonInput = document.getElementById("formDataJson");
+      const reviewBtn = document.getElementById("reviewBtn");
+      
+
+      // Co-Applicant and related controls
+      const maritalStatus = document.getElementById("maritalStatus");
+      const relationshipToPolicyholder = document.getElementById("relationshipToPolicyholder");
+      const dateOfBirthInput = document.getElementById("dateOfBirth");
+      const ageInput = document.getElementById("age");
+
+      // Function to calculate age from DOB
+      function calculateAge(dobString) {
+         if (!dobString || !isValidDateFormat(dobString)) {
+            ageInput.value = "";
+            return "";
+         }
+         
+         const [month, day, year] = dobString.split("/").map(Number);
+         const birthDate = new Date(year, month - 1, day);
+         
+         // Validate the date (handles invalid dates like Feb 30)
+         if (isNaN(birthDate.getTime())) {
+            ageInput.value = "";
+            return "";
+         }
+         
+         const today = new Date();
+         let age = today.getFullYear() - birthDate.getFullYear();
+         const monthDiff = today.getMonth() - birthDate.getMonth();
+         
+         // Adjust age if birthday hasn't occurred this year
+         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+         }
+         
+         ageInput.value = age.toString();
+         return age.toString();
+      }
+      function formatDateToISO(dateStr) {
+   if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+   
+   const [month, day, year] = dateStr.split("/");
+   return `${year}-${month}-${day}`; // YYYY-MM-DD
+}
+
+      // Initialize Pikaday datepickers for all date fields
+      const dateFieldIds = ["00NU7000005zuLl", "dateOfBirth", "dateLicensed", "00NU7000007CwPB"];
+      dateFieldIds.forEach(id => {
+         const el = document.getElementById(id);
+         if (el) {
+         new Pikaday({
+            field: el,
+            format: "MM/DD/YYYY",
+            toString(date) {
+            const day = String(date.getDate()).padStart(2, "0");
+            const month = String(date.getMonth() + 1).padStart(2, "0");
+            const year = date.getFullYear();
+            return `${month}/${day}/${year}`;
+            },
+            parse(dateString) {
+            const [month, day, year] = dateString.split("/");
+            return new Date(year, month - 1, day);
+            },
+         });
+         }
+      });
+
+      // Auto-calculate age when DOB changes
+      if (dateOfBirthInput) {
+         dateOfBirthInput.addEventListener("input", function() {
+            calculateAge(this.value);
+         });
+         
+         dateOfBirthInput.addEventListener("change", function() {
+            calculateAge(this.value);
+         });
+         
+         // Also listen for Pikaday changes
+         dateOfBirthInput.addEventListener("blur", function() {
+            calculateAge(this.value);
+         });
+      }
+
+      // Co-Applicant toggling and enabling/disabling inputs
+     
+     
+
+      // Updated validation fields for new structure
+      const fieldData = [
+         { id: "email", label: "Email", type: "email" },
+         { id: "00NU7000005zuX3", label: "Policy Number" },
+         { id: "00NU7000005zuLl", label: "Effective Date" },
+         { id: "firstName", label: "First Name" },
+         { id: "lastName", label: "Last Name" },
+         { id: "gender", label: "Gender" },
+         { id: "maritalStatus", label: "Marital Status" },
+         { id: "dateOfBirth", label: "Date of Birth" },
+         { id: "dlNumber", label: "DL Number" },
+         { id: "dlCountry", label: "DL Country" },
+         { id: "dlState", label: "DL State" },
+         { id: "dateLicensed", label: "Date Licensed" },
+         { id: "relationshipToPolicyholder", label: "Relationship to Policyholder" },
+         { id: "age", label: "Age", type: "number" } // Include age in validation
+      ];
+
+      // Additional dynamic co-applicant fields (validate only if co-applicant visible)
+      
+const allFields = fieldData;
+      // Helper to validate MM/DD/YYYY format
+      function isValidDateFormat(value) {
+         return /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/.test(value);
+      }
+
+      // Get radio value of Request Type
+      function getRequestType() {
+         const radios = document.querySelectorAll('input[name="Is_this_a_quote_or_a_change_request__c"]');
+         for (const radio of radios) {
+         if (radio.checked) return radio.value;
+         }
+         return "";
+      }
+
+      // Update Salesforce hidden checkbox fields for requestType
+      document.querySelectorAll('input[name="Is_this_a_quote_or_a_change_request__c"]').forEach(radio => {
+         radio.addEventListener('change', function() {
+         document.getElementById("sfQuote").value = this.value === "Quote" ? "true" : "false";
+         document.getElementById("sfEndorsement").value = this.value === "Endorsement" ? "true" : "false";
+         });
+      });
+
+      // Review and Submit button click validation and show dialog
+      reviewBtn.addEventListener("click", function (e) {
+         e.preventDefault();
+
+         const missing = [];
+         const missingData = [];
+         const completedData = [];
+
+         const requestTypeVal = getRequestType();
+         if (!requestTypeVal) {
+         missing.push("Request Type");
+         missingData.push({ field: "Request Type", value: "" });
+         } else {
+         completedData.push({ field: "Request Type", value: requestTypeVal });
+         }
+
+         // Combine driver and co-applicant fields for validation
+
+         allFields.forEach(field => {
+         const input = document.getElementById(field.id);
+         if (!input) return;
+
+         if (input.disabled) return; // Skip disabled inputs
+
+         const val = input.value.trim();
+
+         let isMissing = false;
+         if (field.type === "email") {
+            if (!val || !input.checkValidity()) isMissing = true;
+         } else if (field.type === "number") {
+            // Age field validation - only check if DOB was provided
+            const dobVal = dateOfBirthInput ? dateOfBirthInput.value.trim() : "";
+            if (dobVal && !val) isMissing = true;
+         } else if (
+            (field.label.includes("Date") || field.label.includes("Birth")) && val
+         ) {
+            if (!isValidDateFormat(val)) isMissing = true;
+         } else {
+            if (!val) isMissing = true;
+         }
+
+         if (isMissing) {
+            missing.push(field.label);
+            missingData.push({ field: field.label, value: val || "" });
+         } else {
+            completedData.push({ field: field.label, value: val });
+         }
+         });
+
+         // Prepare captured data string for hidden input
+         const capturedStr = completedData
+         .map(d => `${d.field} = ${d.value}`)
+         .join("\n");
+
+         const missingStr = missingData
+         .map(d => d.field)
+         .join("\n");
+
+         // Set hidden fields
+         formDataJsonInput.value = capturedStr;
+         // Build All_Form_Data__c JSON
+const allFormData = {
+   Email: document.getElementById("email")?.value || "",
+Is_this_a_quote_or_a_change_request: getRequestType(),
+   Policy_Number: document.getElementById("00NU7000005zuX3")?.value || "",
+   Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value),
+   
+   First_Name: document.getElementById("firstName")?.value || "",
+   Middle_Name: document.getElementById("middleName")?.value || "",
+   Last_Name: document.getElementById("lastName")?.value || "",
+   Gender: document.getElementById("gender")?.value || "",
+   Marital_Status: document.getElementById("maritalStatus")?.value || "",
+   Date_of_Birth: formatDateToISO(document.getElementById("dateOfBirth")?.value),
+   Age: document.getElementById("age")?.value || "",
+   DL_Number: document.getElementById("dlNumber")?.value || "",
+   DL_Country: document.getElementById("dlCountry")?.value || "",
+   DL_State: document.getElementById("dlState")?.value || "",
+   Date_Licensed: formatDateToISO(document.getElementById("dateLicensed")?.value),
+   Relationship_to_Policyholder: document.getElementById("relationshipToPolicyholder")?.value || "",
+
+   // Hidden fields (explicitly included as you requested)
+   Carrier: "Cincinnati",
+   Policy_Action: document.getElementById("AddDriver")?.value || ""
+};
+
+// Set JSON string
+//document.getElementById("allFormData").value = JSON.stringify(allFormData, null, 2);
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
+
+         const formMissingHidden = document.getElementById("formMissingData");
+         if (formMissingHidden) {
+         formMissingHidden.value = missingStr;
+         }
+
+         if (missing.length) {
+         dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
+         missingFieldsList.innerHTML = missing.map(f => `<li>${f}</li>`).join("");
+         } else {
+         dialogTitle.textContent = "All mandatory fields are completed. Ready to submit your request?";
+         missingFieldsList.innerHTML = "";
+         }
+
+         dialog.classList.remove("hidden");
+      });
+
+      // Modal buttons logic
+      editBtn.addEventListener("click", () => {
+         dialog.classList.add("hidden");
+      });
+
+      proceedBtn.addEventListener("click", () => {
+         dialog.classList.add("hidden");
+         form.submit();
+      });
+
+      // Close dialog on outside click and ESC key press
+      window.addEventListener("click", (e) => {
+         if (e.target === dialog) {
+         dialog.classList.add("hidden");
+         }
+      });
+
+      window.addEventListener("keydown", (e) => {
+         if (e.key === "Escape" && !dialog.classList.contains("hidden")) {
+         dialog.classList.add("hidden");
+         }
+      });
+      });
+      </script>
+   </body>
+</html>
