@@ -24,7 +24,7 @@
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
@@ -650,7 +650,7 @@
               for="primaryLocationAddr2"
               class="block text-sm font-medium text-gray-700"
             >
-              Primary Location Address 2<span class="star">*</span>
+              Primary Location Address 2
             </label>
             <input
               type="text"
@@ -701,7 +701,7 @@
       </div>
 
       <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
       <input
         type="hidden"
         name="retURL"
@@ -713,6 +713,7 @@
       <input type="hidden" name="phone" value="28436836129" />
       <input type="hidden" name="lead_source" value="Web Form" />
       <input type="hidden" name="delete_Action_Form__c" value="1" />
+      <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
       <input
         type="hidden"
         id="formDataJson"
@@ -911,24 +912,33 @@ if (addressTypeSelect.value === "Domestic") {
   }
 }
 
-          if (vehicleLocationSelect.value === "Other") {
-            const otherFields = [
-              { id: "primaryLocationAddr1", label: "Primary Location Address 1" },
-              { id: "primaryLocationAddr2", label: "Primary Location Address 2" },
-              { id: "primaryLocationCity", label: "Primary Location City" },
-              { id: "primaryLocationZip", label: "Primary Location Zip" }
-            ];
-            otherFields.forEach((otherField) => {
-              const input = document.getElementById(otherField.id);
-              if (!input.value.trim()) {
-                missing.push(otherField.label);
-              }
-            });
-          }
+
+
+
+         if (vehicleLocationSelect.value === "Other") {
+  const otherFields = [
+    { id: "primaryLocationAddr1", label: "Primary Location Address 1" },
+    { id: "primaryLocationAddr2", label: "Primary Location Address 2", optional: true },
+    { id: "primaryLocationCity", label: "Primary Location City" },
+    { id: "primaryLocationZip", label: "Primary Location Zip" }
+  ];
+
+  otherFields.forEach((otherField) => {
+    const input = document.getElementById(otherField.id);
+    if (!input.value.trim() && !otherField.optional) {
+      missing.push(otherField.label);
+    }
+  });
+}
 
           return missing;
         }
 
+        function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
         reviewBtn.addEventListener("click", () => {
           const missing = validateFields();
           proceedBtn.classList.remove("hidden");
@@ -989,6 +999,37 @@ if (addressTypeSelect.value === "Domestic") {
 
           const formCapturedDataStr = completedData.join("\n");
           const formMissingDataStr = missingData.join("\n");
+          const selectedRequestType = document.querySelector(
+  'input[name="Is_this_a_quote_or_a_change_request__c"]:checked'
+)?.value || "";
+
+const allFormData = {
+  Email: document.getElementById("email")?.value?.trim() || "",
+  Is_this_a_quote_or_a_change_request: selectedRequestType,
+
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || "",
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value?.trim() || "",
+Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value?.trim() || ""),
+  Address_Type: document.getElementById("addressType")?.value || "",
+  address_1: document.getElementById("addressLine11")?.value?.trim() || "",
+  address2_1: document.getElementById("addressLine21")?.value?.trim() || "",
+  city_1: document.getElementById("city1")?.value?.trim() || "",
+  state_1: document.getElementById("state1")?.value || "",
+  zip_1: document.getElementById("zip1")?.value?.trim() || "",
+  Primary_Residence: document.getElementById("primaryResidence")?.value || "",
+  Country: document.getElementById("country")?.value || "",
+  PO_Box_or_military_address: document.getElementById("poBoxMilitary")?.value || "",
+
+  Vehicle_Location_Verification: document.getElementById("vehicleLocationType")?.value || "",
+  Primary_Location_Address_1: document.getElementById("primaryLocationAddr1")?.value?.trim() || "",
+  Primary_Location_Address_2: document.getElementById("primaryLocationAddr2")?.value?.trim() || "",
+  Primary_Location_City: document.getElementById("primaryLocationCity")?.value?.trim() || "",
+  Primary_Location_Zip: document.getElementById("primaryLocationZip")?.value?.trim() || "",
+
+  Carrier: document.querySelector('input[name="Carrier__c"]')?.value || ""
+};
+
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
 
           const formDataJsonInput = document.getElementById("formDataJson");
           if (formDataJsonInput) {
