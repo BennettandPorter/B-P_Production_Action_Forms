@@ -34,7 +34,7 @@
       <!-- All Form Data - HIDDEN JSON CAPTURE -->
       <textarea
         id="00NU7000008TS4L"
-        name="00NU7000008TS4L"
+        name="All_Form_Data__c"
         rows="50"
         type="text"
         wrap="soft"
@@ -105,7 +105,7 @@
       <input type="hidden" name="Form_Captured_Data__c" />
       <input type="hidden" name="Form_Missing_Data__c" />
       <input type="hidden" name="company" value="Cincinnati" />
-
+      
       <!-- Submit button -->
       <div class="flex justify-end mt-6">
         <button
@@ -183,7 +183,7 @@
               element.name &&
               element.name !== "Form_Captured_Data__c" &&
               element.name !== "Form_Missing_Data__c" &&
-              element.name !== "00NU7000008TS4L"
+              element.name !== "All_Form_Data__c"
             ) {
               let fieldName = element.name.replace(/__c$/, "");
 
