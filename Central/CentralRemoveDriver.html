@@ -15,7 +15,7 @@
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
@@ -65,7 +65,7 @@
             class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
           />
         </div>
-
+       
         <div class="mb-3">
           <label for="00NU7000005zuLl" class="block text-sm font-medium text-gray-700">
             Effective Date (MM/DD/YYYY)<span class="star">*</span>
@@ -126,7 +126,7 @@
         </div>
       </div>
 
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
       <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
       <input type="hidden" name="first_name" value="Central Remove Driver" />
       <input type="hidden" name="last_name" value=" Demo Check" />
@@ -139,6 +139,7 @@
       <input type="hidden" name="Carrier__c" value="Central Insurance">
       <input type="hidden" name="company" value="Caelius Test Central Remove Driver" />
       <input type="hidden" name="Debug_Notes__c" value="Central Test: 2025-06-27 07:21AM" />
+      <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
 
       <div class="flex justify-end mt-6">
         <button type="button" id="reviewBtn" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition">
@@ -210,6 +211,11 @@
             additionalRemarks.value = "";
           }
         });
+        function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month}-${day}`;
+}
 
         reviewBtn.addEventListener("click", () => {
           const missingData = [];
@@ -244,6 +250,30 @@
             }
           });
 
+          const allFormData = { Email: document.getElementById("email")?.value || "",
+
+  Is_this_a_quote_or_a_change_request:
+    getSelectedRadioValue("Is_this_a_quote_or_a_change_request__c") === "Quote" ? "Y" : "N",
+
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value || "",
+
+  Effective_Date: formatDateToISO(
+    document.getElementById("00NU7000005zuLl")?.value
+  ),
+
+  First_Name: document.getElementById("driverName")?.value || "",
+
+  reasonToDelete:
+    document.getElementById("reasonToDelete")?.value || "",
+
+  additionalRemarks:
+    document.getElementById("additionalRemarks")?.value || "",
+
+  // Hidden fields (IMPORTANT)
+  Carrier: "Central Insurance",
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || ""
+};
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
           // Write captured and missing data to hidden fields
           document.getElementById("formDataJson").value = completedData.join("\n");
           document.getElementById("formMissingData").value = missingData.join("\n");
