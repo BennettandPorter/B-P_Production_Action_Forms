@@ -52,7 +52,7 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
   <form
-    action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+    action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00DU700000AcTJN"
     method="POST"
     class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-6"
     id="mainForm"
@@ -60,7 +60,7 @@
   >
     <h2 class="text-2xl font-bold text-center text-gray-800">Safeco EOI Form</h2>
     <!-- Hidden Fields -->
-    <input type="hidden" name="oid" value="00D4x000006s8rs" />
+    <input type="hidden" name="oid" value="00DU700000AcTJN" />
  <!--   <input type="hidden" name="recordType" value="012U7000003Ie25IAC" />-->
     <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
     <input type="hidden" name="first_name" value="EOIRequest" />
@@ -75,6 +75,7 @@
      <input type="hidden" id="formDataJson" name="Form_Captured_Data__c" value="" />
     <input type="hidden" id="formMissingData" name="Form_Missing_Data__c" value="" />
                         <input type="hidden" name="Carrier__c" value ="Safeco">
+                        <input type="hidden" id="allFormData" name="All_Form_Data__c" value="" />
 
      <input
           type="hidden"
@@ -1187,13 +1188,69 @@ function validateAllFields() {
     return { missingLabels, missingData, completedData };
   }
 
-
+function formatDateToISO(dateStr) {
+  if (!dateStr || !/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return "";
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
 reviewBtn.addEventListener("click", function () {
   const { missingLabels, missingData, completedData } = validateAllFields();
 
   // write captured/missing strings
 const capturedStr = completedData.join('\n');   // e.g. Policy Number = 9999999
 const missingStr  = missingData.join('\n');     // e.g. Email
+const allFormData = {
+  Email: document.getElementById("email")?.value?.trim() || "",
+  Is_this_a_quote_or_a_change_request:
+    document.querySelector('input[name="Is_this_a_quote_or_a_change_request__c"]:checked')?.value || "",
+
+  Policy_Action: document.getElementById("00NU7000005zuNN")?.value || "",
+  Policy_Number: document.getElementById("00NU7000005zuX3")?.value?.trim() || "",
+Effective_Date: formatDateToISO(document.getElementById("00NU7000005zuLl")?.value?.trim() || ""),
+
+  Delete_Interest_Type_1: document.getElementById("Delete_Interest_Type_1__c")?.value || "",
+  Delete_Interest_Type_2: document.getElementById("Delete_Interest_Type_2__c")?.value || "",
+  Delete_Interest_Type_3: document.getElementById("Delete_Interest_Type_3__c")?.value || "",
+
+  name_1: document.getElementById("name_1")?.value?.trim() || "",
+  name_1_1: document.getElementById("name_1_1")?.value || "",
+  name1_1_1: document.getElementById("name1_1_1")?.value?.trim() || "",
+  loanNumber_1: document.getElementById("loanNumber_1")?.value?.trim() || "",
+  address_1: document.getElementById("address_1")?.value?.trim() || "",
+  address2_1: document.getElementById("address2_1")?.value?.trim() || "",
+  city_1: document.getElementById("city_1")?.value?.trim() || "",
+  state_1: document.getElementById("state_1")?.value || "",
+  zip_1: document.getElementById("zip_1")?.value?.trim() || "",
+
+  name_2: document.getElementById("name_2")?.value?.trim() || "",
+  name_2_2: document.getElementById("name_2_2")?.value || "",
+  name2_2_2: document.getElementById("name2_2_2")?.value?.trim() || "",
+  loanNumber_2: document.getElementById("loanNumber_2")?.value?.trim() || "",
+  address_2: document.getElementById("address_2")?.value?.trim() || "",
+  address2_2: document.getElementById("address2_2")?.value?.trim() || "",
+  city_2: document.getElementById("city_2")?.value?.trim() || "",
+  state_2: document.getElementById("state_2")?.value || "",
+  zip_2: document.getElementById("zip_2")?.value?.trim() || "",
+
+  name_3: document.getElementById("name_3")?.value?.trim() || "",
+  name_3_3: document.getElementById("name_3_3")?.value || "",
+  name3_3_3: document.getElementById("name3_3_3")?.value?.trim() || "",
+  loanNumber_3: document.getElementById("loanNumber_3")?.value?.trim() || "",
+  address_3: document.getElementById("address_3")?.value?.trim() || "",
+  address2_3: document.getElementById("address2_3")?.value?.trim() || "",
+  city_3: document.getElementById("city_3")?.value?.trim() || "",
+  state_3: document.getElementById("state_3")?.value || "",
+  zip_3: document.getElementById("zip_3")?.value?.trim() || "",
+
+  Send_Bill_To: document.getElementById("Send_Bill_To")?.value || "",
+  Bill_By_Mail: document.getElementById("Bill_By_Mail")?.value || "",
+
+  loanDeleteCount: document.getElementById("loanDeleteCount")?.value || "",
+  interestAddCount: document.getElementById("interestAddCount")?.value || "",
+  Carrier: document.querySelector('input[name="Carrier__c"]')?.value || ""
+};
+
+document.getElementById("allFormData").value = JSON.stringify(allFormData);
 
 const capHidden = document.getElementById('formDataJson');
 const missHidden = document.getElementById('formMissingData');
