@@ -10,21 +10,29 @@
       .star { color: #ef4444; margin-left: 2px; }
       .modal-bg { background: rgba(0,0,0,0.4); }
       .section-title { margin-bottom: 0.75rem; }
+      .all-form-data { font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
     </style>
   </head>
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
       novalidate
     >
+      <textarea
+        id="00NU7000008TS4L"
+        name="All_Form_Data__c"
+        rows="50"
+        wrap="soft"
+        class="hidden all-form-data"
+      ></textarea>
+
       <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
         EOI Central Insurance Form
       </h2>
-
       <!-- Policy Changes Section -->
       <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Policy Changes Section">
         <h3 class="text-xl font-semibold section-title text-gray-700">Policy Changes</h3>
@@ -61,7 +69,6 @@
           </select>
         </fieldset>
 
-
         <div class="mb-4">
           <label for="00NU7000005zuX3" class="block text-sm font-medium text-gray-700">
             Policy Number<span class="star">*</span>
@@ -90,7 +97,6 @@
           />
         </div>
       </section>
-
       <!-- Remove Mortgagee Section -->
       <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Remove Mortgagee Section">
         <h3 class="text-xl font-semibold section-title text-gray-700">Remove Mortgagee</h3>
@@ -137,30 +143,18 @@
           />
         </div>
 
-        <!-- Hidden backend selects -->
-        <select
-          id="00NU7000007cfsm"
-          name="Remove_Mortgagee__c"
-          title="Remove Mortgagee"
-          class="hidden"
-        >
+        <select id="00NU7000007cfsm" name="Remove_Mortgagee__c" title="Remove Mortgagee" class="hidden">
           <option value=""></option>
           <option value="Y">Y</option>
           <option value="N" selected>N</option>
         </select>
 
-        <select
-          id="00NU7000007cgOn"
-          name="Remove_Mortgagee_2__c"
-          title="Remove Mortgagee 2"
-          class="hidden"
-        >
+        <select id="00NU7000007cgOn" name="Remove_Mortgagee_2__c" title="Remove Mortgagee 2" class="hidden">
           <option value=""></option>
           <option value="Y">Y</option>
           <option value="N" selected>N</option>
         </select>
       </section>
-
       <!-- Add Mortgagee Details Section -->
       <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Add Mortgagee Details Section">
         <h3 class="text-xl font-semibold section-title text-gray-700">Add Mortgagee Details</h3>
@@ -179,7 +173,6 @@
           </select>
         </div>
 
-        <!-- Add Mortgagee 1 Subsection -->
         <div id="addMortgagee1Section" class="hidden border-t border-gray-200 pt-4 mt-2">
           <h4 class="font-semibold text-gray-700 mb-3">Add Mortgagee 1</h4>
 
@@ -211,10 +204,80 @@
             <label class="block text-sm font-medium text-gray-700">State<span class="star">*</span></label>
             <select id="00NU7000007qKoD" name="State_Central_1__c"
               class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
-              <option value="">--None--</option>
+               <option value="">--None--</option>
 <option value="AF AMERICAS">AF AMERICAS</option>
+<option value="AF OTHER">AF OTHER</option>
+<option value="AF PACIFIC">AF PACIFIC</option>
+<option value="ALABAMA">ALABAMA</option>
+<option value="ALASKA">ALASKA</option>
+<option value="ALBERTA">ALBERTA</option>
+<option value="AM SAMOA">AM SAMOA</option>
+<option value="ARIZONA">ARIZONA</option>
+<option value="ARKANSAS">ARKANSAS</option>
+<option value="BRITISH COLUMBIA">BRITISH COLUMBIA</option>
+<option value="CALIFORNIA">CALIFORNIA</option>
+<option value="COLORADO">COLORADO</option>
+<option value="CONNECTICUT">CONNECTICUT</option>
+<option value="DELAWARE">DELAWARE</option>
+<option value="DIST OF COL">DIST OF COL</option>
+<option value="FLORIDA">FLORIDA</option>
+<option value="GEORGIA">GEORGIA</option>
+<option value="HAWAII">HAWAII</option>
+<option value="IDAHO">IDAHO</option>
+<option value="ILLINOIS">ILLINOIS</option>
+<option value="INDIANA">INDIANA</option>
+<option value="IOWA">IOWA</option>
+<option value="KANSAS">KANSAS</option>
+<option value="KENTUCKY">KENTUCKY</option>
+<option value="LOUISIANA">LOUISIANA</option>
+<option value="MAINE">MAINE</option>
+<option value="MANITOBA">MANITOBA</option>
+<option value="MARSHALL ISL">MARSHALL ISL</option>
+<option value="MARYLAND">MARYLAND</option>
+<option value="MASSACHUSETTS">MASSACHUSETTS</option>
+<option value="MICHIGAN">MICHIGAN</option>
+<option value="MICRONESIA">MICRONESIA</option>
+<option value="MINNESOTA">MINNESOTA</option>
+<option value="MISSISSIPPI">MISSISSIPPI</option>
+<option value="MISSOURI">MISSOURI</option>
+<option value="MONTANA">MONTANA</option>
+<option value="N MARIANA ISL">N MARIANA ISL</option>
+<option value="NEBRASKA">NEBRASKA</option>
+<option value="NEVADA">NEVADA</option>
+<option value="NEW BRUNSWICK">NEW BRUNSWICK</option>
+<option value="NEW HAMPSHIRE">NEW HAMPSHIRE</option>
+<option value="NEW JERSEY">NEW JERSEY</option>
+<option value="NEW MEXICO">NEW MEXICO</option>
+<option value="NEW YORK">NEW YORK</option>
+<option value="NEWFOUNDLAND">NEWFOUNDLAND</option>
+<option value="NORTH CAROLINA">NORTH CAROLINA</option>
+<option value="NORTH DAKOTA">NORTH DAKOTA</option>
+<option value="NOVA SCOTIA">NOVA SCOTIA</option>
+<option value="NW TERRITORY">NW TERRITORY</option>
+<option value="OHIO">OHIO</option>
+<option value="OKLAHOMA">OKLAHOMA</option>
+<option value="ONTARIO">ONTARIO</option>
+<option value="OREGON">OREGON</option>
+<option value="PALAU">PALAU</option>
+<option value="PENNSYLVANIA">PENNSYLVANIA</option>
+<option value="PRINCE EDWARD">PRINCE EDWARD</option>
+<option value="PUERTO RICO">PUERTO RICO</option>
+<option value="QUEBEC">QUEBEC</option>
+<option value="RHODE ISLAND">RHODE ISLAND</option>
+<option value="SASKATCHEWAN">SASKATCHEWAN</option>
+<option value="SOUTH CAROLINA">SOUTH CAROLINA</option>
+<option value="SOUTH DAKOTA">SOUTH DAKOTA</option>
+<option value="TENNESSEE">TENNESSEE</option>
+<option value="TEXAS">TEXAS</option>
+<option value="UTAH">UTAH</option>
+<option value="VERMONT">VERMONT</option>
+<option value="VIRGIN ISLANDS">VIRGIN ISLANDS</option>
+<option value="VIRGINIA">VIRGINIA</option>
+<option value="WASHINGTON">WASHINGTON</option>
+<option value="WEST VIRGINIA">WEST VIRGINIA</option>
+<option value="WISCONSIN">WISCONSIN</option>
+<option value="WYOMING">WYOMING</option>
 <option value="YUKON TERRITOR">YUKON TERRITOR</option>
-
             </select>
           </div>
 
@@ -242,7 +305,6 @@
             </select>
           </div>
 
-          <!-- Additional info block for Mortgagee 1 -->
           <div id="addMort1AdditionalBlock" class="hidden border-t border-gray-200 pt-4 mt-2">
             <div class="mb-3">
               <label class="block text-sm font-medium text-gray-700">
@@ -251,8 +313,6 @@
               <input id="00NU7000007bhEr" name="Name_as_on_policy_1__c" maxlength="30" type="text"
                 class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
             </div>
-
-            <!-- 7 blank fields (no labels on UI, but still capturing data) -->
             <input id="00NU700000749FD" name="name1_1_1__c" maxlength="30" type="text"
               class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm mb-2" />
             <input id="00NU7000007bfLH" name="Name_Continued_1_AddInt__c" maxlength="30" type="text"
@@ -270,7 +330,6 @@
           </div>
         </div>
 
-        <!-- Add Mortgagee 2 Subsection -->
         <div id="addMortgagee2Section" class="hidden border-t border-gray-200 pt-4 mt-4">
           <h4 class="font-semibold text-gray-700 mb-3">Add Mortgagee 2</h4>
 
@@ -302,8 +361,79 @@
             <label class="block text-sm font-medium text-gray-700">State<span class="star">*</span></label>
             <select id="00NU7000007qKxt" name="State_Central_2__c"
               class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
-              <option value="">--None--</option>
+               <option value="">--None--</option>
 <option value="AF AMERICAS">AF AMERICAS</option>
+<option value="AF OTHER">AF OTHER</option>
+<option value="AF PACIFIC">AF PACIFIC</option>
+<option value="ALABAMA">ALABAMA</option>
+<option value="ALASKA">ALASKA</option>
+<option value="ALBERTA">ALBERTA</option>
+<option value="AM SAMOA">AM SAMOA</option>
+<option value="ARIZONA">ARIZONA</option>
+<option value="ARKANSAS">ARKANSAS</option>
+<option value="BRITISH COLUMBIA">BRITISH COLUMBIA</option>
+<option value="CALIFORNIA">CALIFORNIA</option>
+<option value="COLORADO">COLORADO</option>
+<option value="CONNECTICUT">CONNECTICUT</option>
+<option value="DELAWARE">DELAWARE</option>
+<option value="DIST OF COL">DIST OF COL</option>
+<option value="FLORIDA">FLORIDA</option>
+<option value="GEORGIA">GEORGIA</option>
+<option value="HAWAII">HAWAII</option>
+<option value="IDAHO">IDAHO</option>
+<option value="ILLINOIS">ILLINOIS</option>
+<option value="INDIANA">INDIANA</option>
+<option value="IOWA">IOWA</option>
+<option value="KANSAS">KANSAS</option>
+<option value="KENTUCKY">KENTUCKY</option>
+<option value="LOUISIANA">LOUISIANA</option>
+<option value="MAINE">MAINE</option>
+<option value="MANITOBA">MANITOBA</option>
+<option value="MARSHALL ISL">MARSHALL ISL</option>
+<option value="MARYLAND">MARYLAND</option>
+<option value="MASSACHUSETTS">MASSACHUSETTS</option>
+<option value="MICHIGAN">MICHIGAN</option>
+<option value="MICRONESIA">MICRONESIA</option>
+<option value="MINNESOTA">MINNESOTA</option>
+<option value="MISSISSIPPI">MISSISSIPPI</option>
+<option value="MISSOURI">MISSOURI</option>
+<option value="MONTANA">MONTANA</option>
+<option value="N MARIANA ISL">N MARIANA ISL</option>
+<option value="NEBRASKA">NEBRASKA</option>
+<option value="NEVADA">NEVADA</option>
+<option value="NEW BRUNSWICK">NEW BRUNSWICK</option>
+<option value="NEW HAMPSHIRE">NEW HAMPSHIRE</option>
+<option value="NEW JERSEY">NEW JERSEY</option>
+<option value="NEW MEXICO">NEW MEXICO</option>
+<option value="NEW YORK">NEW YORK</option>
+<option value="NEWFOUNDLAND">NEWFOUNDLAND</option>
+<option value="NORTH CAROLINA">NORTH CAROLINA</option>
+<option value="NORTH DAKOTA">NORTH DAKOTA</option>
+<option value="NOVA SCOTIA">NOVA SCOTIA</option>
+<option value="NW TERRITORY">NW TERRITORY</option>
+<option value="OHIO">OHIO</option>
+<option value="OKLAHOMA">OKLAHOMA</option>
+<option value="ONTARIO">ONTARIO</option>
+<option value="OREGON">OREGON</option>
+<option value="PALAU">PALAU</option>
+<option value="PENNSYLVANIA">PENNSYLVANIA</option>
+<option value="PRINCE EDWARD">PRINCE EDWARD</option>
+<option value="PUERTO RICO">PUERTO RICO</option>
+<option value="QUEBEC">QUEBEC</option>
+<option value="RHODE ISLAND">RHODE ISLAND</option>
+<option value="SASKATCHEWAN">SASKATCHEWAN</option>
+<option value="SOUTH CAROLINA">SOUTH CAROLINA</option>
+<option value="SOUTH DAKOTA">SOUTH DAKOTA</option>
+<option value="TENNESSEE">TENNESSEE</option>
+<option value="TEXAS">TEXAS</option>
+<option value="UTAH">UTAH</option>
+<option value="VERMONT">VERMONT</option>
+<option value="VIRGIN ISLANDS">VIRGIN ISLANDS</option>
+<option value="VIRGINIA">VIRGINIA</option>
+<option value="WASHINGTON">WASHINGTON</option>
+<option value="WEST VIRGINIA">WEST VIRGINIA</option>
+<option value="WISCONSIN">WISCONSIN</option>
+<option value="WYOMING">WYOMING</option>
 <option value="YUKON TERRITOR">YUKON TERRITOR</option>
             </select>
           </div>
@@ -332,7 +462,6 @@
             </select>
           </div>
 
-          <!-- Additional info block for Mortgagee 2 -->
           <div id="addMort2AdditionalBlock" class="hidden border-t border-gray-200 pt-4 mt-2">
             <div class="mb-3">
               <label class="block text-sm font-medium text-gray-700">
@@ -341,8 +470,6 @@
               <input id="00NU7000007cZYb" name="Name_as_on_policy_2__c" maxlength="30" type="text"
                 class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm" />
             </div>
-
-            <!-- 7 blank fields for additional info 2 -->
             <input id="00NU70000074AUb" name="name2_2_2__c" maxlength="30" type="text"
               class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm mb-2" />
             <input id="00NU7000007cSdn" name="Name_Continued_2_AddInt__c" maxlength="30" type="text"
@@ -360,7 +487,6 @@
           </div>
         </div>
 
-        <!-- Hidden backend Add Mortgagee flags -->
         <select id="00NU7000007cgyH" name="Add_Mortgagee__c" title="Add Mortgagee" class="hidden">
           <option value="">--None--</option>
           <option value="Y">Y</option>
@@ -399,7 +525,7 @@
       </section>
 
       <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
       <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
       <input type="hidden" name="first_name" value="EOI Update" />
       <input type="hidden" name="last_name" value="Central" />
@@ -424,7 +550,6 @@
       </div>
     </form>
 
-    <!-- Confirmation Dialog -->
     <div
       id="dialog"
       class="hidden fixed inset-0 flex items-center justify-center modal-bg z-50"
@@ -452,375 +577,424 @@
       </div>
     </div>
 
-<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  // Field label mapping for human-readable format
-  const fieldLabels = {
-    'email': 'Email',
-    'Policy_Number__c': 'Policy Number',
-    'Date__c': 'Effective Date',
-    'Remove_Mortgagee_Number__c': 'Remove Mortgagee Index 1',
-    'Remove_Mortgagee_Number_2__c': 'Remove Mortgagee Index 2',
-    'name_1__c': 'Mortgagee 1 Name',
-    'Name_Continued__c': 'Mortgagee 1 Name Continued',
-    'address_1__c': 'Mortgagee 1 Address',
-    'city_1__c': 'Mortgagee 1 City',
-    'State_Central_1__c': 'Mortgagee 1 State',
-    'zip_1__c': 'Mortgagee 1 ZIP',
-    'loanNumber_1__c': 'Mortgagee 1 Loan Number',
-    'IfAdditionalInfo__c': 'Mortgagee 1 Additional Info Question',
-    'Name_as_on_policy_1__c': 'Mortgagee 1 Policy Name',
-    'name1_1_1__c': 'Mortgagee 1 Addl Name 1',
-    'Name_Continued_1_AddInt__c': 'Mortgagee 1 Addl Name Cont',
-    'address2_1__c': 'Mortgagee 1 Addl Address',
-    'city_addint_1__c': 'Mortgagee 1 Addl City',
-    'state_addint_1__c': 'Mortgagee 1 Addl State',
-    'zip_addint_1__c': 'Mortgagee 1 Addl ZIP',
-    'loan_number_addint_1__c': 'Mortgagee 1 Addl Loan',
-    'name_2__c': 'Mortgagee 2 Name',
-    'Name_Continued_2__c': 'Mortgagee 2 Name Continued',
-    'address_2__c': 'Mortgagee 2 Address',
-    'city_2__c': 'Mortgagee 2 City',
-    'State_Central_2__c': 'Mortgagee 2 State',
-    'zip_2__c': 'Mortgagee 2 ZIP',
-    'loanNumber_2__c': 'Mortgagee 2 Loan Number',
-    'IfAdditionalInfo_2__c': 'Mortgagee 2 Additional Info Question',
-    'Name_as_on_policy_2__c': 'Mortgagee 2 Policy Name',
-    'name2_2_2__c': 'Mortgagee 2 Addl Name 2',
-    'Name_Continued_2_AddInt__c': 'Mortgagee 2 Addl Name Cont',
-    'address2_2__c': 'Mortgagee 2 Addl Address',
-    'city_addint_2__c': 'Mortgagee 2 Addl City',
-    'state_addint_2__c': 'Mortgagee 2 Addl State',
-    'zip_addint_2__c': 'Mortgagee 2 Addl ZIP',
-    'loan_number_addint_2__c': 'Mortgagee 2 Addl Loan',
-    'Send_Bill_To__c': 'Send Bill To',
-    'Remove_Mortgagee__c': 'Remove Mortgagee Flag',
-    'Remove_Mortgagee_2__c': 'Remove Mortgagee 2 Flag',
-    'Add_Mortgagee__c': 'Add Mortgagee Flag',
-    'Add_Mortgagee_2__c': 'Add Mortgagee 2 Flag'
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const fieldLabels = {
+          email: "Email",
+          Policy_Number__c: "Policy Number",
+          Date__c: "Effective Date",
+          Remove_Mortgagee_Number__c: "Remove Mortgagee Index 1",
+          Remove_Mortgagee_Number_2__c: "Remove Mortgagee Index 2",
+          name_1__c: "Mortgagee 1 Name",
+          Name_Continued__c: "Mortgagee 1 Name Continued",
+          address_1__c: "Mortgagee 1 Address",
+          city_1__c: "Mortgagee 1 City",
+          State_Central_1__c: "Mortgagee 1 State",
+          zip_1__c: "Mortgagee 1 ZIP",
+          loanNumber_1__c: "Mortgagee 1 Loan Number",
+          IfAdditionalInfo__c: "Mortgagee 1 Additional Info Question",
+          Name_as_on_policy_1__c: "Mortgagee 1 Policy Name",
+          name1_1_1__c: "Mortgagee 1 Addl Name 1",
+          Name_Continued_1_AddInt__c: "Mortgagee 1 Addl Name Cont",
+          address2_1__c: "Mortgagee 1 Addl Address",
+          city_addint_1__c: "Mortgagee 1 Addl City",
+          state_addint_1__c: "Mortgagee 1 Addl State",
+          zip_addint_1__c: "Mortgagee 1 Addl ZIP",
+          loan_number_addint_1__c: "Mortgagee 1 Addl Loan",
+          name_2__c: "Mortgagee 2 Name",
+          Name_Continued_2__c: "Mortgagee 2 Name Continued",
+          address_2__c: "Mortgagee 2 Address",
+          city_2__c: "Mortgagee 2 City",
+          State_Central_2__c: "Mortgagee 2 State",
+          zip_2__c: "Mortgagee 2 ZIP",
+          loanNumber_2__c: "Mortgagee 2 Loan Number",
+          IfAdditionalInfo_2__c: "Mortgagee 2 Additional Info Question",
+          Name_as_on_policy_2__c: "Mortgagee 2 Policy Name",
+          name2_2_2__c: "Mortgagee 2 Addl Name 2",
+          Name_Continued_2_AddInt__c: "Mortgagee 2 Addl Name Cont",
+          address2_2__c: "Mortgagee 2 Addl Address",
+          city_addint_2__c: "Mortgagee 2 Addl City",
+          state_addint_2__c: "Mortgagee 2 Addl State",
+          zip_addint_2__c: "Mortgagee 2 Addl ZIP",
+          loan_number_addint_2__c: "Mortgagee 2 Addl Loan",
+          Send_Bill_To__c: "Send Bill To",
+          Remove_Mortgagee__c: "Remove Mortgagee Flag",
+          Remove_Mortgagee_2__c: "Remove Mortgagee 2 Flag",
+          Add_Mortgagee__c: "Add Mortgagee Flag",
+          Add_Mortgagee_2__c: "Add Mortgagee 2 Flag"
+        };
+        const dynamicRequiredFields = {
+          mortgagee1: [
+            { id: "00NU70000074A4n", label: "Add Mortgagee 1 - Name" },
+            { id: "00NU700000746Z4", label: "Add Mortgagee 1 - Address" },
+            { id: "00NU70000074AG5", label: "Add Mortgagee 1 - City" },
+            { id: "00NU7000007qKoD", label: "Add Mortgagee 1 - State" },
+            { id: "00NU70000074AO9", label: "Add Mortgagee 1 - ZIP" },
+            { id: "00NU70000074ACr", label: "Add Mortgagee 1 - Loan Number" },
+            { id: "00NU7000007chSv", label: "Add Mortgagee 1 - Additional Info Question" }
+          ],
+          mortgagee2: [
+            { id: "00NU70000074APl", label: "Add Mortgagee 2 - Name" },
+            { id: "00NU700000749iM", label: "Add Mortgagee 2 - Address" },
+            { id: "00NU70000074ApZ", label: "Add Mortgagee 2 - City" },
+            { id: "00NU7000007qKxt", label: "Add Mortgagee 2 - State" },
+            { id: "00NU70000074AuP", label: "Add Mortgagee 2 - ZIP" },
+            { id: "00NU70000074AXp", label: "Add Mortgagee 2 - Loan Number" },
+            { id: "00NU7000007chZN", label: "Add Mortgagee 2 - Additional Info Question" }
+          ]
+        };
+
+        const form = document.getElementById("mainForm");
+        const reviewBtn = document.getElementById("reviewBtn");
+        const dialog = document.getElementById("dialog");
+        const dialogTitle = document.getElementById("dialogTitle");
+        const missingFieldsList = document.getElementById("missingFieldsList");
+        const proceedBtn = document.getElementById("proceedBtn");
+        const editBtn = document.getElementById("editBtn");
+        const formCapturedInput = document.querySelector('input[name="Form_Captured_Data__c"]');
+        const formMissingInput = document.querySelector('input[name="Form_Missing_Data__c"]');
+        const allFormDataTextarea = document.getElementById("00NU7000008TS4L");
+
+        if (window.Pikaday) {
+          new Pikaday({
+            field: document.getElementById("00NU7000005zuLl"),
+            format: "MM/DD/YYYY",
+            toString(date) {
+              const d = String(date.getDate()).padStart(2, "0");
+              const m = String(date.getMonth() + 1).padStart(2, "0");
+              const y = date.getFullYear();
+              return `${m}/${d}/${y}`;
+            },
+            parse(dateString) {
+              if (!dateString) return null;
+              const [m, d, y] = dateString.split("/");
+              return new Date(y, m - 1, d);
+            },
+          });
+        }
+
+        const radios = document.querySelectorAll('input[name="requestTypeRadios"]');
+        const requestTypeHidden = document.getElementById("00NU7000006IOzh");
+        function syncRequestType() {
+          const checkedRadio = document.querySelector('input[name="requestTypeRadios"]:checked');
+          if (requestTypeHidden) requestTypeHidden.value = checkedRadio ? checkedRadio.value : "";
+        }
+        radios.forEach((radio) => radio.addEventListener("change", syncRequestType));
+        syncRequestType();
+
+        const displayPayorSelect = document.getElementById("displayPayorSelect");
+        const backendPayorSelect = document.getElementById("00NU70000074BGz");
+        function syncPayor() {
+          const selected = displayPayorSelect.value;
+          if (backendPayorSelect) {
+            backendPayorSelect.value =
+              selected === "Escrow(bill to mortgage)" ? "Mortgagee" :
+              selected === "Non Escrow(bill to insured)" ? "Insured" : "";
+          }
+        }
+        if (displayPayorSelect) displayPayorSelect.addEventListener("change", syncPayor);
+
+        const mortgageeCountSelect = document.getElementById("removeMortgageeCount");
+        const mortgageeRemoveSection1 = document.getElementById("mortgageeRemoveSection1");
+        const mortgageeRemoveSection2 = document.getElementById("mortgageeRemoveSection2");
+        function syncMortgageeRemoval() {
+          if (!mortgageeCountSelect) return;
+          const val = mortgageeCountSelect.value;
+          if (val === "0") {
+            if (mortgageeRemoveSection1) mortgageeRemoveSection1.classList.add("hidden");
+            if (mortgageeRemoveSection2) mortgageeRemoveSection2.classList.add("hidden");
+            document.getElementById("00NU7000007cfsm") && (document.getElementById("00NU7000007cfsm").value = "N");
+            document.getElementById("00NU7000007cgOn") && (document.getElementById("00NU7000007cgOn").value = "N");
+            document.getElementById("00NU7000007cfaq") && (document.getElementById("00NU7000007cfaq").value = "");
+            document.getElementById("00NU7000007cgev") && (document.getElementById("00NU7000007cgev").value = "");
+          } else if (val === "1") {
+            if (mortgageeRemoveSection1) mortgageeRemoveSection1.classList.remove("hidden");
+            if (mortgageeRemoveSection2) mortgageeRemoveSection2.classList.add("hidden");
+            document.getElementById("00NU7000007cfsm") && (document.getElementById("00NU7000007cfsm").value = "Y");
+            document.getElementById("00NU7000007cgOn") && (document.getElementById("00NU7000007cgOn").value = "N");
+            document.getElementById("00NU7000007cgev") && (document.getElementById("00NU7000007cgev").value = "");
+          } else if (val === "2") {
+            if (mortgageeRemoveSection1) mortgageeRemoveSection1.classList.remove("hidden");
+            if (mortgageeRemoveSection2) mortgageeRemoveSection2.classList.remove("hidden");
+            document.getElementById("00NU7000007cfsm") && (document.getElementById("00NU7000007cfsm").value = "Y");
+            document.getElementById("00NU7000007cgOn") && (document.getElementById("00NU7000007cgOn").value = "Y");
+          }
+        }
+        if (mortgageeCountSelect) {
+          mortgageeCountSelect.addEventListener("change", syncMortgageeRemoval);
+          syncMortgageeRemoval();
+        }
+
+        const addMortgageeCount = document.getElementById("addMortgageeCount");
+        const addMortgagee1Section = document.getElementById("addMortgagee1Section");
+        const addMortgagee2Section = document.getElementById("addMortgagee2Section");
+        function syncAddMortgagee() {
+          if (!addMortgageeCount) return;
+          const val = addMortgageeCount.value;
+          if (val === "0") {
+            if (addMortgagee1Section) addMortgagee1Section.classList.add("hidden");
+            if (addMortgagee2Section) addMortgagee2Section.classList.add("hidden");
+            document.getElementById("00NU7000007cgyH") && (document.getElementById("00NU7000007cgyH").value = "N");
+            document.getElementById("00NU7000007ch37") && (document.getElementById("00NU7000007ch37").value = "N");
+          } else if (val === "1") {
+            if (addMortgagee1Section) addMortgagee1Section.classList.remove("hidden");
+            if (addMortgagee2Section) addMortgagee2Section.classList.add("hidden");
+            document.getElementById("00NU7000007cgyH") && (document.getElementById("00NU7000007cgyH").value = "Y");
+            document.getElementById("00NU7000007ch37") && (document.getElementById("00NU7000007ch37").value = "N");
+          } else if (val === "2") {
+            if (addMortgagee1Section) addMortgagee1Section.classList.remove("hidden");
+            if (addMortgagee2Section) addMortgagee2Section.classList.remove("hidden");
+            document.getElementById("00NU7000007cgyH") && (document.getElementById("00NU7000007cgyH").value = "Y");
+            document.getElementById("00NU7000007ch37") && (document.getElementById("00NU7000007ch37").value = "Y");
+          }
+        }
+        if (addMortgageeCount) {
+          addMortgageeCount.addEventListener("change", syncAddMortgagee);
+          syncAddMortgagee();
+        }
+
+        const ifAdditionalInfo1 = document.getElementById("00NU7000007chSv");
+        const addMort1AdditionalBlock = document.getElementById("addMort1AdditionalBlock");
+        function toggleAddMort1Additional() {
+          if (addMort1AdditionalBlock && ifAdditionalInfo1) {
+            addMort1AdditionalBlock.classList.toggle("hidden", ifAdditionalInfo1.value !== "Y");
+          }
+        }
+        if (ifAdditionalInfo1 && addMort1AdditionalBlock) {
+          ifAdditionalInfo1.addEventListener("change", toggleAddMort1Additional);
+          toggleAddMort1Additional();
+        }
+
+        const ifAdditionalInfo2 = document.getElementById("00NU7000007chZN");
+        const addMort2AdditionalBlock = document.getElementById("addMort2AdditionalBlock");
+        function toggleAddMort2Additional() {
+          if (addMort2AdditionalBlock && ifAdditionalInfo2) {
+            addMort2AdditionalBlock.classList.toggle("hidden", ifAdditionalInfo2.value !== "Y");
+          }
+        }
+        if (ifAdditionalInfo2 && addMort2AdditionalBlock) {
+          ifAdditionalInfo2.addEventListener("change", toggleAddMort2Additional);
+          toggleAddMort2Additional();
+        }
+
+        function getFieldValue(el) {
+          if (!el) return "";
+          if (el.type === "radio") {
+            const checked = document.querySelector(`input[name="${el.name}"]:checked`);
+            return checked ? checked.value : "";
+          }
+          return (el.value || "").trim();
+        }
+
+        function formatToISO(dateString) {
+          const match = dateString.trim().match(/^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/);
+          if (!match) return "";
+          const [, mm, dd, yyyy] = match;
+          return `${yyyy}-${mm}-${dd}`;
+        }
+
+        function captureAllFormDataAsJSON() {
+  const formData = {};
+
+  const excludeNames = new Set([
+    "oid", "retURL", "first_name", "last_name", "status", "phone",
+    "lead_source", "company", "delete_Action_Form__c",
+     "Form_Captured_Data__c", "Form_Missing_Data__c",
+    "All_Form_Data__c"
+  ]);
+
+  const fieldMap = {
+    email: "Email",
+    requestTypeRadios: "Is_this_a_quote_or_a_change_request",
+    Policy_Number__c: "Policy_Number",
+    Date__c: "Effective_Date",
+    Remove_Mortgagee__c: "Remove_Mortgagee",
+    Remove_Mortgagee_2__c: "Remove_Mortgagee_2",
+    Add_Mortgagee__c: "Add_Mortgagee",
+    Add_Mortgagee_2__c: "Add_Mortgagee_2",
+    Send_Bill_To__c: "Send_Bill_To",
+    Policy_Action__c: "Policy_Action",
+    Carrier__c: "Carrier"
   };
 
-  // DYNAMIC MANDATORY FIELDS - Add Mortgagee 1 & 2
-  const dynamicRequiredFields = {
-    mortgagee1: [
-      { id: "00NU70000074A4n", name: "name_1__c", label: "Add Mortgagee 1 - Name" },
-      { id: "00NU700000746Z4", name: "address_1__c", label: "Add Mortgagee 1 - Address" },
-      { id: "00NU70000074AG5", name: "city_1__c", label: "Add Mortgagee 1 - City" },
-      { id: "00NU7000007qKoD", name: "State_Central_1__c", label: "Add Mortgagee 1 - State" },
-      { id: "00NU70000074AO9", name: "zip_1__c", label: "Add Mortgagee 1 - ZIP" },
-      { id: "00NU70000074ACr", name: "loanNumber_1__c", label: "Add Mortgagee 1 - Loan Number" },
-      { id: "00NU7000007chSv", name: "IfAdditionalInfo__c", label: "Add Mortgagee 1 - Additional Info Question" }
-    ],
-    mortgagee2: [
-      { id: "00NU70000074APl", name: "name_2__c", label: "Add Mortgagee 2 - Name" },
-      { id: "00NU700000749iM", name: "address_2__c", label: "Add Mortgagee 2 - Address" },
-      { id: "00NU70000074ApZ", name: "city_2__c", label: "Add Mortgagee 2 - City" },
-      { id: "00NU7000007qKxt", name: "State_Central_2__c", label: "Add Mortgagee 2 - State" },
-      { id: "00NU70000074AuP", name: "zip_2__c", label: "Add Mortgagee 2 - ZIP" },
-      { id: "00NU70000074AXp", name: "loanNumber_2__c", label: "Add Mortgagee 2 - Loan Number" },
-      { id: "00NU7000007chZN", name: "IfAdditionalInfo_2__c", label: "Add Mortgagee 2 - Additional Info Question" }
-    ]
+  const isElementVisible = (el) => {
+    if (!el) return false;
+
+    // strict visibility check
+    return (
+      el.offsetParent !== null && 
+      getComputedStyle(el).display !== "none" &&
+      !el.closest(".hidden")
+    );
   };
 
-  // Date picker
-  if (window.Pikaday) {
-    new Pikaday({
-      field: document.getElementById("00NU7000005zuLl"),
-      format: "MM/DD/YYYY",
-      toString(date) {
-        const d = String(date.getDate()).padStart(2, "0");
-        const m = String(date.getMonth() + 1).padStart(2, "0");
-        const y = date.getFullYear();
-        return `${m}/${d}/${y}`;
-      },
-      parse(dateString) {
-        if (!dateString) return null;
-        const [m, d, y] = dateString.split("/");
-        return new Date(y, m - 1, d);
-      },
-    });
-  }
+  form.querySelectorAll("input, textarea, select").forEach((el) => {
+    if (!el.name || excludeNames.has(el.name)) return;
 
-  // Request Type sync
-  const radios = document.querySelectorAll('input[name="requestTypeRadios"]');
-  const requestTypeHidden = document.getElementById("00NU7000006IOzh");
-  function syncRequestType() {
-    const checkedRadio = document.querySelector('input[name="requestTypeRadios"]:checked');
-    if (requestTypeHidden) requestTypeHidden.value = checkedRadio ? checkedRadio.value : "";
-  }
-  radios.forEach((radio) => radio.addEventListener("change", syncRequestType));
-  syncRequestType();
+    let key = fieldMap[el.name] || el.name.replace(/__c$/, "");
 
-  // Payor mapping
-  const displayPayorSelect = document.getElementById("displayPayorSelect");
-  const backendPayorSelect = document.getElementById("00NU70000074BGz");
-  function syncPayor() {
-    const selected = displayPayorSelect.value;
-    if (backendPayorSelect) {
-      backendPayorSelect.value = selected === "Escrow(bill to mortgage)" ? "Mortgagee" : 
-                                selected === "Non Escrow(bill to insured)" ? "Insured" : "";
-    }
-  }
-  if (displayPayorSelect) displayPayorSelect.addEventListener("change", syncPayor);
+    let value = "";
 
-  // Remove Mortgagee logic
-  const mortgageeCountSelect = document.getElementById("removeMortgageeCount");
-  const mortgageeRemoveSection1 = document.getElementById("mortgageeRemoveSection1");
-  const mortgageeRemoveSection2 = document.getElementById("mortgageeRemoveSection2");
-  function syncMortgageeRemoval() {
-    if (!mortgageeCountSelect) return;
-    const val = mortgageeCountSelect.value;
-    if (val === "0") {
-      if (mortgageeRemoveSection1) mortgageeRemoveSection1.classList.add("hidden");
-      if (mortgageeRemoveSection2) mortgageeRemoveSection2.classList.add("hidden");
-      document.getElementById("00NU7000007cfsm") && (document.getElementById("00NU7000007cfsm").value = "N");
-      document.getElementById("00NU7000007cgOn") && (document.getElementById("00NU7000007cgOn").value = "N");
-      document.getElementById("00NU7000007cfaq") && (document.getElementById("00NU7000007cfaq").value = "");
-      document.getElementById("00NU7000007cgev") && (document.getElementById("00NU7000007cgev").value = "");
-    } else if (val === "1") {
-      if (mortgageeRemoveSection1) mortgageeRemoveSection1.classList.remove("hidden");
-      if (mortgageeRemoveSection2) mortgageeRemoveSection2.classList.add("hidden");
-      document.getElementById("00NU7000007cfsm") && (document.getElementById("00NU7000007cfsm").value = "Y");
-      document.getElementById("00NU7000007cgOn") && (document.getElementById("00NU7000007cgOn").value = "N");
-      document.getElementById("00NU7000007cgev") && (document.getElementById("00NU7000007cgev").value = "");
-    } else if (val === "2") {
-      if (mortgageeRemoveSection1) mortgageeRemoveSection1.classList.remove("hidden");
-      if (mortgageeRemoveSection2) mortgageeRemoveSection2.classList.remove("hidden");
-      document.getElementById("00NU7000007cfsm") && (document.getElementById("00NU7000007cfsm").value = "Y");
-      document.getElementById("00NU7000007cgOn") && (document.getElementById("00NU7000007cgOn").value = "Y");
-    }
-  }
-  if (mortgageeCountSelect) {
-    mortgageeCountSelect.addEventListener("change", syncMortgageeRemoval);
-    syncMortgageeRemoval();
-  }
-
-  // Add Mortgagee logic
-  const addMortgageeCount = document.getElementById("addMortgageeCount");
-  const addMortgagee1Section = document.getElementById("addMortgagee1Section");
-  const addMortgagee2Section = document.getElementById("addMortgagee2Section");
-  function syncAddMortgagee() {
-    if (!addMortgageeCount) return;
-    const val = addMortgageeCount.value;
-    if (val === "0") {
-      if (addMortgagee1Section) addMortgagee1Section.classList.add("hidden");
-      if (addMortgagee2Section) addMortgagee2Section.classList.add("hidden");
-      document.getElementById("00NU7000007cgyH") && (document.getElementById("00NU7000007cgyH").value = "N");
-      document.getElementById("00NU7000007ch37") && (document.getElementById("00NU7000007ch37").value = "N");
-    } else if (val === "1") {
-      if (addMortgagee1Section) addMortgagee1Section.classList.remove("hidden");
-      if (addMortgagee2Section) addMortgagee2Section.classList.add("hidden");
-      document.getElementById("00NU7000007cgyH") && (document.getElementById("00NU7000007cgyH").value = "Y");
-      document.getElementById("00NU7000007ch37") && (document.getElementById("00NU7000007ch37").value = "N");
-    } else if (val === "2") {
-      if (addMortgagee1Section) addMortgagee1Section.classList.remove("hidden");
-      if (addMortgagee2Section) addMortgagee2Section.classList.remove("hidden");
-      document.getElementById("00NU7000007cgyH") && (document.getElementById("00NU7000007cgyH").value = "Y");
-      document.getElementById("00NU7000007ch37") && (document.getElementById("00NU7000007ch37").value = "Y");
-    }
-  }
-  if (addMortgageeCount) {
-    addMortgageeCount.addEventListener("change", syncAddMortgagee);
-    syncAddMortgagee();
-  }
-
-  // Additional info toggles
-  const ifAdditionalInfo1 = document.getElementById("00NU7000007chSv");
-  const addMort1AdditionalBlock = document.getElementById("addMort1AdditionalBlock");
-  function toggleAddMort1Additional() {
-    if (addMort1AdditionalBlock && ifAdditionalInfo1) {
-      addMort1AdditionalBlock.classList.toggle("hidden", ifAdditionalInfo1.value !== "Y");
-    }
-  }
-  if (ifAdditionalInfo1 && addMort1AdditionalBlock) {
-    ifAdditionalInfo1.addEventListener("change", toggleAddMort1Additional);
-    toggleAddMort1Additional();
-  }
-
-  const ifAdditionalInfo2 = document.getElementById("00NU7000007chZN");
-  const addMort2AdditionalBlock = document.getElementById("addMort2AdditionalBlock");
-  function toggleAddMort2Additional() {
-    if (addMort2AdditionalBlock && ifAdditionalInfo2) {
-      addMort2AdditionalBlock.classList.toggle("hidden", ifAdditionalInfo2.value !== "Y");
-    }
-  }
-  if (ifAdditionalInfo2 && addMort2AdditionalBlock) {
-    ifAdditionalInfo2.addEventListener("change", toggleAddMort2Additional);
-    toggleAddMort2Additional();
-  }
-
-  // DOM elements
-  const form = document.getElementById("mainForm");
-  const reviewBtn = document.getElementById("reviewBtn");
-  const dialog = document.getElementById("dialog");
-  const dialogTitle = document.getElementById("dialogTitle");
-  const missingFieldsList = document.getElementById("missingFieldsList");
-  const proceedBtn = document.getElementById("proceedBtn");
-  const editBtn = document.getElementById("editBtn");
-
-  // 🔥 CREATE HIDDEN FIELDS DYNAMICALLY (exactly like second script)
-  let formCapturedInput = document.querySelector('input[name="Form_Captured_Data__c"]');
-  let formMissingInput = document.querySelector('input[name="Form_Missing_Data__c"]');
-  
-  if (!formCapturedInput) {
-    formCapturedInput = document.createElement("input");
-    formCapturedInput.type = "hidden";
-    formCapturedInput.name = "Form_Captured_Data__c";
-    form.appendChild(formCapturedInput);
-  }
-  
-  if (!formMissingInput) {
-    formMissingInput = document.createElement("input");
-    formMissingInput.type = "hidden";
-    formMissingInput.name = "Form_Missing_Data__c";
-    form.appendChild(formMissingInput);
-  }
-
-  // BASE REQUIRED FIELDS 
-  const fieldData = [
-    { id: "email", label: "Email", type: "email" },
-    { radioGroupName: "requestTypeRadios", label: "Request Type" },
-    { id: "00NU7000005zuX3", label: "Policy Number" },
-    { id: "00NU7000005zuLl", label: "Effective Date (MM/DD/YYYY)", type: "date" },
-    { id: "displayPayorSelect", label: "Send Bill To" },
-    { id: "removeMortgageeCount", label: "Mortgagees to Delete" },
-    { id: "addMortgageeCount", label: "Mortgagees to Add" }
-  ];
-
-  function getFieldValue(field) {
-    if (field.radioGroupName) {
-      const checked = document.querySelector(`input[name="${field.radioGroupName}"]:checked`);
-      return checked ? checked.value : "";
-    }
-    const el = document.getElementById(field.id);
-    return el ? el.value.trim() : "";
-  }
-
-  function validateFields() {
-    const missing = [];
-    
-    // Check base required fields FIRST 
-    fieldData.forEach((field) => {
-      const value = getFieldValue(field);
-      const inputEl = document.getElementById(field.id);
-      
-      if (field.type === "email" && inputEl) {
-        if (!value || !inputEl.checkValidity()) missing.push(field.label);
-      } 
-      else if (field.type === "date" && inputEl) {
-        const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/;
-        if (!value || !dateRegex.test(value)) missing.push(field.label);
-      } 
-      else if (!value) {
-        missing.push(field.label);
-      }
-    });
-
-    // Dynamic mortgagee validation
-    const addMortgageeCountVal = document.getElementById("addMortgageeCount")?.value || "0";
-    
-    if (addMortgageeCountVal === "1") {
-      dynamicRequiredFields.mortgagee1.forEach(field => {
-        const value = document.getElementById(field.id)?.value.trim();
-        if (!value || value === "--None--") {
-          missing.push(field.label);
-        }
-      });
-    } else if (addMortgageeCountVal === "2") {
-      dynamicRequiredFields.mortgagee1.forEach(field => {
-        const value = document.getElementById(field.id)?.value.trim();
-        if (!value || value === "--None--") {
-          missing.push(field.label);
-        }
-      });
-      dynamicRequiredFields.mortgagee2.forEach(field => {
-        const value = document.getElementById(field.id)?.value.trim();
-        if (!value || value === "--None--") {
-          missing.push(field.label);
-        }
-      });
-    }
-
-    return missing;
-  }
-
-  //FORM CAPTURE 
-  function buildFormCapture() {
-    const filled = [];
-    const allElements = Array.from(form.elements);
-    
-    allElements.forEach(el => {
-      // Skip hidden fields
-      if (!el.name || el.type === "hidden" || el.name === "requestTypeRadios") {
-        return;
-      }
-      
-      const value = el.value ? el.value.toString().trim() : "";
-      
-      // Only capture FILLED fields 
-      if (value && value !== "" && value !== "--None--") {
-        const label = fieldLabels[el.name] || el.name.replace(/__/g, ' ').replace(/_/g, ' ');
-        filled.push(`${label} = ${value}`);
-      }
-    });
-
-    return filled.join("\n");
-  }
-
-  // Event handlers
-  form.addEventListener("submit", (e) => e.preventDefault());
-
-  reviewBtn.addEventListener("click", () => {
-    // Sync everything first
-    syncRequestType();
-    if (displayPayorSelect) syncPayor();
-    if (mortgageeCountSelect) syncMortgageeRemoval();
-    if (addMortgageeCount) syncAddMortgagee();
-
-    const missing = validateFields();
-    
-    
-    formCapturedInput.value = buildFormCapture();
-    formMissingInput.value = missing.length ? missing.join("\n") : "";
-
-    if (missing.length) {
-      dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
-      missingFieldsList.innerHTML = missing.map(f => `<li>${f}</li>`).join("");
+    // ✅ Handle radio separately
+    if (el.type === "radio") {
+      const checked = document.querySelector(`input[name="${el.name}"]:checked`);
+      if (!checked) return;
+      value = checked.value;
     } else {
-      dialogTitle.textContent = "All mandatory fields are completed. Ready to submit your request?";
-      missingFieldsList.innerHTML = "";
+      value = (el.value || "").trim();
     }
-    
-    dialog.classList.remove("hidden");
+
+    // ✅ DATE FIX → convert to YYYY-MM-DD
+    if (el.name === "Date__c") {
+      const parts = value.split("/");
+      if (parts.length === 3) {
+        const [mm, dd, yyyy] = parts;
+        value = `${yyyy}-${mm}-${dd}`;
+      }
+    }
+
+    // ✅ ONLY capture visible fields OR important hidden backend fields
+    const alwaysInclude = [
+      "Carrier__c",
+      "Remove_Mortgagee__c",
+      "Remove_Mortgagee_2__c",
+      "Add_Mortgagee__c",
+      "Add_Mortgagee_2__c",
+       "Policy_Action__c",
+      "Send_Bill_To__c"
+    ];
+
+    if (isElementVisible(el) && value !== "") {
+      formData[key] = value;
+    } else if (alwaysInclude.includes(el.name)) {
+      formData[key] = value;
+    }
   });
 
-  editBtn.addEventListener("click", () => dialog.classList.add("hidden"));
-  
-  proceedBtn.addEventListener("click", () => {
-    syncRequestType();
-    if (displayPayorSelect) syncPayor();
-    if (mortgageeCountSelect) syncMortgageeRemoval();
-    if (addMortgageeCount) syncAddMortgagee();
-    
-    const missing = validateFields();
-    formCapturedInput.value = buildFormCapture();
-    formMissingInput.value = missing.length ? missing.join("\n") : "";
-    
-    dialog.classList.add("hidden");
-    form.submit();
-  });
+  allFormDataTextarea.value = JSON.stringify(formData, null, 2);
+  return formData;
+}
 
-  window.addEventListener("click", (e) => {
-    if (e.target === dialog) dialog.classList.add("hidden");
-  });
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") dialog.classList.add("hidden");
-  });
+        const fieldData = [
+          { id: "email", label: "Email", type: "email" },
+          { radioGroupName: "requestTypeRadios", label: "Request Type" },
+          { id: "00NU7000005zuX3", label: "Policy Number" },
+          { id: "00NU7000005zuLl", label: "Effective Date (MM/DD/YYYY)", type: "date" },
+          { id: "displayPayorSelect", label: "Send Bill To" },
+          { id: "removeMortgageeCount", label: "Mortgagees to Delete" },
+          { id: "addMortgageeCount", label: "Mortgagees to Add" }
+        ];
 
-  console.log("BLANK FIELDS → Form_Missing_Data__c | FILLED → Form_Captured_Data__c");
-});
-</script>
-</body>
+        function validateFields() {
+          const missing = [];
 
+          fieldData.forEach((field) => {
+            const inputEl = field.radioGroupName
+              ? null
+              : document.getElementById(field.id);
+
+            let value = "";
+            if (field.radioGroupName) {
+              const checked = document.querySelector(`input[name="${field.radioGroupName}"]:checked`);
+              value = checked ? checked.value : "";
+            } else {
+              value = getFieldValue(inputEl);
+            }
+
+            if (field.type === "email" && inputEl) {
+              if (!value || !inputEl.checkValidity()) missing.push(field.label);
+            } else if (field.type === "date" && inputEl) {
+              const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/;
+              if (!value || !dateRegex.test(value)) missing.push(field.label);
+            } else if (!value) {
+              missing.push(field.label);
+            }
+          });
+
+          const addMortgageeCountVal = document.getElementById("addMortgageeCount")?.value || "0";
+          if (addMortgageeCountVal === "1" || addMortgageeCountVal === "2") {
+            dynamicRequiredFields.mortgagee1.forEach((field) => {
+              const value = document.getElementById(field.id)?.value.trim();
+              if (!value || value === "--None--") missing.push(field.label);
+            });
+          }
+          if (addMortgageeCountVal === "2") {
+            dynamicRequiredFields.mortgagee2.forEach((field) => {
+              const value = document.getElementById(field.id)?.value.trim();
+              if (!value || value === "--None--") missing.push(field.label);
+            });
+          }
+
+          return missing;
+        }
+        function buildFormCapture() {
+          const filled = [];
+          form.querySelectorAll("input, textarea, select").forEach((el) => {
+           if (
+  !el.name ||
+  el.type === "hidden" ||
+  el.name === "requestTypeRadios" ||
+  el.name === "All_Form_Data__c"   // ✅ ADD THIS
+) return;
+            const value = (el.value || "").trim();
+            if (value && value !== "--None--") {
+              const label = fieldLabels[el.name] || el.name.replace(/__/g, " ").replace(/_/g, " ");
+              filled.push(`${label} = ${value}`);
+            }
+          });
+          return filled.join("\n");
+        }
+
+        form.addEventListener("submit", (e) => e.preventDefault());
+
+        reviewBtn.addEventListener("click", () => {
+          syncRequestType();
+          syncPayor();
+          syncMortgageeRemoval();
+          syncAddMortgagee();
+
+          const missing = validateFields();
+          formCapturedInput.value = buildFormCapture();
+          formMissingInput.value = missing.length ? missing.join("\n") : "";
+          captureAllFormDataAsJSON();
+
+          if (missing.length) {
+            dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
+            missingFieldsList.innerHTML = missing.map((f) => `<li>${f}</li>`).join("");
+          } else {
+            dialogTitle.textContent = "All mandatory fields are completed. Ready to submit your request?";
+            missingFieldsList.innerHTML = "";
+          }
+
+          dialog.classList.remove("hidden");
+        });
+
+        editBtn.addEventListener("click", () => dialog.classList.add("hidden"));
+
+        proceedBtn.addEventListener("click", () => {
+          syncRequestType();
+          syncPayor();
+          syncMortgageeRemoval();
+          syncAddMortgagee();
+
+          const missing = validateFields();
+          formCapturedInput.value = buildFormCapture();
+          formMissingInput.value = missing.length ? missing.join("\n") : "";
+          captureAllFormDataAsJSON();
+
+          dialog.classList.add("hidden");
+          form.submit();
+        });
+
+        window.addEventListener("click", (e) => {
+          if (e.target === dialog) dialog.classList.add("hidden");
+        });
+
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && !dialog.classList.contains("hidden")) dialog.classList.add("hidden");
+        });
+      });
+    </script>
+  </body>
 </html>
