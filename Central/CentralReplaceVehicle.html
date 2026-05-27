@@ -9,17 +9,26 @@
       .hidden { display: none; }
       .star { color: #ef4444; margin-left: 2px; }
       .modal-bg { background: rgba(0,0,0,0.4);}
+      .all-form-data { font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
     </style>
   </head>
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <form
       id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+      action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
       method="POST"
       class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
       autocomplete="off"
       novalidate
     >
+      <textarea
+        id="00NU7000008TS4L"
+        name="All_Form_Data__c"
+        rows="50"
+        wrap="soft"
+        class="hidden all-form-data"
+      ></textarea>
+
       <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
         Replace Vehicle Central Insurance Form
       </h2>
@@ -53,7 +62,6 @@
               <input type="radio" name="requestTypeRadios" value="N" class="mr-2" />Endorsement
             </label>
           </div>
-          <!-- Hidden original select mapped to radios -->
           <select id="00NU7000006IOzh" name="Is_this_a_quote_or_a_change_request__c" class="hidden">
             <option value=""></option>
             <option value="Y">Y</option>
@@ -96,52 +104,47 @@
       <section class="bg-gray-50 border rounded-xl p-6 shadow-inner" aria-label="Vehicle Details Section">
         <h3 class="text-xl font-semibold mb-4 text-gray-700">Vehicle Details</h3>
 
-       <!-- Signature / Summit question with logos -->
-<div class="mb-6">
-  <!-- Disclaimer text in red + different style -->
-  <p class="text-sm mb-2" style="color:#b91c1c; font-style:italic;">
-    Hey, could you please check the policy declaration page we sent over email?
-    In the top-left corner, can you confirm whether that is a Signature or the Summit logo?
-    <span class="star">*</span>
-  </p>
+        <div class="mb-6">
+          <p class="text-sm mb-2" style="color:#b91c1c; font-style:italic;">
+            Hey, could you please check the policy declaration page we sent over email?
+            In the top-left corner, can you confirm whether that is a Signature or the Summit logo?
+            <span class="star">*</span>
+          </p>
 
-  <!-- Visual examples the question refers to -->
-  <div class="flex items-center space-x-8 mb-3">
-    <div class="flex flex-col items-center">
-      <img src="Summit Logo.jpg" alt="Summit logo example" class="h-16 object-contain mb-1" />
-      <span class="text-xs text-gray-600">Summit logo</span>
-    </div>
-    <div class="flex flex-col items-center">
-      <img src="Signature Logo.jpg" alt="Signature logo example" class="h-16 object-contain mb-1" />
-      <span class="text-xs text-gray-600">Signature logo</span>
-    </div>
-  </div>
+          <div class="flex items-center space-x-8 mb-3">
+            <div class="flex flex-col items-center">
+              <img src="Summit Logo.jpg" alt="Summit logo example" class="h-16 object-contain mb-1" />
+              <span class="text-xs text-gray-600">Summit logo</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <img src="Signature Logo.jpg" alt="Signature logo example" class="h-16 object-contain mb-1" />
+              <span class="text-xs text-gray-600">Signature logo</span>
+            </div>
+          </div>
 
-  <!-- Actual mapped question label -->
-  <fieldset>
-    <legend class="block text-sm font-medium text-gray-700 mb-1">
-      Is the logo one of these (Signature/Summit)?<span class="star">*</span>
-    </legend>
-    <div class="flex space-x-6">
-      <label class="inline-flex items-center">
-        <input type="radio" name="signatureSummitRadios" value="Y" class="mr-2" />
-        Yes
-      </label>
-      <label class="inline-flex items-center">
-        <input type="radio" name="signatureSummitRadios" value="N" class="mr-2" />
-        No
-      </label>
-    </div>
-  </fieldset>
+          <fieldset>
+            <legend class="block text-sm font-medium text-gray-700 mb-1">
+              Is the logo one of these (Signature/Summit)?<span class="star">*</span>
+            </legend>
+            <div class="flex space-x-6">
+              <label class="inline-flex items-center">
+                <input type="radio" name="signatureSummitRadios" value="Y" class="mr-2" />
+                Yes
+              </label>
+              <label class="inline-flex items-center">
+                <input type="radio" name="signatureSummitRadios" value="N" class="mr-2" />
+                No
+              </label>
+            </div>
+          </fieldset>
 
-  <!-- Hidden SF field that will store Y/N -->
-  <select id="00NU7000007oVML" name="Is_Signature_Summit__c" title="Is Signature/Summit" class="hidden">
-    <option value="">--None--</option>
-    <option value="Y">Y</option>
-    <option value="N">N</option>
-  </select>
-</div>
-        <!-- Old Vehicle Details Subsection (shaded box) -->
+          <select id="00NU7000007oVML" name="Is_Signature_Summit__c" title="Is Signature/Summit" class="hidden">
+            <option value="">--None--</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+          </select>
+        </div>
+
         <div class="bg-gray-100 border border-gray-300 rounded-lg p-4 mb-6">
           <div class="mb-2">
             <span class="block text-lg font-medium text-gray-600">
@@ -181,7 +184,6 @@
           </div>
         </div>
 
-        <!-- VIN Number of New Vehicle -->
         <div class="mb-4">
           <label for="00NU7000006Knh3" class="block text-sm font-medium text-gray-700">
             VIN Number of New Vehicle<span class="star">*</span>
@@ -196,7 +198,7 @@
             autocomplete="off"
           />
         </div>
-        <!-- Purchase Date -->
+
         <div class="mb-4">
           <label for="00NU7000007Aop9" class="block text-sm font-medium text-gray-700">
             Purchase Date<span class="star">*</span>
@@ -214,12 +216,11 @@
           </span>
         </div>
 
-        <!-- Vehicle Use -->
         <div class="mb-4">
           <label for="00NU7000006N0iD" class="block text-sm font-medium text-gray-700">
             Vehicle Use<span class="star">*</span>
           </label>
-          <select id="00NU7000006N0iD" name="Vehicle_Use__c" title="Vehicle Use"
+          <select id="00NU7000006N0iD" name="Vehicle_Use12__c" title="Vehicle Use"
             class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm">
             <option value=""></option>
             <option value="Pleasure (0-2 Miles One Way)">Pleasure (0-2 Miles One Way)</option>
@@ -315,7 +316,6 @@
           />
         </div>
 
-        <!-- Dynamic Towing and Labor: only when Signature/Summit = No -->
         <div class="mb-4 hidden" id="towingLaborContainer">
           <label for="00NU7000007ALrx" class="block text-sm font-medium text-gray-700">
             Towing and Labor<span class="star">*</span>
@@ -357,7 +357,8 @@
       </section>
 
       <!-- Address Section -->
-      <section id="addressSection"
+      <section
+        id="addressSection"
         class="bg-gray-50 border rounded-xl p-6 shadow-inner"
         aria-label="Address Section"
       >
@@ -407,7 +408,7 @@
           </label>
           <input
             id="00NU7000006YQuN"
-            name="Name_Safeco__c"
+            name="Name"
             maxlength="30"
             size="20"
             type="text"
@@ -463,7 +464,7 @@
             title="State"
             class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
           >
-            <option value="">Select a State</option>
+             <option value="">Select a State</option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -531,7 +532,7 @@
       </section>
 
       <!-- Hidden Salesforce fields -->
-      <input type="hidden" name="oid" value="00D4x000006s8rs" />
+      <input type="hidden" name="oid" value="00DU700000AcTJN" />
       <input type="hidden" name="retURL" value="https://bennettandporter.com/" />
       <input type="hidden" name="first_name" value="Replace Vehicle" />
       <input type="hidden" name="last_name" value="Central " />
@@ -544,8 +545,6 @@
       <input type="hidden" name="Form_Captured_Data__c" />
       <input type="hidden" name="Form_Missing_Data__c" />
 
-
-
       <div class="flex justify-end mt-6">
         <button
           type="button"
@@ -557,7 +556,6 @@
       </div>
     </form>
 
-    <!-- Confirmation Dialog -->
     <div
       id="dialog"
       class="hidden fixed inset-0 flex items-center justify-center modal-bg z-50"
@@ -585,330 +583,382 @@
       </div>
     </div>
 
-<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Date pickers
-    if (window.Pikaday) {
-      new Pikaday({
-        field: document.getElementById("00NU7000005zuLl"),
-        format: "MM/DD/YYYY",
-        toString(date) {
-          const d = String(date.getDate()).padStart(2, "0");
-          const m = String(date.getMonth() + 1).padStart(2, "0");
-          const y = date.getFullYear();
-          return `${m}/${d}/${y}`;
-        },
-        parse(dateString) {
-          const [m, d, y] = dateString.split("/");
-          return new Date(y, m - 1, d);
-        },
-      });
-      new Pikaday({
-        field: document.getElementById("00NU7000007Aop9"),
-        format: "MM/DD/YYYY",
-        toString(date) {
-          const d = String(date.getDate()).padStart(2, "0");
-          const m = String(date.getMonth() + 1).padStart(2, "0");
-          const y = date.getFullYear();
-          return `${m}/${d}/${y}`;
-        },
-        parse(dateString) {
-          const [m, d, y] = dateString.split("/");
-          return new Date(y, m - 1, d);
-        },
-      });
-    }
-
-    // RADIO to select mapping for Quote/Endorsement
-    const radioQuote = document.querySelector('input[name="requestTypeRadios"][value="Y"]');
-    const radioEndorse = document.querySelector('input[name="requestTypeRadios"][value="N"]');
-    const selectField = document.getElementById("00NU7000006IOzh");
-
-    function syncSelectWithRadio() {
-      if (radioQuote.checked) {
-        selectField.value = "Y";
-      } else if (radioEndorse.checked) {
-        selectField.value = "N";
-      } else {
-        selectField.value = "";
-      }
-    }
-    syncSelectWithRadio();
-    radioQuote.addEventListener("change", syncSelectWithRadio);
-    radioEndorse.addEventListener("change", syncSelectWithRadio);
-
-    // Map Signature/Summit radios to hidden SF select
-    const sigSummitRadios = document.querySelectorAll('input[name="signatureSummitRadios"]');
-    const sigSummitSelect = document.getElementById("00NU7000007oVML");
-    const towingLaborContainer = document.getElementById("towingLaborContainer");
-    const towingLaborSelect = document.getElementById("00NU7000007ALrx");
-
-    function syncSigSummit() {
-      const checked = document.querySelector('input[name="signatureSummitRadios"]:checked');
-      const val = checked ? checked.value : "";
-
-      // Sync to SF picklist (Y/N)
-      sigSummitSelect.value = val;
-
-      // Show Towing & Labor only when answer is "N" (No)
-      if (val === "N") {
-        if (towingLaborContainer) {
-          towingLaborContainer.classList.remove("hidden");
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.Pikaday) {
+          new Pikaday({
+            field: document.getElementById("00NU7000005zuLl"),
+            format: "MM/DD/YYYY",
+            toString(date) {
+              const d = String(date.getDate()).padStart(2, "0");
+              const m = String(date.getMonth() + 1).padStart(2, "0");
+              const y = date.getFullYear();
+              return `${m}/${d}/${y}`;
+            },
+            parse(dateString) {
+              const [m, d, y] = dateString.split("/");
+              return new Date(y, m - 1, d);
+            },
+          });
+          new Pikaday({
+            field: document.getElementById("00NU7000007Aop9"),
+            format: "MM/DD/YYYY",
+            toString(date) {
+              const d = String(date.getDate()).padStart(2, "0");
+              const m = String(date.getMonth() + 1).padStart(2, "0");
+              const y = date.getFullYear();
+              return `${m}/${d}/${y}`;
+            },
+            parse(dateString) {
+              const [m, d, y] = dateString.split("/");
+              return new Date(y, m - 1, d);
+            },
+          });
         }
-      } else {
-        if (towingLaborContainer) {
-          towingLaborContainer.classList.add("hidden");
-        }
-        // Optional: reset value when hidden
-        if (towingLaborSelect) {
-          towingLaborSelect.value = "No Towing and Labor";
-        }
-      }
-    }
 
-    // Wire change handlers
-    sigSummitRadios.forEach((radio) => {
-      radio.addEventListener("change", syncSigSummit);
-    });
+        const form = document.getElementById("mainForm");
+        const reviewBtn = document.getElementById("reviewBtn");
+        const dialog = document.getElementById("dialog");
+        const dialogTitle = document.getElementById("dialogTitle");
+        const missingFieldsList = document.getElementById("missingFieldsList");
+        const proceedBtn = document.getElementById("proceedBtn");
+        const editBtn = document.getElementById("editBtn");
+        const allFormDataTextarea = document.getElementById("00NU7000008TS4L");
 
-    // If SF select pre-populated (edit mode), reflect in radios
-    if (sigSummitSelect && sigSummitSelect.value !== "") {
-      const matched = document.querySelector(
-        `input[name="signatureSummitRadios"][value="${sigSummitSelect.value}"]`
-      );
-      if (matched) matched.checked = true;
-    } else if (sigSummitSelect) {
-      sigSummitSelect.value = "";
-    }
+        const radioQuote = document.querySelector('input[name="requestTypeRadios"][value="Y"]');
+        const radioEndorse = document.querySelector('input[name="requestTypeRadios"][value="N"]');
+        const selectField = document.getElementById("00NU7000006IOzh");
 
-    // Initial sync on load
-    syncSigSummit();
-
-    // Lease/Loan UI logic
-    const leaseRadios = document.querySelectorAll('input[name="Is_this_vehicle_leased__c"]');
-    const loanFieldDiv = document.getElementById("secondAddressFieldDiv");
-    const loanFieldOptions = document.getElementById("secondAddressFieldOptions");
-    const lossPayeeSection = document.getElementById("lossPayeeSection");
-    const lossPayeeHeader = lossPayeeSection.querySelector("h3");
-
-    function showLossPayeeSection(show, headerText) {
-      if (show) {
-        lossPayeeHeader.textContent = headerText;
-        lossPayeeSection.style.display = "block";
-      } else {
-        lossPayeeSection.style.display = "none";
-        lossPayeeHeader.textContent = "";
-        lossPayeeSection.querySelectorAll("input, select").forEach((el) => {
-          if (el.type === "radio" || el.type === "checkbox") {
-            el.checked = false;
+        function syncSelectWithRadio() {
+          if (radioQuote.checked) {
+            selectField.value = "Y";
+          } else if (radioEndorse.checked) {
+            selectField.value = "N";
           } else {
-            el.value = "";
+            selectField.value = "";
           }
+        }
+        syncSelectWithRadio();
+        radioQuote.addEventListener("change", syncSelectWithRadio);
+        radioEndorse.addEventListener("change", syncSelectWithRadio);
+
+        const sigSummitRadios = document.querySelectorAll('input[name="signatureSummitRadios"]');
+        const sigSummitSelect = document.getElementById("00NU7000007oVML");
+        const towingLaborContainer = document.getElementById("towingLaborContainer");
+        const towingLaborSelect = document.getElementById("00NU7000007ALrx");
+
+        function syncSigSummit() {
+          const checked = document.querySelector('input[name="signatureSummitRadios"]:checked');
+          const val = checked ? checked.value : "";
+
+          sigSummitSelect.value = val;
+
+          if (val === "N") {
+            if (towingLaborContainer) towingLaborContainer.classList.remove("hidden");
+          } else {
+            if (towingLaborContainer) towingLaborContainer.classList.add("hidden");
+            if (towingLaborSelect) towingLaborSelect.value = "No Towing and Labor";
+          }
+        }
+
+        sigSummitRadios.forEach((radio) => {
+          radio.addEventListener("change", syncSigSummit);
         });
-      }
-    }
 
-    function updateUI() {
-      const leaseVal = document.querySelector('input[name="Is_this_vehicle_leased__c"]:checked')?.value;
-      const loanVal = document.querySelector('input[name="Is_there_a_Loan_for_this_vehicle__c"]:checked')?.value;
-
-      if (leaseVal === "Y") {
-        loanFieldDiv.style.display = "none";
-        showLossPayeeSection(true, "Loss Payee & Additional Insured (Lessor)");
-      } else if (leaseVal === "N") {
-        loanFieldDiv.style.display = "block";
-        loanFieldOptions.style.display = "flex";
-        if (loanVal === "Y") {
-          showLossPayeeSection(true, "Loan Information");
-        } else {
-          showLossPayeeSection(false, "");
+        if (sigSummitSelect && sigSummitSelect.value !== "") {
+          const matched = document.querySelector(
+            `input[name="signatureSummitRadios"][value="${sigSummitSelect.value}"]`
+          );
+          if (matched) matched.checked = true;
+        } else if (sigSummitSelect) {
+          sigSummitSelect.value = "";
         }
-      } else {
-        loanFieldDiv.style.display = "block";
-        loanFieldOptions.style.display = "flex";
-        showLossPayeeSection(false, "");
-      }
-    }
+        syncSigSummit();
 
-    leaseRadios.forEach((radio) => {
-      radio.addEventListener("change", () => {
-        document.querySelectorAll('input[name="Is_there_a_Loan_for_this_vehicle__c"]').forEach((el) => (el.checked = false));
-        updateUI();
-      });
-    });
+        const leaseRadios = document.querySelectorAll('input[name="Is_this_vehicle_leased__c"]');
+        const loanFieldDiv = document.getElementById("secondAddressFieldDiv");
+        const loanFieldOptions = document.getElementById("secondAddressFieldOptions");
+        const lossPayeeSection = document.getElementById("lossPayeeSection");
+        const lossPayeeHeader = lossPayeeSection.querySelector("h3");
 
-    loanFieldDiv.querySelectorAll('input[name="Is_there_a_Loan_for_this_vehicle__c"]').forEach((radio) => {
-      radio.addEventListener("change", updateUI);
-    });
-
-    updateUI();
-
-    // Validation fields list with visibleLabel mapping
-    const requiredFields = [
-      { id: "email", label: "Email", visibleLabel: "Email", type: "email" },
-      { radioGroupName: "requestTypeRadios", label: "Select the Request Type:", visibleLabel: "Request Type" },
-      { radioGroupName: "signatureSummitRadios", label: "Is the logo Signature/Summit?", visibleLabel: "Signature/Summit Logo" },
-      { id: "00NU7000007EGYk", label: "Vehicle Year", visibleLabel: "Vehicle Year" },
-      { id: "00NU70000063XnC", label: "Vehicle Name", visibleLabel: "Vehicle Name" },
-      { id: "00NU7000005zuX3", label: "Policy Number", visibleLabel: "Policy Number" },
-      { id: "00NU7000005zuLl", label: "Effective Date (MM/DD/YYYY)", visibleLabel: "Effective Date", type: "date" },
-      { id: "00NU7000006Knh3", label: "VIN Number of New Vehicle", visibleLabel: "VIN Number" },
-      { id: "00NU7000007Aop9", label: "Purchase Date", visibleLabel: "Purchase Date", type: "date" },
-      { id: "00NU7000006N0iD", label: "Vehicle Use", visibleLabel: "Vehicle Use" },
-      { id: "00NU7000007ALC1", label: "Other than Collision", visibleLabel: "Other than Collision" },
-      { id: "00NU700000618cn", label: "Collision", visibleLabel: "Collision" },
-      { id: "00NU7000007AORd", label: "Extended Transportation", visibleLabel: "Extended Transportation" },
-      { id: "00NU7000007CApB", label: "Excess Custom Equipment Coverage", visibleLabel: "Excess Custom Equipment" },
-      { id: "00NU7000007ALrx", label: "Towing and Labor", visibleLabel: "Towing and Labor" },
-      { id: "00NU7000007APab", label: "Lease/Loan Guard", visibleLabel: "Lease/Loan Guard" },
-      { id: "00NU7000007APfR", label: "Trip Interruption Coverage", visibleLabel: "Trip Interruption" },
-      { radioGroupName: "Is_this_vehicle_leased__c", label: "Is this vehicle leased?", visibleLabel: "Vehicle Leased" },
-      { radioGroupName: "Is_there_a_Loan_for_this_vehicle__c", label: "Is there a Loan for this vehicle?", visibleLabel: "Vehicle Loan" },
-      { id: "00NU7000006YQuN", label: "Loss Payee Name", visibleLabel: "Loss Payee Name" },
-      { id: "00NU7000007AyLR", label: "Loss Payee Mailing Address", visibleLabel: "Loss Payee Address" },
-      { id: "00NU7000005zvUj", label: "Loss Payee City", visibleLabel: "Loss Payee City" },
-      { id: "00NU7000005zvWL", label: "Loss Payee State", visibleLabel: "Loss Payee State" },
-      { id: "00NU7000005zw7R", label: "Loss Payee Zip Code", visibleLabel: "Loss Payee Zip" }
-    ];
-
-    function captureFormData() {
-      const formData = [];
-      
-      requiredFields.forEach((field) => {
-        let fieldValue = '';
-        
-        if (field.radioGroupName) {
-          // Handle radio groups - get checked value and map to readable text
-          const radios = document.querySelectorAll(`input[name="${field.radioGroupName}"]`);
-          const checkedRadio = [...radios].find(r => r.checked);
-          if (checkedRadio) {
-            fieldValue = checkedRadio.nextSibling?.textContent?.trim() || checkedRadio.value;
+        function showLossPayeeSection(show, headerText) {
+          if (show) {
+            lossPayeeHeader.textContent = headerText;
+            lossPayeeSection.style.display = "block";
+          } else {
+            lossPayeeSection.style.display = "none";
+            lossPayeeHeader.textContent = "";
+            lossPayeeSection.querySelectorAll("input, select").forEach((el) => {
+              if (el.type === "radio" || el.type === "checkbox") {
+                el.checked = false;
+              } else {
+                el.value = "";
+              }
+            });
           }
-        } else {
-          // Handle regular fields
-          const el = document.getElementById(field.id);
-          if (el) {
-            if (el.tagName === 'SELECT') {
-              fieldValue = el.options[el.selectedIndex]?.text || el.value || '';
+        }
+
+        function updateUI() {
+          const leaseVal = document.querySelector('input[name="Is_this_vehicle_leased__c"]:checked')?.value;
+          const loanVal = document.querySelector('input[name="Is_there_a_Loan_for_this_vehicle__c"]:checked')?.value;
+
+          if (leaseVal === "Y") {
+            loanFieldDiv.style.display = "none";
+            showLossPayeeSection(true, "Loss Payee & Additional Insured (Lessor)");
+          } else if (leaseVal === "N") {
+            loanFieldDiv.style.display = "block";
+            loanFieldOptions.style.display = "flex";
+            if (loanVal === "Y") {
+              showLossPayeeSection(true, "Loan Information");
             } else {
-              fieldValue = el.value?.trim() || '';
+              showLossPayeeSection(false, "");
             }
+          } else {
+            loanFieldDiv.style.display = "block";
+            loanFieldOptions.style.display = "flex";
+            showLossPayeeSection(false, "");
           }
         }
-        
-        if (fieldValue) {
-          // Use visibleLabel instead of SF field ID
-          formData.push(`${field.visibleLabel}: ${fieldValue}`);
-        }
-      });
-      
-      // SEND FORM DATA LINE BY LINE - VISIBLE LABELS ONLY - NO BRACES/JSON
-      document.querySelector('input[name="Form_Captured_Data__c"]').value = formData.join('\n');
-      return formData;
-    }
 
-    function validateFields() {
-      const missing = [];
+        leaseRadios.forEach((radio) => {
+          radio.addEventListener("change", () => {
+            document.querySelectorAll('input[name="Is_there_a_Loan_for_this_vehicle__c"]').forEach((el) => (el.checked = false));
+            updateUI();
+          });
+        });
 
-      requiredFields.forEach((field) => {
-        // Skip loan radios if hidden
-        if (field.radioGroupName === "Is_there_a_Loan_for_this_vehicle__c" && loanFieldDiv.style.display === "none") {
-          return;
-        }
+        loanFieldDiv.querySelectorAll('input[name="Is_there_a_Loan_for_this_vehicle__c"]').forEach((radio) => {
+          radio.addEventListener("change", updateUI);
+        });
 
-        // Skip Towing & Labor when container hidden
-        if (field.id === "00NU7000007ALrx" &&
-            towingLaborContainer &&
-            towingLaborContainer.classList.contains("hidden")) {
-          return;
-        }
+        updateUI();
 
-        if (field.radioGroupName) {
-          const radios = document.querySelectorAll(`input[name="${field.radioGroupName}"]`);
-          if (!radios.length) return;
-          const checked = [...radios].some((r) => r.checked);
-          if (!checked) missing.push(field.label);
-          return;
-        }
-
-        const el = document.getElementById(field.id);
-        const lossFields = [
-          "00NU7000006YQuN","00NU7000007AyLR","00NU7000005zvUj",
-          "00NU7000005zvWL","00NU7000005zw7R","00NU7000007CBN3"
+        const requiredFields = [
+          { id: "email", label: "Email", visibleLabel: "Email", type: "email" },
+          { radioGroupName: "requestTypeRadios", label: "Select the Request Type:", visibleLabel: "Request Type" },
+          { radioGroupName: "signatureSummitRadios", label: "Is the logo Signature/Summit?", visibleLabel: "Signature/Summit Logo" },
+          { id: "00NU7000007EGYk", label: "Vehicle Year", visibleLabel: "Vehicle Year" },
+          { id: "00NU70000063XnC", label: "Vehicle Name", visibleLabel: "Vehicle Name" },
+          { id: "00NU7000005zuX3", label: "Policy Number", visibleLabel: "Policy Number" },
+          { id: "00NU7000005zuLl", label: "Effective Date (MM/DD/YYYY)", visibleLabel: "Effective Date", type: "date" },
+          { id: "00NU7000006Knh3", label: "VIN Number of New Vehicle", visibleLabel: "VIN Number" },
+          { id: "00NU7000007Aop9", label: "Purchase Date", visibleLabel: "Purchase Date", type: "date" },
+          { id: "00NU7000006N0iD", label: "Vehicle Use", visibleLabel: "Vehicle Use" },
+          { id: "00NU7000007ALC1", label: "Other than Collision", visibleLabel: "Other than Collision" },
+          { id: "00NU700000618cn", label: "Collision", visibleLabel: "Collision" },
+          { id: "00NU7000007AORd", label: "Extended Transportation", visibleLabel: "Extended Transportation" },
+          { id: "00NU7000007CApB", label: "Excess Custom Equipment Coverage", visibleLabel: "Excess Custom Equipment" },
+          { id: "00NU7000007ALrx", label: "Towing and Labor", visibleLabel: "Towing and Labor" },
+          { id: "00NU7000007APab", label: "Lease/Loan Guard", visibleLabel: "Lease/Loan Guard" },
+          { id: "00NU7000007APfR", label: "Trip Interruption Coverage", visibleLabel: "Trip Interruption" },
+          { radioGroupName: "Is_this_vehicle_leased__c", label: "Is this vehicle leased?", visibleLabel: "Vehicle Leased" },
+          { radioGroupName: "Is_there_a_Loan_for_this_vehicle__c", label: "Is there a Loan for this vehicle?", visibleLabel: "Vehicle Loan" },
+          { id: "00NU7000006YQuN", label: "Loss Payee Name", visibleLabel: "Loss Payee Name" },
+          { id: "00NU7000007AyLR", label: "Loss Payee Mailing Address", visibleLabel: "Loss Payee Address" },
+          { id: "00NU7000005zvUj", label: "Loss Payee City", visibleLabel: "Loss Payee City" },
+          { id: "00NU7000005zvWL", label: "Loss Payee State", visibleLabel: "Loss Payee State" },
+          { id: "00NU7000005zw7R", label: "Loss Payee Zip Code", visibleLabel: "Loss Payee Zip" }
         ];
-        if (lossFields.includes(field.id) && lossPayeeSection.style.display === "none") return;
 
-        if (!el) return;
-
-        if (field.type === "email") {
-          if (!el.value.trim() || !el.checkValidity()) missing.push(field.label);
-        } else if (field.type === "date") {
-          const val = el.value.trim();
-          const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/;
-          if (!val || !dateRegex.test(val)) missing.push(field.label);
-        } else {
-          if (!el.value.trim()) missing.push(field.label);
+        function captureFormData() {
+          const formData = [];
+          requiredFields.forEach((field) => {
+            let fieldValue = '';
+            if (field.radioGroupName) {
+              const radios = document.querySelectorAll(`input[name="${field.radioGroupName}"]`);
+              const checkedRadio = [...radios].find(r => r.checked);
+              if (checkedRadio) {
+                fieldValue = checkedRadio.nextSibling?.textContent?.trim() || checkedRadio.value;
+              }
+            } else {
+              const el = document.getElementById(field.id);
+              if (el) {
+                if (el.tagName === 'SELECT') {
+                  fieldValue = el.options[el.selectedIndex]?.text || el.value || '';
+                } else {
+                  fieldValue = el.value?.trim() || '';
+                }
+              }
+            }
+            if (fieldValue) {
+              formData.push(`${field.visibleLabel}: ${fieldValue}`);
+            }
+          });
+          document.querySelector('input[name="Form_Captured_Data__c"]').value = formData.join('\n');
+          return formData;
         }
-      });
 
-      // SEND MISSING FIELDS LINE BY LINE - NO BRACES/JSON
-      const missingFieldList = missing.join('\n');
-      document.querySelector('input[name="Form_Missing_Data__c"]').value = missingFieldList;
+        function validateFields() {
+          const missing = [];
 
-      return missing;
+          requiredFields.forEach((field) => {
+            if (field.radioGroupName === "Is_there_a_Loan_for_this_vehicle__c" && loanFieldDiv.style.display === "none") {
+              return;
+            }
+
+            if (field.id === "00NU7000007ALrx" &&
+                towingLaborContainer &&
+                towingLaborContainer.classList.contains("hidden")) {
+              return;
+            }
+
+            if (field.radioGroupName) {
+              const radios = document.querySelectorAll(`input[name="${field.radioGroupName}"]`);
+              if (!radios.length) return;
+              const checked = [...radios].some((r) => r.checked);
+              if (!checked) missing.push(field.label);
+              return;
+            }
+
+            const el = document.getElementById(field.id);
+            const lossFields = [
+              "00NU7000006YQuN","00NU7000007AyLR","00NU7000005zvUj",
+              "00NU7000005zvWL","00NU7000005zw7R","00NU7000007CBN3"
+            ];
+            if (lossFields.includes(field.id) && lossPayeeSection.style.display === "none") return;
+
+            if (!el) return;
+
+            if (field.type === "email") {
+              if (!el.value.trim() || !el.checkValidity()) missing.push(field.label);
+            } else if (field.type === "date") {
+              const val = el.value.trim();
+              const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/;
+              if (!val || !dateRegex.test(val)) missing.push(field.label);
+            } else {
+              if (!el.value.trim()) missing.push(field.label);
+            }
+          });
+
+          document.querySelector('input[name="Form_Missing_Data__c"]').value = missing.join('\n');
+          return missing;
+        }
+
+       function formatToISO(dateString) {
+  const match = dateString.trim().match(/^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(1[0-9]{3}|2[0-9]{3}|30[0-9]{2})$/);
+  if (!match) return "";
+  const [, mm, dd, yyyy] = match;
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function captureAllFormDataAsJSON() {
+  const formData = {};
+  const excludeFields = [
+    "oid", "OrgId", "retURL", "ReturnURL", "first_name", "FirstName",
+    "last_name", "LastName", "status", "Status", "phone", "Phone",
+    "lead_source", "LeadSource", "delete_Action_Form__c", "delete_Action_Form",
+    "company", "requestTypeRadios" ,"Company"
+  ];
+
+  const fieldMapping = {
+    email: "Email",
+    Policy_Number__c: "Policy_Number",
+    Policy_Action__c: "Policy_Action",
+    Carrier__c: "Carrier",
+    Date__c: "Effective_Date"
+  };
+
+  const formElements = form.querySelectorAll("input, textarea, select");
+
+  formElements.forEach((element) => {
+    if (
+      !element.name ||
+      element.name === "Form_Captured_Data__c" ||
+      element.name === "Form_Missing_Data__c" ||
+      element.name === "All_Form_Data__c"
+    ) return;
+
+    const mappedName = fieldMapping[element.name] || element.name.replace(/__c$/, "");
+    if (excludeFields.includes(mappedName) || excludeFields.includes(element.name)) return;
+
+    if (mappedName === "Effective_Date") {
+      formData[mappedName] = formatToISO(element.value || "");
+    } else if (element.type === "radio") {
+      if (element.checked) formData[mappedName] = element.value || "";
+    } else if (element.type !== "checkbox") {
+      formData[mappedName] = element.value || "";
     }
-
-    const form = document.getElementById("mainForm");
-    const reviewBtn = document.getElementById("reviewBtn");
-    const dialog = document.getElementById("dialog");
-    const dialogTitle = document.getElementById("dialogTitle");
-    const missingFieldsList = document.getElementById("missingFieldsList");
-    const proceedBtn = document.getElementById("proceedBtn");
-    const editBtn = document.getElementById("editBtn");
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      // Always capture form data on submit
-      captureFormData();
-    });
-
-    reviewBtn.addEventListener("click", () => {
-      const missing = validateFields();
-      if (missing.length) {
-        dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
-        missingFieldsList.innerHTML = missing.map((f) => `<li>${f}</li>`).join("");
-      } else {
-        dialogTitle.textContent = "All mandatory fields are completed. Ready to submit your request?";
-        missingFieldsList.innerHTML = "";
-      }
-      dialog.classList.remove("hidden");
-    });
-
-    editBtn.addEventListener("click", () => {
-      dialog.classList.add("hidden");
-    });
-
-    proceedBtn.addEventListener("click", () => {
-      // Final capture before submit
-      captureFormData();
-      dialog.classList.add("hidden");
-      form.submit();
-    });
-
-    window.addEventListener("click", (e) => {
-      if (e.target === dialog) {
-        dialog.classList.add("hidden");
-      }
-    });
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !dialog.classList.contains("hidden")) {
-        dialog.classList.add("hidden");
-      }
-    });
   });
-</script>
-  </body>
 
+  return JSON.stringify(formData, null, 2);
+}
+
+        function captureFormAudit() {
+          const captured = [];
+          const missing = [];
+
+          requiredFields.forEach(field => {
+            const el = field.radioGroupName
+              ? document.querySelector(`input[name="${field.radioGroupName}"]:checked`)
+              : document.getElementById(field.id);
+
+            if (field.radioGroupName) {
+              if (el) captured.push(`${field.label} = ${el.value}`);
+              else missing.push(field.label);
+            } else if (el && el.value.trim()) {
+              captured.push(`${field.label} = ${el.value.trim()}`);
+            } else {
+              missing.push(field.label);
+            }
+          });
+
+          let capturedField = document.getElementById("Form_Captured_Data__c");
+          let missingField = document.getElementById("Form_Missing_Data__c");
+
+          if (!capturedField) {
+            capturedField = document.createElement("input");
+            capturedField.type = "hidden";
+            capturedField.name = "Form_Captured_Data__c";
+            capturedField.id = "Form_Captured_Data__c";
+            form.appendChild(capturedField);
+          }
+
+          if (!missingField) {
+            missingField = document.createElement("input");
+            missingField.type = "hidden";
+            missingField.name = "Form_Missing_Data__c";
+            missingField.id = "Form_Missing_Data__c";
+            form.appendChild(missingField);
+          }
+
+          capturedField.value = captured.join("\n");
+          missingField.value = missing.join("\n");
+        }
+
+        reviewBtn.addEventListener("click", () => {
+          const missing = validateFields();
+          captureFormAudit();
+          allFormDataTextarea.value = captureAllFormDataAsJSON();
+
+          if (missing.length) {
+            dialogTitle.textContent = "Below Mandatory Fields are missing and the Team will contact you shortly.";
+            missingFieldsList.innerHTML = missing.map(f => `<li>${f}</li>`).join("");
+          } else {
+            dialogTitle.textContent = "All mandatory fields are completed. Ready to submit your request?";
+            missingFieldsList.innerHTML = "";
+          }
+
+          dialog.classList.remove("hidden");
+        });
+
+        editBtn.addEventListener("click", () => dialog.classList.add("hidden"));
+
+        proceedBtn.addEventListener("click", () => {
+          captureFormAudit();
+          allFormDataTextarea.value = captureAllFormDataAsJSON();
+          dialog.classList.add("hidden");
+          form.submit();
+        });
+
+        window.addEventListener("click", e => {
+          if (e.target === dialog) dialog.classList.add("hidden");
+        });
+
+        window.addEventListener("keydown", e => {
+          if (e.key === "Escape" && !dialog.classList.contains("hidden")) dialog.classList.add("hidden");
+        });
+      });
+    </script>
+  </body>
 </html>
