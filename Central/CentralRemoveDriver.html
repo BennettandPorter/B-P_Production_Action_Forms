@@ -278,7 +278,7 @@ document.getElementById("allFormData").value = JSON.stringify(allFormData);
           document.getElementById("formDataJson").value = completedData.join("\n");
           document.getElementById("formMissingData").value = missingData.join("\n");
 
-          // Update Dialog UI
+          // Update Dialog UI 
           if (missingData.length > 0) {
             dialogTitle.textContent = "Mandatory Fields Missing:";
             missingFieldsList.innerHTML = missingData.map(f => `<li>${f}</li>`).join("");
