@@ -24,7 +24,7 @@
    <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">                          
       <form
          id="mainForm"
-         action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DU700000AcTJN"
+         action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
          method="POST"
          class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative"
          autocomplete="off"
@@ -45,7 +45,6 @@
                   name="email"
                   class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                   autocomplete="off"
-                  
                   />
             </div>
             <div>
@@ -221,8 +220,7 @@
                   id="00NU7000007CvbC"
                   name="Driver_Information__c"
                   class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm"
-                  autocomplete="off"
-                  
+                  autocomplete="off"       
                   >
                   <option value="">--None--</option>
                   <option value="Operator">Operator</option>
@@ -473,7 +471,7 @@
             </div>
          </div>
          <!-- Hidden Salesforce fields -->
-         <input type=hidden name="oid" value="00DU700000AcTJN">
+         <input type=hidden name="oid" value="00D4x000006s8rs">
        <!--  <input
             type="hidden"
             name="recordType"
@@ -870,8 +868,6 @@ document.getElementById("allFormData").value = JSON.stringify(allFormData);
     }
   });
 });
-
-
       </script>
    </body>
 </html>
