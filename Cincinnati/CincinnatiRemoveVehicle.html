@@ -29,7 +29,7 @@
       <!-- All Form Data - HIDDEN JSON CAPTURE -->
       <textarea 
         id="00NU7000008TS4L" 
-        name="00NU7000008TS4L" 
+        name="All_Form_Data__c" 
         rows="50" 
         type="text" 
         wrap="soft"
@@ -205,11 +205,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return new Date(y, m - 1, d);
       },
       onSelect: function() {
-        // ✅ FORCE UPDATE input value on selection
+       
         dateInput.value = this.toString();
       },
       onClose: function() {
-        // ✅ FORCE UPDATE input value on close
+        // FORCE UPDATE input value on close
         if (this.getDate()) {
           dateInput.value = this.toString();
         }
@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
         !element.name ||
         element.name === 'Form_Captured_Data__c' ||
         element.name === 'Form_Missing_Data__c' ||
-        element.name === '00NU7000008TS4L' ||
+        element.name === 'All_Form_Data__c' ||
         element.name === 'requestTypeRadios'
       ) {
         return;
@@ -330,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* ===================== FORM CAPTURE ===================== */
   function captureFormData() {
-    // ✅ FORCE DATE PICKER TO UPDATE BEFORE CAPTURE
+ 
     if (picker && picker.getDate()) {
       dateInput.value = picker.toString();
     }
