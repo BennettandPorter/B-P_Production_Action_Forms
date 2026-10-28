@@ -32,14 +32,13 @@
     </style>
   </head>
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
-    <form
-      id="mainForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
-      method="POST"
-      class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8"
-      autocomplete="off"
-      novalidate
-    >
+        <form id="mainForm" 
+          action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D4x000006s8rs"
+          method="POST" 
+          class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl space-y-8 relative" 
+          autocomplete="off" 
+          novalidate>
+
       <textarea
         id="00NU7000008TS4L"
         name="All_Form_Data__c"  
@@ -139,14 +138,14 @@
 
         <div class="mb-4">
           <div class="disclaimer-box">
-            Hey, could you please check the policy declaration page we sent over email? In the column under Additional Coverages can you confirm whether there is <strong>Capstone Auto Endorsement</strong>?
+            Hey, could you please check the policy declaration page we sent over email? In the column under Additional Coverages can you confirm whether there is <strong>Capstone Auto Endorsement or Personal Auto Plus Coverage?</strong>
           </div>
         </div>
 
         <div class="mb-4">
           <fieldset>
             <legend class="block text-sm font-medium text-gray-700 mb-1">
-              If Capstone Policy or Not:<span class="star">*</span>
+              Do you have the Capstone Auto Endorsement?<span class="star">*</span>
             </legend>
             <div class="flex space-x-6">
               <label class="inline-flex items-center">
@@ -159,6 +158,49 @@
             <input type="hidden" id="00NU7000009B269" name="IfCapstonePolicy" value="" />
           </fieldset>
         </div>
+
+        <!-- Personal Auto Plus Endorsement Question -->
+<div class="mb-4">
+  <fieldset>
+    <legend class="block text-sm font-medium text-gray-700 mb-1">
+      Do you have the Personal Auto Plus Endorsement?<span class="star">*</span>
+    </legend>
+
+    <div class="flex space-x-6">
+      <label class="inline-flex items-center">
+        <input
+          type="radio"
+          name="PersonalAutoPlusEndorsementRadios"
+          value="Y"
+          class="mr-2"
+        />
+        Yes
+      </label>
+
+      <label class="inline-flex items-center">
+        <input
+          type="radio"
+          name="PersonalAutoPlusEndorsementRadios"
+          value="N"
+          class="mr-2"
+        />
+        No
+      </label>
+    </div>
+
+    <!-- Salesforce field receives Y or N -->
+    <select
+      id="00NU700000BJ6pl"
+      name="Personal_Auto_Plus_Endorsement__c"
+      title="Personal Auto Plus Endorsement?"
+      class="hidden"
+    >
+      <option value="">--None--</option>
+      <option value="Y">Y</option>
+      <option value="N">N</option>
+    </select>
+  </fieldset>
+</div>
 
         <div class="mb-4">
           <label for="00NU7000009B2Cb" class="block text-sm font-medium text-gray-700">
@@ -191,29 +233,6 @@
             disabled
             required
           />
-        </div>
-
-        <div class="mb-4">
-          <fieldset class="mb-4">
-            <legend class="block text-sm font-medium text-gray-700 mb-2">
-              Do you know the VIN of the Old Vehicle?<span class="star">*</span>
-            </legend>
-            <div class="flex space-x-6">
-              <label class="inline-flex items-center">
-                <input type="radio" name="oldVinRadios" value="Y" class="mr-2" required />
-                Yes
-              </label>
-              <label class="inline-flex items-center">
-                <input type="radio" name="oldVinRadios" value="N" class="mr-2" required />
-                No
-              </label>
-            </div>
-            <select id="00NU7000006DHIv" name="00NU7000006DHIv" class="hidden" required>
-              <option value="">--None--</option>
-              <option value="Y">Y</option>
-              <option value="N">N</option>
-            </select>
-          </fieldset>
         </div>
 
         <div class="mb-4">
@@ -378,32 +397,49 @@
         </div>
 
         <div class="mb-4">
-          <label class="flex items-center p-3 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 cursor-pointer w-full">
-            <input
-              type="checkbox"
-              id="00NU7000008AYAI"
-              name="00NU7000008AYAI"
-              value="Y"
-              class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-            />
-            <span class="text-sm font-medium text-gray-700">Customizing Equipment</span>
-          </label>
-          <input type="hidden" name="00NU7000008AYAI" value="N" />
-        </div>
+        <label class="flex items-start p-3 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 cursor-pointer w-full">
+    <input
+      type="checkbox"
+      id="00NU7000008AYAI"
+      name="Customizing_Equipment__c"
+      value="Y"
+      class="mr-3 mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+    />
 
-        <div id="customPartsField" class="mb-4 hidden">
-          <label for="00NU7000007QrCj" class="block text-sm font-medium text-gray-700">
-            Custom Parts and/or Equipment Value
-          </label>
-          <input
-            type="text"
-            id="00NU7000007QrCj"
-            name="00NU7000007QrCj"
-            maxlength="30"
-            class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            autocomplete="off"
-          />
-        </div>
+    <span class="text-sm font-medium text-gray-700">
+      Custom Equipment
+
+      <span
+        id="customEquipmentTooltip"
+        class="hidden block mt-2 font-bold text-gray-700"
+      >
+        Dollar value total of all add on non-factory installed equipment(Custom rims, aftermarket spoiler, custom radio etc.)
+      </span>
+    </span>
+  </label>
+
+  <input type="hidden" name="00NU7000008AYAI" value="N" />
+</div>
+
+               <div id="customPartsField" class="mb-4 hidden">
+  <label for="00NU7000007QrCj" class="block text-sm font-medium text-gray-700">
+    Custom Parts and/or Equipment Value
+  </label>
+
+  <div class="mt-1 flex items-center w-full border border-gray-300 rounded-lg shadow-sm bg-white focus-within:ring-blue-500 focus-within:border-blue-500">
+    <span class="pl-3 text-gray-600 font-medium">$</span>
+
+    <input
+      type="text"
+      id="00NU7000007QrCj"
+      name="Custom_Parts_and_or_Equipment_value__c"
+      maxlength="30"
+      inputmode="numeric"
+      class="w-full p-2 rounded-lg focus:outline-none"
+      autocomplete="off"
+    />
+  </div>
+</div>
 
         <div class="mb-4">
           <label for="00NU700000618hd" class="block text-sm font-medium text-gray-700">
@@ -430,7 +466,6 @@
             name="00NU7000008Adt7"
             class="mt-1 w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="">--None--</option>
             <option value="N/A">N/A</option>
             <option value="30/900">30/900</option>
             <option value="40/1,200">40/1,200</option>
@@ -444,11 +479,12 @@
             <input
               type="checkbox"
               id="00NU7000008Absz"
-              name="00NU7000008Absz"
+              name="Replacement_Cost__c"
               value="Y"
               class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
             />
-            <span class="text-sm font-medium text-gray-700">Replacement Cost</span>
+            <span class="text-sm font-medium text-gray-700"><strong> Replacement Cost</strong> (Like GAP, but provides the replacement cost of the vehicle without depreciation)
+</span>
           </label>
           <input type="hidden" name="00NU7000008Absz" value="N" />
         </div>
@@ -458,11 +494,12 @@
             <input
               type="checkbox"
               id="00NU7000008Aduj"
-              name="00NU7000008Aduj"
+              name="GAP_Coverage__c"
               value="Y"
               class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
             />
-            <span class="text-sm font-medium text-gray-700">GAP Coverage</span>
+            <span class="text-sm font-medium text-gray-700"><strong> GAP Coverage </strong> (Pays the difference between the value of your car and the unpaid balance on your lease or loan)</span>
+          </label>
           </label>
           <input type="hidden" name="00NU7000008Aduj" value="N" />
         </div>
@@ -645,14 +682,35 @@
 
         const customEquipCheckbox = document.getElementById("00NU7000008AYAI");
         const customPartsField = document.getElementById("customPartsField");
+
+        const customPartsValue = document.getElementById("00NU7000007QrCj");
+
+if (customPartsValue) {
+  customPartsValue.addEventListener("input", function () {
+    // Keep only digits; the $ symbol is displayed separately.
+    this.value = this.value.replace(/\D/g, "");
+  });
+}
         function toggleCustomParts() {
-          if (customEquipCheckbox && customEquipCheckbox.checked) {
-            customPartsField.classList.remove("hidden");
-          } else {
-            customPartsField.classList.add("hidden");
-            document.getElementById("00NU7000007QrCj").value = "";
-          }
-        }
+  const tooltip = document.getElementById("customEquipmentTooltip");
+
+  if (customEquipCheckbox && customEquipCheckbox.checked) {
+    customPartsField.classList.remove("hidden");
+
+    if (tooltip) {
+      tooltip.classList.remove("hidden");
+    }
+  } else {
+    customPartsField.classList.add("hidden");
+
+    if (tooltip) {
+      tooltip.classList.add("hidden");
+    }
+
+    document.getElementById("00NU7000007QrCj").value = "";
+  }
+}
+
         if (customEquipCheckbox) {
           customEquipCheckbox.addEventListener("change", toggleCustomParts);
           toggleCustomParts();
@@ -666,15 +724,6 @@
         }
         requestRadios.forEach(radio => radio.addEventListener("change", syncRequestType));
         syncRequestType();
-
-        const oldVinRadios = document.querySelectorAll('input[name="oldVinRadios"]');
-        const oldVinHiddenSelect = document.getElementById("00NU7000006DHIv");
-        function syncOldVin() {
-          const checkedRadio = document.querySelector('input[name="oldVinRadios"]:checked');
-          oldVinHiddenSelect.value = checkedRadio ? checkedRadio.value : "";
-        }
-        oldVinRadios.forEach(radio => radio.addEventListener("change", syncOldVin));
-        syncOldVin();
 
         const newVinRadios = document.querySelectorAll('input[name="newVinRadios"]');
         const newVinHiddenSelect = document.getElementById("00NU7000006NiT7");
@@ -690,33 +739,114 @@
           return checked ? checked.value : "";
         }
 
-        function toggleCapstoneFields() {
-          const val = getCapstoneValue();
-          if (capstoneHidden) capstoneHidden.value = val;
+        
+function toggleCapstoneFields() {
+  const val = getCapstoneValue();
 
-          if (val === "Y") {
-            userAgreedValue.disabled = false;
-            userAgreedValue.required = true;
-            userAgreedValue.value = "";
-            carNewCostValue.value = "";
-            carNewCostValue.disabled = true;
-            carNewCostValue.required = false;
-          } else if (val === "N") {
-            carNewCostValue.disabled = false;
-            carNewCostValue.required = true;
-            carNewCostValue.value = "";
-            userAgreedValue.value = "";
-            userAgreedValue.disabled = true;
-            userAgreedValue.required = false;
-          } else {
-            userAgreedValue.value = "";
-            carNewCostValue.value = "";
-            userAgreedValue.disabled = true;
-            carNewCostValue.disabled = true;
-            userAgreedValue.required = false;
-            carNewCostValue.required = false;
-          }
+  if (capstoneHidden) capstoneHidden.value = val;
+
+  if (val === "Y") {
+    userAgreedValue.disabled = false;
+    userAgreedValue.required = true;
+
+    carNewCostValue.value = "";
+    carNewCostValue.disabled = true;
+    carNewCostValue.required = false;
+
+  } else if (val === "N") {
+    carNewCostValue.disabled = false;
+    carNewCostValue.required = true;
+
+    userAgreedValue.value = "";
+    userAgreedValue.disabled = true;
+    userAgreedValue.required = false;
+
+  } else {
+    userAgreedValue.value = "";
+    carNewCostValue.value = "";
+
+    userAgreedValue.disabled = true;
+    carNewCostValue.disabled = true;
+
+    userAgreedValue.required = false;
+    carNewCostValue.required = false;
+  }
+
+  // Apply the shared coverage-disabling logic.
+  updateCoverageFieldStates();
+}
+
+
+ // Personal Auto Plus Endorsement
+const personalAutoPlusRadios = document.querySelectorAll(
+  'input[name="PersonalAutoPlusEndorsementRadios"]'
+);
+
+const personalAutoPlusSelect = document.getElementById("00NU700000BJ6pl");
+
+const fullSafetyGlass = document.getElementById("00NU7000008AbwA");
+const roadsideAssistance = document.getElementById("00NU700000618hd");
+const transportationExpense = document.getElementById("00NU7000008Adt7");
+
+// Disable the three coverage fields if either endorsement is Yes.
+
+function updateCoverageFieldStates() {
+  const capstoneValue = getCapstoneValue();
+
+  const personalAutoPlusRadio = document.querySelector(
+    'input[name="PersonalAutoPlusEndorsementRadios"]:checked'
+  );
+
+  const personalAutoPlusValue = personalAutoPlusRadio
+    ? personalAutoPlusRadio.value
+    : "";
+
+  // Disable and clear coverage fields if either endorsement is Yes.
+  const disableFields =
+    capstoneValue === "Y" || personalAutoPlusValue === "Y";
+
+  [fullSafetyGlass, roadsideAssistance, transportationExpense].forEach(
+    field => {
+      if (!field) return;
+
+      if (disableFields) {
+        // Clear the field so it does not retain a previous selection.
+        if (field.type === "checkbox") {
+          field.checked = false;
+        } else {
+          field.value = "";
         }
+      }
+
+      field.disabled = disableFields;
+
+      field.classList.toggle("bg-gray-200", disableFields);
+      field.classList.toggle("text-gray-500", disableFields);
+      field.classList.toggle("cursor-not-allowed", disableFields);
+    }
+  );
+}
+
+function togglePersonalAutoPlusFields() {
+  const checked = document.querySelector(
+    'input[name="PersonalAutoPlusEndorsementRadios"]:checked'
+  );
+
+  const value = checked ? checked.value : "";
+
+  // Preserve the existing Salesforce Y/N field behavior.
+  if (personalAutoPlusSelect) {
+    personalAutoPlusSelect.value = value;
+  }
+
+  updateCoverageFieldStates();
+}
+
+personalAutoPlusRadios.forEach(radio => {
+  radio.addEventListener("change", togglePersonalAutoPlusFields);
+});
+
+togglePersonalAutoPlusFields();
 
         capstoneRadios.forEach(r => r.addEventListener("change", toggleCapstoneFields));
         toggleCapstoneFields();
@@ -726,14 +856,14 @@
           { radioGroupName: "requestTypeRadios", label: "Select the Request Type:" },
           { id: "00NU7000005zuX3", label: "Policy Number", type: "policy" },
           { id: "00NU7000005zuLl", label: "Effective Date (MM/DD/YYYY)", type: "date" },
-          { radioGroupName: "oldVinRadios", label: "Do you know the VIN of the Old Vehicle?" },
           { id: "vinOld", label: "VIN Number of Old Vehicle" },
           { radioGroupName: "newVinRadios", label: "Do you know the VIN of the New Vehicle?" },
           { id: "00NU700000616Sv", label: "VIN Number of New Vehicle" },
           { id: "00NU7000007EGYk", label: "New Vehicle Year", type: "year" },
           { id: "00NU700000616W9", label: "New Vehicle Make" },
           { id: "00NU700000616Xl", label: "New Vehicle Model" },
-          { id: "00NU7000009B269", label: "If Capstone Policy or Not:", type: "capstone" },
+          { id: "00NU7000009B269", label: "Do you have the Capstone Auto Endorsement?", type: "capstone" },
+          { radioGroupName: "PersonalAutoPlusEndorsementRadios", label: "Do you have the Personal Auto Plus Endorsement?"},
           { id: "00NU7000009B2Cb", label: "User Agreed Value", type: "capstoneY" },
           { id: "00NU7000008lT1x", label: "Car New Cost Value", type: "capstoneN" }
         ];
@@ -755,6 +885,17 @@
           const formElements = form.querySelectorAll("input, textarea, select");
           const capstoneVal = getCapstoneValue();
 
+          const personalAutoPlusRadio = document.querySelector(
+  'input[name="PersonalAutoPlusEndorsementRadios"]:checked'
+);
+
+const personalAutoPlusVal = personalAutoPlusRadio
+  ? personalAutoPlusRadio.value
+  : "";
+
+const clearCoverageValues =
+  capstoneVal === "Y" || personalAutoPlusVal === "Y";
+
           formElements.forEach(element => {
             if (
               !element.name ||
@@ -764,7 +905,9 @@
               element.name === "requestTypeRadios" ||
               element.name === "oldVinRadios" ||
               element.name === "newVinRadios" ||
-              element.name === "IfCapstonePolicyRadios"
+              element.name === "IfCapstonePolicyRadios"||
+              element.name === "PersonalAutoPlusEndorsementRadios" ||
+              element.name === "Personal_Auto_Plus_Endorsement__c"
             ) return;
 
             let fieldName = element.name.replace(/__c$/, "");
@@ -781,7 +924,6 @@
               "00NU7000006N0zx": "Annual_Miles",
               "vinOldVehicle": "VIN_number",
               "00NU700000616Sv": "VIN_number_2",
-              "00NU7000006DHIv": "Know_Old_VIN",
               "00NU7000006NiT7": "Know_New_VIN",
               "00NU7000007EGYk": "Vehicle_Year",
               "00NU700000616W9": "Make",
@@ -800,21 +942,56 @@
               "00NU7000008Aduj": "GAP_Coverage"
             };
 
-            fieldName = fieldMapping[fieldName] || fieldName;
+            // Ignore hidden fallback inputs for checkbox fields in JSON capture.
+if (
+  element.type === "hidden" &&
+  ["00NU7000008AbwA"].includes(element.name)
+) {
+  return;
+}
+            
+fieldName = fieldMapping[fieldName] || fieldName;
 
-            if (fieldName === "Effective_Date" && element.value) {
-              formData[fieldName] = formatDateForJSON(element.value);
-            } else if (fieldName === "Policy_Number") {
-              formData[fieldName] = formatPolicyNumberHidden(element.value);
-            } else if (fieldName === "User_Agreed_Value" && capstoneVal !== "Y") {
-              formData[fieldName] = "";
-            } else if (fieldName === "Car_New_Cost_Value" && capstoneVal !== "N") {
-              formData[fieldName] = "";
-            } else if (fieldName === "If_Capstone_Policy") {
-              formData[fieldName] = capstoneVal;
-            } else {
-              formData[fieldName] = element.value || "";
-            }
+if (fieldName === "Full_Safety_Glass") {
+  formData[fieldName] = clearCoverageValues
+    ? ""
+    : (element.type === "checkbox"
+        ? (element.checked ? "Y" : "N")
+        : (element.value || ""));
+
+} else if (
+  fieldName === "Roadside_Assistance" ||
+  fieldName === "Transportation_Expense"
+) {
+  formData[fieldName] = clearCoverageValues
+    ? ""
+    : (element.value || "");
+
+} else if (
+  fieldName === "Effective_Date" &&
+  element.value
+) {
+  formData[fieldName] = formatDateForJSON(element.value);
+
+} else if (
+  fieldName === "User_Agreed_Value" &&
+  capstoneVal !== "Y"
+) {
+  formData[fieldName] = "";
+
+} else if (
+  fieldName === "Car_New_Cost_Value" &&
+  capstoneVal !== "N"
+) {
+  formData[fieldName] = "";
+
+} else if (fieldName === "IfCapstonePolicy") {
+  formData[fieldName] = capstoneVal;
+
+} else {
+  formData[fieldName] = element.value || "";
+}
+
           });
 
           return JSON.stringify(formData, null, 2);
